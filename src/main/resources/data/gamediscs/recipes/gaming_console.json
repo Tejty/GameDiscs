@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ggg",
+    "rco",
+    "bbn"
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:glass_pane"
+    },
+    "c": {
+      "item": "minecraft:clock"
+    },
+    "r": {
+      "item": "minecraft:repeater"
+    },
+    "o": {
+      "item": "minecraft:comparator"
+    },
+    "b": {
+      "tag": "minecraft:buttons"
+    },
+    "n": {
+      "item": "minecraft:note_block"
+    }
+  },
+  "result": {
+    "item": "gamediscs:gaming_console"
+  }
+}
