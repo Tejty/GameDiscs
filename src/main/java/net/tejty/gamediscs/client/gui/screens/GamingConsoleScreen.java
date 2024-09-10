@@ -30,6 +30,37 @@ public class GamingConsoleScreen extends Screen {
     private static final int D = 68;
     private static final int SPACE = 32;
     private static final int ENTER = 257;
+    private static final int SHIFT = 24;
+    private static final int W_X = 33;
+    private static final int W_Y = 121;
+    private static final int W_WIDTH = 14;
+    private static final int W_HEIGHT = 24;
+    private static final int W_SOURCE = 183;
+    private static final int A_X = 17;
+    private static final int A_Y = 137;
+    private static final int A_WIDTH = 23;
+    private static final int A_HEIGHT = 15;
+    private static final int A_SOURCE = 160;
+    private static final int D_X = 40;
+    private static final int D_Y = 137;
+    private static final int D_WIDTH = 23;
+    private static final int D_HEIGHT = 15;
+    private static final int D_SOURCE = 197;
+    private static final int S_X = 33;
+    private static final int S_Y = 145;
+    private static final int S_WIDTH = 14;
+    private static final int S_HEIGHT = 23;
+    private static final int S_SOURCE = 220;
+    private static final int B1_X = 96;
+    private static final int B1_Y = 136;
+    private static final int B1_WIDTH = 16;
+    private static final int B1_HEIGHT = 16;
+    private static final int B1_SOURCE = 234;
+    private static final int B2_X = 128;
+    private static final int B2_Y = 128;
+    private static final int B2_WIDTH = 16;
+    private static final int B2_HEIGHT = 16;
+    private static final int B2_SOURCE = 234;
     private final Timer timer = new Timer(50, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -46,7 +77,7 @@ public class GamingConsoleScreen extends Screen {
 
     private List<Game> availableGames = new ArrayList<>();
     private int selected = 0;
-    private Game game;
+    private Game game = new Game();
 
     public GamingConsoleScreen(Component title) {
         super(title);
@@ -68,7 +99,7 @@ public class GamingConsoleScreen extends Screen {
         graphics.blit(BACKGROUD, getConsoleX(), getConsoleY(), 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 256, 256);
 
         graphics.enableScissor(SCREEN_X + getConsoleX(), SCREEN_Y + getConsoleY(), SCREEN_X + getConsoleX() + Game.WIDTH, SCREEN_Y + getConsoleY() + Game.HEIGHT);
-        if (game != null) {
+        if (!game.isEmpty()) {
             game.render(graphics, SCREEN_X + getConsoleX(), SCREEN_Y + getConsoleY());
         }
         else {
@@ -109,7 +140,19 @@ public class GamingConsoleScreen extends Screen {
         }
         graphics.disableScissor();
 
+        renderButtons(graphics);
+
         super.render(graphics, pMouseX, pMouseY, pPartialTick);
+    }
+
+    private void renderButtons(GuiGraphics graphics) {
+        graphics.blit(BACKGROUD, getConsoleX() + W_X, getConsoleY() + W_Y, 0, W_SOURCE, game.controls.isButtonDown(Button.UP) ? SHIFT : 0, W_WIDTH, W_HEIGHT, 256, 256);
+        graphics.blit(BACKGROUD, getConsoleX() + A_X, getConsoleY() + A_Y, 0, A_SOURCE, game.controls.isButtonDown(Button.LEFT) ? SHIFT : 0, A_WIDTH, A_HEIGHT, 256, 256);
+        graphics.blit(BACKGROUD, getConsoleX() + D_X, getConsoleY() + D_Y, 0, D_SOURCE, game.controls.isButtonDown(Button.RIGHT) ? SHIFT : 0, D_WIDTH, D_HEIGHT, 256, 256);
+        graphics.blit(BACKGROUD, getConsoleX() + S_X, getConsoleY() + S_Y, 0, S_SOURCE, game.controls.isButtonDown(Button.DOWN) ? SHIFT : 0, S_WIDTH, S_HEIGHT, 256, 256);
+
+        graphics.blit(BACKGROUD, getConsoleX() + B1_X, getConsoleY() + B1_Y, 0, B1_SOURCE, game.controls.isButtonDown(Button.BUTTON1) ? SHIFT : 0, B1_WIDTH, B1_HEIGHT, 256, 256);
+        graphics.blit(BACKGROUD, getConsoleX() + B2_X, getConsoleY() + B2_Y, 0, B2_SOURCE, game.controls.isButtonDown(Button.BUTTON2) ? SHIFT : 0, B2_WIDTH, B2_HEIGHT, 256, 256);
     }
 
     public List<Game> scanForGames() {
@@ -159,7 +202,7 @@ public class GamingConsoleScreen extends Screen {
                     break;
             }
         }
-        else {
+        if (game.isEmpty()) {
             if (pKeyCode == W) {
                 int newSelected = selected - 1;
                 if (newSelected < 0) {

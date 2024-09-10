@@ -209,4 +209,8 @@ public class Game {
     public Component getName() {return Component.empty();}
     public ResourceLocation getIcon() {return null;}
     public ChatFormatting getColor() {return ChatFormatting.YELLOW;}
+
+    public boolean isEmpty() {
+        return this.getClass().equals(Game.class);
+    }
 }
