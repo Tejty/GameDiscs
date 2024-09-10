@@ -1,9 +1,11 @@
 package net.tejty.gamediscs.game.games;
 
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec2;
 import net.tejty.gamediscs.game.Game;
+import net.tejty.gamediscs.game.GameStage;
 import net.tejty.gamediscs.game.Sprite;
 import net.tejty.gamediscs.game.controls.Button;
 
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlappyBirdGame extends Game {
-    private Sprite bird;
+    private Sprite bird = new Sprite(new Vec2(10, 30), new Vec2(10, 8), new ResourceLocation("gamediscs:textures/games/sprite/bird.png"));
     private List<Sprite> pillars = new ArrayList<Sprite>();
     private Sprite ground = new Sprite(new Vec2(0, HEIGHT - 16), new Vec2(156, 16), new ResourceLocation("gamediscs:textures/games/sprite/ground.png"));
     private int pillarSpawnTimer = 0;
@@ -41,6 +43,18 @@ public class FlappyBirdGame extends Game {
     }
 
     @Override
+    public synchronized void tick() {
+        super.tick();
+
+        if (stage != GameStage.DIED && stage != GameStage.WON) {
+            ground.tick();
+            if (ground.getX() <= -16) {
+                ground.moveBy(new Vec2(16, 0));
+            }
+        }
+    }
+
+    @Override
     public synchronized void gameTick() {
         super.gameTick();
 
@@ -55,7 +69,16 @@ public class FlappyBirdGame extends Game {
         int i = 0;
         while (i < pillars.size()) {
             Sprite pillar = pillars.get(i);
+            boolean flag = false;
+            if (pillar.getX() + pillar.getWidth() > bird.getX() && pillar.getY() < 0) {
+                flag = true;
+            }
             pillar.tick();
+
+            if (flag && pillar.getX() + pillar.getWidth() <= bird.getX()) {
+                score++;
+            }
+
             if (pillar.getX() + pillar.getWidth() < 0) {
                 //Minecraft.getInstance().player.displayClientMessage(Component.literal("deleting pillar: " + pillar.getX() + ", " + pillar.getWidth()), false);
                 pillars.remove(pillar);
@@ -71,11 +94,6 @@ public class FlappyBirdGame extends Game {
 
         if (bird.isTouching(ground) || bird.getY() < 0) {
             die();
-        }
-
-        ground.tick();
-        if (ground.getX() <= -16) {
-            ground.moveBy(new Vec2(16, 0));
         }
 
         pillarSpawnTimer--;
@@ -104,6 +122,8 @@ public class FlappyBirdGame extends Game {
         if (bird != null) {
             bird.render(graphics, posX, posY);
         }
+
+        renderOverlay(graphics, posX, posY);
     }
 
     @Override
@@ -118,5 +138,15 @@ public class FlappyBirdGame extends Game {
     @Override
     public ResourceLocation getBackground() {
         return new ResourceLocation("gamediscs:textures/games/background/flappy_bird_background.png");
+    }
+
+    @Override
+    public Component getName() {
+        return Component.translatable("gamediscs.flappy_bird");
+    }
+
+    @Override
+    public ResourceLocation getIcon() {
+        return new ResourceLocation("gamediscs:textures/item/game_disc_flappy_bird.png");
     }
 }

@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.tejty.gamediscs.client.gui.screens.GamingConsoleScreen;
+import net.tejty.gamediscs.game.Game;
 
 public class GamingConsoleItem extends Item {
     public GamingConsoleItem(Properties properties) {
@@ -25,5 +26,12 @@ public class GamingConsoleItem extends Item {
         }
 
         return super.use(level, player, hand);
+    }
+
+    public void setBestScore(Class<? extends Game> game, int score) {
+        String gameName = game.getName().substring(game.getPackageName().length() + 1);
+        String playerName = Minecraft.getInstance().player.getDisplayName().getString();
+        Minecraft.getInstance().player.displayClientMessage(Component.literal(gameName + ";" + playerName + ";" + score), false);
+        // TODO bestScore
     }
 }

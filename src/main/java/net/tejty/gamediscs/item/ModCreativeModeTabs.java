@@ -22,6 +22,7 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.game_discs_tab"))
                     .displayItems((itemDisplayParameters, output) -> {
                         output.accept(ModItems.GAMING_CONSOLE.get());
+                        output.accept(ModItems.GAME_DISC_FLAPPY_BIRD.get());
                     })
                     .build()
     );

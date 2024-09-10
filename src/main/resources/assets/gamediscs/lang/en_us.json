@@ -7,5 +7,9 @@
   "gui.gamingconsole.title": "Gaming Console",
   "gui.gamingconsole.press_any_key": "Press any key",
   "gamediscs.tooltip.game": "Game:",
-  "gamediscs.flappy_bird": "Flappy Bee"
+  "gamediscs.flappy_bird": "Flappy Bee",
+  "gui.gamingconsole.select_game": "Select game",
+  "gui.gamingconsole.score": "Score",
+  "gui.gamingconsole.died": "You lost!",
+  "gui.gamingconsole.won": "You won!"
 }
