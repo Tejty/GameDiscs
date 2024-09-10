@@ -11,5 +11,6 @@
   "gui.gamingconsole.select_game": "Select game",
   "gui.gamingconsole.score": "Score",
   "gui.gamingconsole.died": "You lost!",
-  "gui.gamingconsole.won": "You won!"
+  "gui.gamingconsole.won": "You won!",
+  "gui.gamingconsole.best_score": "Best score"
 }

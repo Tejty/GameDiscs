@@ -1,6 +1,7 @@
 package net.tejty.gamediscs.item.custom;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -28,10 +29,23 @@ public class GamingConsoleItem extends Item {
         return super.use(level, player, hand);
     }
 
-    public void setBestScore(Class<? extends Game> game, int score) {
-        String gameName = game.getName().substring(game.getPackageName().length() + 1);
-        String playerName = Minecraft.getInstance().player.getDisplayName().getString();
-        Minecraft.getInstance().player.displayClientMessage(Component.literal(gameName + ";" + playerName + ";" + score), false);
+    public void setBestScore(ItemStack stack, String game, int score, Player player) {
+        if (!stack.hasTag()){
+            stack.setTag(new CompoundTag());
+        }
+        CompoundTag nbtData = stack.getTag();
+        nbtData.putInt("gamediscs:" + game + ";" + player.getDisplayName().getString(), score);
+        stack.setTag(nbtData);
+
         // TODO bestScore
+    }
+
+    public static int getBestScore(ItemStack stack, String game, Player player) {
+        if (!stack.hasTag()){
+            return 0;
+        }
+        else {
+            return stack.getTag().getInt("gamediscs:" + game + ";" + player.getDisplayName().getString());
+        }
     }
 }

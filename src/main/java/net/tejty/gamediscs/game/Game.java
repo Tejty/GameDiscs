@@ -12,6 +12,8 @@ import net.tejty.gamediscs.game.controls.Button;
 import net.tejty.gamediscs.game.controls.Controls;
 import net.tejty.gamediscs.item.ModItems;
 import net.tejty.gamediscs.item.custom.GamingConsoleItem;
+import net.tejty.gamediscs.networking.ModMessages;
+import net.tejty.gamediscs.networking.packet.SetBestScoreC2SPacket;
 
 import java.awt.*;
 import java.util.Random;
@@ -48,7 +50,9 @@ public class Game {
 
     public synchronized  void die() {
         if (getConsole().getItem() instanceof GamingConsoleItem consoleItem) {
-            consoleItem.setBestScore(this.getClass(), score);
+            if (consoleItem.getBestScore(getConsole(), this.getClass().getName().substring(this.getClass().getPackageName().length() + 1), Minecraft.getInstance().player) < score) {
+                ModMessages.sendToServer(new SetBestScoreC2SPacket(this.getClass().getName().substring(this.getClass().getPackageName().length() + 1), score));
+            }
         }
         stage = GameStage.DIED;
         ticks = 1;
@@ -164,6 +168,16 @@ public class Game {
                         component,
                         posX + (WIDTH - font.width(component.getVisualOrderText())) / 2,
                         posY + 35 + font.lineHeight,
+                        component.getStyle().getColor().getValue(),
+                        false
+                );
+                int bestScore = GamingConsoleItem.getBestScore(getConsole(), this.getClass().getName().substring(this.getClass().getPackageName().length() + 1), Minecraft.getInstance().player);
+                component = Component.translatable("gui.gamingconsole.best_score").append(": ").append(String.valueOf(bestScore)).withStyle(ChatFormatting.YELLOW);
+                graphics.drawString(
+                        font,
+                        component,
+                        posX + (WIDTH - font.width(component.getVisualOrderText())) / 2,
+                        posY + 50 + font.lineHeight,
                         component.getStyle().getColor().getValue(),
                         false
                 );
