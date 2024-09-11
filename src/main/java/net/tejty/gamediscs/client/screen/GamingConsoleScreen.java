@@ -1,4 +1,4 @@
-package net.tejty.gamediscs.client.gui.screens;
+package net.tejty.gamediscs.client.screen;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -7,15 +7,17 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import net.tejty.gamediscs.game.Game;
-import net.tejty.gamediscs.game.controls.Button;
+import net.tejty.gamediscs.games.util.Game;
+import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.item.custom.GameDiscItem;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class GamingConsoleScreen extends Screen {
     private static final ResourceLocation BACKGROUD = new ResourceLocation("gamediscs:textures/gui/gaming_console.png");
@@ -61,12 +63,6 @@ public class GamingConsoleScreen extends Screen {
     private static final int B2_WIDTH = 16;
     private static final int B2_HEIGHT = 16;
     private static final int B2_SOURCE = 234;
-    private final Timer timer = new Timer(50, new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (game != null) {game.tick();}
-        }
-    });
 
     private int getConsoleX() {
         return (this.width - SCREEN_WIDTH) / 2;
@@ -74,30 +70,30 @@ public class GamingConsoleScreen extends Screen {
     private int getConsoleY() {
         return (this.height - SCREEN_HEIGHT) / 2;
     }
-
     private List<Game> availableGames = new ArrayList<>();
     private int selected = 0;
     private Game game = new Game();
-
     public GamingConsoleScreen(Component title) {
         super(title);
-
         availableGames = scanForGames();
-
+        Timer timer = new Timer(50, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (game != null) {
+                    game.tick();
+                }
+            }
+        });
         timer.start();
     }
-
     @Override
     public boolean isPauseScreen() {
         return false;
     }
-
     @Override
-    public void render(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
+    public void render(@NotNull GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
         renderBackground(graphics);
-
         graphics.blit(BACKGROUD, getConsoleX(), getConsoleY(), 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 256, 256);
-
         graphics.enableScissor(SCREEN_X + getConsoleX(), SCREEN_Y + getConsoleY(), SCREEN_X + getConsoleX() + Game.WIDTH, SCREEN_Y + getConsoleY() + Game.HEIGHT);
         if (!game.isEmpty()) {
             game.render(graphics, SCREEN_X + getConsoleX(), SCREEN_Y + getConsoleY());
@@ -111,7 +107,6 @@ public class GamingConsoleScreen extends Screen {
                         0, 0, 0, 140, 18, 140, 18
                 );
             }
-
             graphics.drawString(
                     font,
                     Component.translatable("gui.gamingconsole.select_game").withStyle(ChatFormatting.BOLD),
@@ -120,7 +115,6 @@ public class GamingConsoleScreen extends Screen {
                     0xace53b,
                     false
             );
-
             for (int i = 0; i < availableGames.size(); i++) {
                 graphics.drawString(
                         font,
@@ -139,9 +133,7 @@ public class GamingConsoleScreen extends Screen {
             }
         }
         graphics.disableScissor();
-
         renderButtons(graphics);
-
         super.render(graphics, pMouseX, pMouseY, pPartialTick);
     }
 
@@ -150,16 +142,14 @@ public class GamingConsoleScreen extends Screen {
         graphics.blit(BACKGROUD, getConsoleX() + A_X, getConsoleY() + A_Y, 0, A_SOURCE, game.controls.isButtonDown(Button.LEFT) ? SHIFT : 0, A_WIDTH, A_HEIGHT, 256, 256);
         graphics.blit(BACKGROUD, getConsoleX() + D_X, getConsoleY() + D_Y, 0, D_SOURCE, game.controls.isButtonDown(Button.RIGHT) ? SHIFT : 0, D_WIDTH, D_HEIGHT, 256, 256);
         graphics.blit(BACKGROUD, getConsoleX() + S_X, getConsoleY() + S_Y, 0, S_SOURCE, game.controls.isButtonDown(Button.DOWN) ? SHIFT : 0, S_WIDTH, S_HEIGHT, 256, 256);
-
         graphics.blit(BACKGROUD, getConsoleX() + B1_X, getConsoleY() + B1_Y, 0, B1_SOURCE, game.controls.isButtonDown(Button.BUTTON1) ? SHIFT : 0, B1_WIDTH, B1_HEIGHT, 256, 256);
         graphics.blit(BACKGROUD, getConsoleX() + B2_X, getConsoleY() + B2_Y, 0, B2_SOURCE, game.controls.isButtonDown(Button.BUTTON2) ? SHIFT : 0, B2_WIDTH, B2_HEIGHT, 256, 256);
     }
-
     public List<Game> scanForGames() {
         List<Game> games = new ArrayList<>();
         Player player = Minecraft.getInstance().player;
         //player.displayClientMessage(Component.literal("Scanning"), false);
-        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+        for (int i = 0; i < Objects.requireNonNull(player).getInventory().getContainerSize(); i++) {
             //player.displayClientMessage(Component.literal("Item: " + player.getInventory().getItem(i).toString()), false);
             if (player.getInventory().getItem(i).getItem() instanceof GameDiscItem disc) {
                 games.removeIf((game) -> game.getClass().equals(disc.getGame().getClass()));
@@ -168,40 +158,39 @@ public class GamingConsoleScreen extends Screen {
         }
         return games;
     }
-
     @Override
     public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
         boolean flag = false;
-
         //Minecraft.getInstance().player.displayClientMessage(Component.literal("Key: " + pKeyCode), false);
         if (game != null) {
             switch (pKeyCode) {
-                case W:
+                case W -> {
                     game.controls.setButton(Button.UP, true);
                     flag = true;
-                    break;
-                case S:
+                }
+                case S -> {
                     game.controls.setButton(Button.DOWN, true);
                     flag = true;
-                    break;
-                case A:
+                }
+                case A -> {
                     game.controls.setButton(Button.LEFT, true);
                     flag = true;
-                    break;
-                case D:
+                }
+                case D -> {
                     game.controls.setButton(Button.RIGHT, true);
                     flag = true;
-                    break;
-                case SPACE:
+                }
+                case SPACE -> {
                     game.controls.setButton(Button.BUTTON1, true);
                     flag = true;
-                    break;
-                case ENTER:
+                }
+                case ENTER -> {
                     game.controls.setButton(Button.BUTTON2, true);
                     flag = true;
-                    break;
+                }
             }
         }
+        assert game != null;
         if (game.isEmpty()) {
             if (pKeyCode == W) {
                 int newSelected = selected - 1;
@@ -217,7 +206,6 @@ public class GamingConsoleScreen extends Screen {
                 }
                 selected = newSelected;
             }
-
             if ((pKeyCode == SPACE || pKeyCode == ENTER) && !availableGames.isEmpty()) {
                 Game newGame = availableGames.get(selected);
                 newGame.prepare();
@@ -229,37 +217,35 @@ public class GamingConsoleScreen extends Screen {
     @Override
     public boolean keyReleased(int pKeyCode, int pScanCode, int pModifiers) {
         boolean flag = false;
-
         //Minecraft.getInstance().player.displayClientMessage(Component.literal("Key: " + pKeyCode), false);
         if (game != null) {
             switch (pKeyCode) {
-                case W:
+                case W -> {
                     game.controls.setButton(Button.UP, false);
                     flag = true;
-                    break;
-                case S:
+                }
+                case S -> {
                     game.controls.setButton(Button.DOWN, false);
                     flag = true;
-                    break;
-                case A:
+                }
+                case A -> {
                     game.controls.setButton(Button.LEFT, false);
                     flag = true;
-                    break;
-                case D:
+                }
+                case D -> {
                     game.controls.setButton(Button.RIGHT, false);
                     flag = true;
-                    break;
-                case SPACE:
+                }
+                case SPACE -> {
                     game.controls.setButton(Button.BUTTON1, false);
                     flag = true;
-                    break;
-                case ENTER:
+                }
+                case ENTER -> {
                     game.controls.setButton(Button.BUTTON2, false);
                     flag = true;
-                    break;
+                }
             }
         }
-
         return (super.keyPressed(pKeyCode, pScanCode, pModifiers) || flag);
     }
 }

@@ -11,8 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.tejty.gamediscs.client.gui.screens.GamingConsoleScreen;
-import net.tejty.gamediscs.game.Game;
+import net.tejty.gamediscs.client.screen.GamingConsoleScreen;
 
 public class GamingConsoleItem extends Item {
     public GamingConsoleItem(Properties properties) {

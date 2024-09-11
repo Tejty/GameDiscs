@@ -1,9 +1,6 @@
-package net.tejty.gamediscs.game.controls;
+package net.tejty.gamediscs.games.controls;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
-import net.tejty.gamediscs.game.Game;
-
+import net.tejty.gamediscs.games.util.Game;
 public class Controls {
     private boolean UP;
     private boolean DOWN;
@@ -11,17 +8,13 @@ public class Controls {
     private boolean RIGHT;
     private boolean BUTTON1;
     private boolean BUTTON2;
-
     private final Game game;
-
     public Controls(Game game) {
         this.game = game;
     }
-
     public void setButton(Button button, boolean isDown) {
         //Minecraft.getInstance().player.displayClientMessage(Component.literal("Setting: " + button), false);
         boolean callEvent = false;
-
         switch (button) {
             case UP -> {
                 if (!UP && isDown) {
@@ -69,7 +62,6 @@ public class Controls {
             game.buttonUp(button);
         }
     }
-
     public boolean isButtonDown(Button button) {
         return switch (button) {
             case UP -> UP;
