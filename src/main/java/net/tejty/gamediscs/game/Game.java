@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -15,6 +16,7 @@ import net.tejty.gamediscs.item.custom.GamingConsoleItem;
 import net.tejty.gamediscs.networking.ModMessages;
 import net.tejty.gamediscs.networking.packet.SetBestScoreC2SPacket;
 
+import java.awt.*;
 import java.util.Random;
 
 public class Game {
@@ -97,7 +99,7 @@ public class Game {
                     font,
                     Component.translatable("gui.gamingconsole.press_any_key"),
                     posX + (WIDTH - font.width(Component.translatable("gui.gamingconsole.press_any_key").getVisualOrderText())) / 2 + 1,
-                    posY + HEIGHT - font.lineHeight + 1,
+                    posY + HEIGHT - font.lineHeight - 1,
                     0x373737,
                     false
             );
@@ -105,7 +107,7 @@ public class Game {
                     font,
                     Component.translatable("gui.gamingconsole.press_any_key"),
                     posX + (WIDTH - font.width(Component.translatable("gui.gamingconsole.press_any_key").getVisualOrderText())) / 2,
-                    posY + HEIGHT - font.lineHeight,
+                    posY + HEIGHT - font.lineHeight - 2,
                     0xFFFFFF,
                     false
             );
@@ -183,6 +185,10 @@ public class Game {
             }
         }
         else {
+            if (showScoreBox()) {
+                graphics.blit(new ResourceLocation("gamediscs:textures/gui/score_box.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
+            }
+
             graphics.drawString(
                     font,
                     Component.translatable("gui.gamingconsole.score").append(": ").append(String.valueOf(score)),
@@ -196,7 +202,7 @@ public class Game {
                     Component.translatable("gui.gamingconsole.score").append(": ").append(String.valueOf(score)),
                     posX + 1,
                     posY + 1,
-                    0xFFFFFF,
+                    scoreColor(),
                     false
             );
         }
@@ -222,6 +228,12 @@ public class Game {
 
     public ResourceLocation getBackground() {
         return null;
+    }
+    public boolean showScoreBox() {
+        return true;
+    }
+    public int scoreColor() {
+        return 0xFFFFFF;
     }
     public Component getName() {return Component.empty();}
     public ResourceLocation getIcon() {return null;}

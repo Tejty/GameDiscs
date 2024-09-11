@@ -1,5 +1,6 @@
 package net.tejty.gamediscs.game.games;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -138,6 +139,16 @@ public class FlappyBirdGame extends Game {
     @Override
     public ResourceLocation getBackground() {
         return new ResourceLocation("gamediscs:textures/games/background/flappy_bird_background.png");
+    }
+
+    @Override
+    public boolean showScoreBox() {
+        return false;
+    }
+
+    @Override
+    public int scoreColor() {
+        return ChatFormatting.YELLOW.getColor();
     }
 
     @Override
