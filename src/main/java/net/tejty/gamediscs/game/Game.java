@@ -15,7 +15,6 @@ import net.tejty.gamediscs.item.custom.GamingConsoleItem;
 import net.tejty.gamediscs.networking.ModMessages;
 import net.tejty.gamediscs.networking.packet.SetBestScoreC2SPacket;
 
-import java.awt.*;
 import java.util.Random;
 
 public class Game {
@@ -75,7 +74,7 @@ public class Game {
     }
 
     public synchronized void tick() {
-        if (stage == GameStage.PLAYING) {
+        if (stage == GameStage.PLAYING && ticks % gameTickDuration() == 0) {
             gameTick();
         }
         ticks++;
@@ -187,16 +186,16 @@ public class Game {
             graphics.drawString(
                     font,
                     Component.translatable("gui.gamingconsole.score").append(": ").append(String.valueOf(score)),
-                    posX + 3,
-                    posY + 3,
+                    posX + 2,
+                    posY + 2,
                     0x373737,
                     false
             );
             graphics.drawString(
                     font,
                     Component.translatable("gui.gamingconsole.score").append(": ").append(String.valueOf(score)),
-                    posX + 2,
-                    posY + 2,
+                    posX + 1,
+                    posY + 1,
                     0xFFFFFF,
                     false
             );
@@ -215,6 +214,10 @@ public class Game {
 
     public synchronized void buttonUp(Button button) {
 
+    }
+
+    public int gameTickDuration() {
+        return 1;
     }
 
     public ResourceLocation getBackground() {

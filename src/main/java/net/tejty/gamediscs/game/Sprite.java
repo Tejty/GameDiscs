@@ -60,6 +60,13 @@ public class Sprite {
         this.vel = this.vel.add(vel);
     }
 
+    public ResourceLocation getImage() {
+        return image;
+    }
+    public void setImage(ResourceLocation image) {
+        this.image = image;
+    }
+
     public void tick() {
         this.pos = this.pos.add(this.vel);
     }
