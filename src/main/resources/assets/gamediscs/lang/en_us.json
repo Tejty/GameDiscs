@@ -3,14 +3,17 @@
 
   "item.gamediscs.gaming_console": "Gaming Console",
   "item.gamediscs.game_disc_flappy_bird": "Game Disc",
+  "item.gamediscs.game_disc_slime": "Game Disc",
 
   "gui.gamingconsole.title": "Gaming Console",
   "gui.gamingconsole.press_any_key": "Press any key",
-  "gamediscs.tooltip.game": "Game:",
-  "gamediscs.flappy_bird": "Flappy Bee",
   "gui.gamingconsole.select_game": "Select game",
   "gui.gamingconsole.score": "Score",
-  "gui.gamingconsole.died": "You lost!",
+  "gui.gamingconsole.best_score": "Best score",
   "gui.gamingconsole.won": "You won!",
-  "gui.gamingconsole.best_score": "Best score"
+  "gui.gamingconsole.died": "You lost!",
+
+  "gamediscs.tooltip.game": "Game:",
+  "gamediscs.flappy_bird": "Flappy Bee",
+  "gamediscs.slime": "Slime"
 }

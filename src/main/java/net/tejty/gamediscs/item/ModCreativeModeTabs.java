@@ -23,6 +23,7 @@ public class ModCreativeModeTabs {
                     .displayItems((itemDisplayParameters, output) -> {
                         output.accept(ModItems.GAMING_CONSOLE.get());
                         output.accept(ModItems.GAME_DISC_FLAPPY_BIRD.get());
+                        output.accept(ModItems.GAME_DISC_SLIME.get());
                     })
                     .build()
     );

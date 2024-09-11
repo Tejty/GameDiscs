@@ -10,6 +10,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.game.games.FlappyBirdGame;
+import net.tejty.gamediscs.game.games.SlimeGame;
 import net.tejty.gamediscs.item.custom.GameDiscItem;
 import net.tejty.gamediscs.item.custom.GamingConsoleItem;
 
@@ -31,6 +32,14 @@ public class ModItems {
                             .rarity(Rarity.RARE),
                     () -> new FlappyBirdGame(),
                     Component.translatable("gamediscs.flappy_bird").withStyle(ChatFormatting.YELLOW)
+            )
+    );
+    public static final RegistryObject<Item> GAME_DISC_SLIME = ITEMS.register("game_disc_slime",
+            () -> new GameDiscItem(
+                    new Item.Properties()
+                            .rarity(Rarity.RARE),
+                    () -> new SlimeGame(),
+                    Component.translatable("gamediscs.slime").withStyle(ChatFormatting.DARK_GREEN)
             )
     );
 
