@@ -159,11 +159,18 @@ public class GamingConsoleScreen extends Screen {
         return games;
     }
     @Override
-    public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
+    public boolean keyPressed(int key, int pScanCode, int pModifiers) {
         boolean flag = false;
-        //Minecraft.getInstance().player.displayClientMessage(Component.literal("Key: " + pKeyCode), false);
+        if (!game.isEmpty()) {
+            if (key == 81) {
+                game = new Game();
+            }
+            else if (key == 82) {
+                game.prepare();
+            }
+        }
         if (game != null) {
-            switch (pKeyCode) {
+            switch (key) {
                 case W -> {
                     game.controls.setButton(Button.UP, true);
                     flag = true;
@@ -192,27 +199,27 @@ public class GamingConsoleScreen extends Screen {
         }
         assert game != null;
         if (game.isEmpty()) {
-            if (pKeyCode == W) {
+            if (key == W) {
                 int newSelected = selected - 1;
                 if (newSelected < 0) {
                     newSelected = availableGames.size() - 1;
                 }
                 selected = newSelected;
             }
-            if (pKeyCode == S) {
+            if (key == S) {
                 int newSelected = selected + 1;
                 if (newSelected > availableGames.size() - 1) {
                     newSelected = 0;
                 }
                 selected = newSelected;
             }
-            if ((pKeyCode == SPACE || pKeyCode == ENTER) && !availableGames.isEmpty()) {
+            if ((key == SPACE || key == ENTER) && !availableGames.isEmpty()) {
                 Game newGame = availableGames.get(selected);
                 newGame.prepare();
                 game = newGame;
             }
         }
-        return (super.keyPressed(pKeyCode, pScanCode, pModifiers) || flag);
+        return (super.keyPressed(key, pScanCode, pModifiers) || flag);
     }
     @Override
     public boolean keyReleased(int pKeyCode, int pScanCode, int pModifiers) {

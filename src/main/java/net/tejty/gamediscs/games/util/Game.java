@@ -29,18 +29,16 @@ public class Game {
 
     }
     public synchronized void prepare() {
-        //LogUtils.getLogger().debug("PREPARING GAME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         stage = GameStage.START;
         ticks = 1;
     }
     public synchronized void start() {
-        //LogUtils.getLogger().debug("STARTING GAME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         score = 0;
         stage = GameStage.PLAYING;
         ticks = 1;
     }
     public synchronized  void die() {
-        if (getConsole().getItem() instanceof GamingConsoleItem consoleItem) {
+        if (getConsole().getItem() instanceof GamingConsoleItem) {
             if (GamingConsoleItem.getBestScore(getConsole(), this.getClass().getName().substring(this.getClass().getPackageName().length() + 1), Minecraft.getInstance().player) < score) {
                 ModMessages.sendToServer(new SetBestScoreC2SPacket(this.getClass().getName().substring(this.getClass().getPackageName().length() + 1), score));
             }
