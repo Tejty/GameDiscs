@@ -15,52 +15,29 @@ import net.tejty.gamediscs.util.creativetab.CreativeTabs;
 import net.tejty.gamediscs.item.ItemRegistry;
 import net.tejty.gamediscs.util.networking.ModMessages;
 import org.slf4j.Logger;
-
-// The value here should match an entry in the META-INF/mods.toml file
-@Mod(GameDiscsMod.MODID)
+@Mod(GameDiscsMod.MODID) //The value here should match an entry in the META-INF/mods.toml file
 public class GameDiscsMod {
-
-    // Define mod id in a common place for everything to reference
-    public static final String MODID = "gamediscs";
-    // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
-
+    public static final String MODID = "gamediscs"; //Define mod id in a common place for everything to reference
+    private static final Logger LOGGER = LogUtils.getLogger(); //Directly reference a slf4j logger
     public GameDiscsMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        ItemRegistry.register(modEventBus); //Registering items
+        CreativeTabs.register(modEventBus); //Register creative tab
 
-        // Registering items
-        ItemRegistry.register(modEventBus);
-
-        // Register creative mode tab
-        CreativeTabs.register(modEventBus);
-
-        // Register the commonSetup method for modloading
-        modEventBus.addListener(this::commonSetup);
-
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
+        modEventBus.addListener(this::commonSetup); //Register the commonSetup method for modloading
+        MinecraftForge.EVENT_BUS.register(this); //Register ourselves for server and other game events we are interested in
     }
-
     private void commonSetup(final FMLCommonSetupEvent event) {
-        // Some common setup code
-        ModMessages.register();
+        ModMessages.register(); //Some common setup code
     }
-
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
+        LOGGER.info("HELLO from server starting"); //Do something when the server starts
     }
-
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents {
-
-        @SubscribeEvent
+    public static class ClientModEvents { @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
+            LOGGER.info("HELLO FROM CLIENT SETUP"); //Some client setup code
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
     }
