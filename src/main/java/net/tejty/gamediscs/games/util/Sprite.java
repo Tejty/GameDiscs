@@ -8,15 +8,14 @@ import net.tejty.gamediscs.games.graphics.Renderer;
 
 public class Sprite {
     // Properties of the Sprite
-    private Vec2 pos;
-    private Vec2 size;
-    private Vec2 vel;
-    private Renderer image;
+    private Vec2 pos = Vec2.ZERO;
+    private Vec2 size = Vec2.ZERO;
+    private Vec2 vel = Vec2.ZERO;
+    private Renderer image = new Renderer();
     public Sprite(Vec2 pos, Vec2 size, Renderer image) {
         this.pos = pos;
         this.size = size;
         this.image = image;
-        this.vel = Vec2.ZERO;
     }
 
     public Sprite(Vec2 pos, Vec2 size, ResourceLocation image) {
