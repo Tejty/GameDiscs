@@ -21,136 +21,186 @@ import java.util.Objects;
 
 public class GamingConsoleScreen extends Screen {
     private static final ResourceLocation BACKGROUD = new ResourceLocation("gamediscs:textures/gui/gaming_console.png");
-    private static final int SCREEN_WIDTH = 160;
-    private static final int SCREEN_HEIGHT = 198;
+    private static final int CONSOLE_WIDTH = 160;
+    private static final int CONSOLE_HEIGHT = 198;
+
+    // Position of the game screen relative to the left top corner of the console
     private static final int SCREEN_X = 10;
     private static final int SCREEN_Y = 10;
 
+    // Key codes of the using keys
+    // TODO configurable keys
     private static final int W = 87;
     private static final int S = 83;
     private static final int A = 65;
     private static final int D = 68;
     private static final int SPACE = 32;
     private static final int ENTER = 257;
-    private static final int SHIFT = 24;
-    private static final int W_X = 33;
-    private static final int W_Y = 121;
-    private static final int W_WIDTH = 14;
-    private static final int W_HEIGHT = 24;
-    private static final int W_SOURCE = 183;
-    private static final int A_X = 17;
-    private static final int A_Y = 137;
-    private static final int A_WIDTH = 23;
-    private static final int A_HEIGHT = 15;
-    private static final int A_SOURCE = 160;
-    private static final int D_X = 40;
-    private static final int D_Y = 137;
-    private static final int D_WIDTH = 23;
-    private static final int D_HEIGHT = 15;
-    private static final int D_SOURCE = 197;
-    private static final int S_X = 33;
-    private static final int S_Y = 145;
-    private static final int S_WIDTH = 14;
-    private static final int S_HEIGHT = 23;
-    private static final int S_SOURCE = 220;
-    private static final int B1_X = 96;
-    private static final int B1_Y = 136;
-    private static final int B1_WIDTH = 16;
-    private static final int B1_HEIGHT = 16;
-    private static final int B1_SOURCE = 234;
-    private static final int B2_X = 128;
-    private static final int B2_Y = 128;
-    private static final int B2_WIDTH = 16;
-    private static final int B2_HEIGHT = 16;
-    private static final int B2_SOURCE = 234;
 
+    // Visual buttons that allow you to visually see if the button is pressed or not
+    private static final VisualButton W_BUTTON = new VisualButton(BACKGROUD, 256, 256, 33, 121, 14, 24, 183, 0, 24);
+    private static final VisualButton A_BUTTON = new VisualButton(BACKGROUD, 256, 256, 17, 137, 23, 15, 160, 0, 24);
+    private static final VisualButton D_BUTTON = new VisualButton(BACKGROUD, 256, 256, 40, 137, 23, 15, 197, 0, 24);
+    private static final VisualButton S_BUTTON = new VisualButton(BACKGROUD, 256, 256, 33, 145, 14, 23, 220, 0, 24);
+    private static final VisualButton B1_BUTTON = new VisualButton(BACKGROUD, 256, 256, 96, 136, 16, 16, 234, 0, 24);
+    private static final VisualButton B2_BUTTON = new VisualButton(BACKGROUD, 256, 256, 128, 128, 16, 16, 234, 0, 24);
+
+    // Calculates position of the console on screen
     private int getConsoleX() {
-        return (this.width - SCREEN_WIDTH) / 2;
+        return (this.width - CONSOLE_WIDTH) / 2;
     }
     private int getConsoleY() {
-        return (this.height - SCREEN_HEIGHT) / 2;
+        return (this.height - CONSOLE_HEIGHT) / 2;
     }
+
+    // List of games that are available to play
     private List<Game> availableGames = new ArrayList<>();
+
+    // Currently selected game
     private int selected = 0;
+
+    // Game, the player is currently playing (if there is only Game, and not its child, it means there is no game selected, and game selection screen is showed)
     private Game game = new Game();
+
     public GamingConsoleScreen(Component title) {
         super(title);
+
+        // Scans for games in player's inventory
         availableGames = scanForGames();
-        Timer timer = new Timer(50, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (game != null) {
-                    game.tick();
-                }
+
+        // Creates timer that calls tick() in Game every 50ms (20 times per second)
+        Timer timer = new Timer(50, e -> {
+            if (game != null) {
+                game.tick();
             }
         });
+
+        // Starts the timer
         timer.start();
     }
+
+    // This screen doesn't pause the game when opened
     @Override
     public boolean isPauseScreen() {
         return false;
     }
+
+    // Main rendering method
     @Override
     public void render(@NotNull GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
         renderBackground(graphics);
-        graphics.blit(BACKGROUD, getConsoleX(), getConsoleY(), 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 256, 256);
-        graphics.enableScissor(SCREEN_X + getConsoleX(), SCREEN_Y + getConsoleY(), SCREEN_X + getConsoleX() + Game.WIDTH, SCREEN_Y + getConsoleY() + Game.HEIGHT);
-        if (!game.isEmpty()) {
-            game.render(graphics, SCREEN_X + getConsoleX(), SCREEN_Y + getConsoleY());
-        }
-        else {
-            if (!availableGames.isEmpty()) {
-                graphics.blit(
-                        new ResourceLocation("gamediscs:textures/gui/selected.png"),
-                        getConsoleX() + SCREEN_X,
-                        getConsoleY() + SCREEN_Y + 3 + font.lineHeight + 18 * selected - (Math.max(0, selected - 3) * 18),
-                        0, 0, 0, 140, 18, 140, 18
-                );
-            }
-            graphics.drawString(
-                    font,
-                    Component.translatable("gui.gamingconsole.select_game").withStyle(ChatFormatting.BOLD),
-                    getConsoleX() + SCREEN_X + (Game.WIDTH - font.width(Component.translatable("gui.gamingconsole.select_game").withStyle(ChatFormatting.BOLD).getVisualOrderText())) / 2,
-                    getConsoleY() + SCREEN_Y + 3 - (Math.max(0, selected - 3) * 18),
-                    0xace53b,
-                    false
-            );
-            for (int i = 0; i < availableGames.size(); i++) {
-                graphics.drawString(
-                        font,
-                        Component.literal(availableGames.get(i).getName().getString()).withStyle(availableGames.get(i).getColor(), i == selected ? ChatFormatting.BOLD : ChatFormatting.ITALIC),
-                        getConsoleX() + SCREEN_X + 22,
-                        getConsoleY() + SCREEN_Y + 4 + font.lineHeight + 18 * i + (18 - font.lineHeight) / 2 - (Math.max(0, selected - 3) * 18),
-                        availableGames.get(i).getColor().getColor(),
-                        false
-                );
-                graphics.blit(
-                        availableGames.get(i).getIcon(),
-                        getConsoleX() + SCREEN_X + 3,
-                        getConsoleY() + SCREEN_Y + 4 + font.lineHeight + 18 * i - (Math.max(0, selected - 3) * 18),
-                        0, 0, 0, 16, 16, 16, 16
-                );
-            }
-        }
-        graphics.disableScissor();
+        renderGameScreen(graphics, getConsoleX() + SCREEN_X, getConsoleY() + SCREEN_Y);
+
         renderButtons(graphics);
         super.render(graphics, pMouseX, pMouseY, pPartialTick);
     }
 
-    private void renderButtons(GuiGraphics graphics) {
-        graphics.blit(BACKGROUD, getConsoleX() + W_X, getConsoleY() + W_Y, 0, W_SOURCE, game.controls.isButtonDown(Button.UP) ? SHIFT : 0, W_WIDTH, W_HEIGHT, 256, 256);
-        graphics.blit(BACKGROUD, getConsoleX() + A_X, getConsoleY() + A_Y, 0, A_SOURCE, game.controls.isButtonDown(Button.LEFT) ? SHIFT : 0, A_WIDTH, A_HEIGHT, 256, 256);
-        graphics.blit(BACKGROUD, getConsoleX() + D_X, getConsoleY() + D_Y, 0, D_SOURCE, game.controls.isButtonDown(Button.RIGHT) ? SHIFT : 0, D_WIDTH, D_HEIGHT, 256, 256);
-        graphics.blit(BACKGROUD, getConsoleX() + S_X, getConsoleY() + S_Y, 0, S_SOURCE, game.controls.isButtonDown(Button.DOWN) ? SHIFT : 0, S_WIDTH, S_HEIGHT, 256, 256);
-        graphics.blit(BACKGROUD, getConsoleX() + B1_X, getConsoleY() + B1_Y, 0, B1_SOURCE, game.controls.isButtonDown(Button.BUTTON1) ? SHIFT : 0, B1_WIDTH, B1_HEIGHT, 256, 256);
-        graphics.blit(BACKGROUD, getConsoleX() + B2_X, getConsoleY() + B2_Y, 0, B2_SOURCE, game.controls.isButtonDown(Button.BUTTON2) ? SHIFT : 0, B2_WIDTH, B2_HEIGHT, 256, 256);
+    @Override
+    public void renderBackground(GuiGraphics graphics) {
+        // Renders dark semitransparent background
+        super.renderBackground(graphics);
+
+        // Renders console image
+        graphics.blit(BACKGROUD, getConsoleX(), getConsoleY(), 0, 0, 0, CONSOLE_WIDTH, CONSOLE_HEIGHT, 256, 256);
     }
+
+    /**
+     * Renders game screen, including game, game selection, scores, etc.
+     * @param graphics GuiGraphics used for rendering
+     * @param x X position of the game screen
+     * @param y Y position of the game screen
+     */
+    private void renderGameScreen(GuiGraphics graphics, int x, int y) {
+        // Makes sure that nothing is rendered outside the game screen
+        graphics.enableScissor(x, y, x + Game.WIDTH, y + Game.HEIGHT);
+
+        // Renders the game itself
+        if (!game.isEmpty()) {
+            game.render(graphics, x, y);
+        }
+        else {
+            // If the game is empty, renders game selection screen
+            renderGameSelection(graphics, x, y);
+        }
+
+        // Allowing rendering everywhere
+        graphics.disableScissor();
+    }
+
+    /**
+     * Renders game selection screen
+     * @param graphics GuiGraphics used for rendering
+     * @param x X position
+     * @param y Y position
+     */
+    private void renderGameSelection(GuiGraphics graphics, int x, int y) {
+        // If there are some available games, it renders a selection marking on corresponding Y position
+        if (!availableGames.isEmpty()) {
+            graphics.blit(
+                    new ResourceLocation("gamediscs:textures/gui/selected.png"),
+                    x,
+                    y + 3 + font.lineHeight + 18 * selected - (Math.max(0, selected - 3) * 18),
+                    0, 0, 0, 140, 18, 140, 18
+            );
+        }
+
+        // Rendering "Select game" title, on top of the screen
+        graphics.drawString(
+                font,
+                Component.translatable("gui.gamingconsole.select_game").withStyle(ChatFormatting.BOLD),
+                x + (Game.WIDTH - font.width(Component.translatable("gui.gamingconsole.select_game").withStyle(ChatFormatting.BOLD).getVisualOrderText())) / 2,
+                y + 3 - (Math.max(0, selected - 3) * 18),
+                0xace53b,
+                false
+        );
+
+        // Rendering all available games
+        for (int i = 0; i < availableGames.size(); i++) {
+            // Rendering name of the game
+            graphics.drawString(
+                    font,
+                    // If the game is currently selected, the title renders bold
+                    Component.literal(availableGames.get(i).getName().getString()).withStyle(availableGames.get(i).getColor(), i == selected ? ChatFormatting.BOLD : ChatFormatting.ITALIC),
+                    x + 22,
+                    y + 4 + font.lineHeight + 18 * i + (18 - font.lineHeight) / 2 - (Math.max(0, selected - 3) * 18),
+                    availableGames.get(i).getColor().getColor(),
+                    false
+            );
+            // Rendering icon of the game
+            graphics.blit(
+                    availableGames.get(i).getIcon(),
+                    x + 3,
+                    y + 4 + font.lineHeight + 18 * i - (Math.max(0, selected - 3) * 18),
+                    0, 0, 0, 16, 16, 16, 16
+            );
+        }
+    }
+
+    /**
+     * Renders all visual buttons
+     * @param graphics GuiGraphics used for rendering
+     */
+    private void renderButtons(GuiGraphics graphics) {
+        W_BUTTON.render(graphics, getConsoleX(), getConsoleY(), game.controls.isButtonDown(Button.UP));
+        A_BUTTON.render(graphics, getConsoleX(), getConsoleY(), game.controls.isButtonDown(Button.LEFT));
+        D_BUTTON.render(graphics, getConsoleX(), getConsoleY(), game.controls.isButtonDown(Button.RIGHT));
+        S_BUTTON.render(graphics, getConsoleX(), getConsoleY(), game.controls.isButtonDown(Button.DOWN));
+        B1_BUTTON.render(graphics, getConsoleX(), getConsoleY(), game.controls.isButtonDown(Button.BUTTON1));
+        B2_BUTTON.render(graphics, getConsoleX(), getConsoleY(), game.controls.isButtonDown(Button.BUTTON2));
+    }
+
+    /**
+     * Scans for all games, player currently has in inventory
+     * @return List of found games
+     */
     public List<Game> scanForGames() {
+        // Creating the list of the games
         List<Game> games = new ArrayList<>();
         Player player = Minecraft.getInstance().player;
-        //player.displayClientMessage(Component.literal("Scanning"), false);
+
+        // Going through each slot of player's inventory
         for (int i = 0; i < Objects.requireNonNull(player).getInventory().getContainerSize(); i++) {
-            //player.displayClientMessage(Component.literal("Item: " + player.getInventory().getItem(i).toString()), false);
+            // If the item is GameDisc, it adds it to the list
             if (player.getInventory().getItem(i).getItem() instanceof GameDiscItem disc) {
                 games.removeIf((game) -> game.getClass().equals(disc.getGame().getClass()));
                 games.add(disc.getGame());
@@ -158,18 +208,28 @@ public class GamingConsoleScreen extends Screen {
         }
         return games;
     }
+
+    // Main method for pressed keys
     @Override
     public boolean keyPressed(int key, int pScanCode, int pModifiers) {
+        // This method should return true if the key press was consumed. So it saves it in this flag variable
         boolean flag = false;
+
+        // If the game is not empty, tries to quit or reset the game if the corresponding key was pressed
         if (!game.isEmpty()) {
+            // If the key was Q, returns to game selection (sets game to empty Game)
             if (key == 81) {
                 game = new Game();
+                flag = true;
             }
+            // If the key was R, resets the game by calling prepare() method
             else if (key == 82) {
                 game.prepare();
+                flag = true;
             }
         }
         if (game != null) {
+            // Sets the buttons in game's controls to pressed state if the button was pressed
             switch (key) {
                 case W -> {
                     game.controls.setButton(Button.UP, true);
@@ -197,35 +257,45 @@ public class GamingConsoleScreen extends Screen {
                 }
             }
         }
-        assert game != null;
         if (game.isEmpty()) {
+            // If we are in game selection, it must handle the keys by itself
+            // W moves the selection up
             if (key == W) {
                 int newSelected = selected - 1;
                 if (newSelected < 0) {
                     newSelected = availableGames.size() - 1;
                 }
                 selected = newSelected;
+                flag = true;
             }
+            // S moves the selection down
             if (key == S) {
                 int newSelected = selected + 1;
                 if (newSelected > availableGames.size() - 1) {
                     newSelected = 0;
                 }
                 selected = newSelected;
+                flag = true;
             }
+            // Space selects game
             if ((key == SPACE || key == ENTER) && !availableGames.isEmpty()) {
                 Game newGame = availableGames.get(selected);
                 newGame.prepare();
                 game = newGame;
+                flag = true;
             }
         }
         return (super.keyPressed(key, pScanCode, pModifiers) || flag);
     }
+
+    // Main method for handling key releasing
     @Override
     public boolean keyReleased(int pKeyCode, int pScanCode, int pModifiers) {
+        // This method should return true if the key release was consumed, so it saves it in this flag variable
         boolean flag = false;
-        //Minecraft.getInstance().player.displayClientMessage(Component.literal("Key: " + pKeyCode), false);
+
         if (game != null) {
+            // Trying to set button in game's controls to released state if the corresponding key was released
             switch (pKeyCode) {
                 case W -> {
                     game.controls.setButton(Button.UP, false);
