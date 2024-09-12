@@ -1,4 +1,4 @@
-package net.tejty.gamediscs.loot;
+package net.tejty.gamediscs.util.loot;
 
 import com.mojang.serialization.Codec;
 import net.minecraftforge.common.loot.IGlobalLootModifier;

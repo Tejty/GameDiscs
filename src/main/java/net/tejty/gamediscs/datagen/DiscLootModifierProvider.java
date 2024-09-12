@@ -9,7 +9,7 @@ import net.minecraftforge.common.data.GlobalLootModifierProvider;
 import net.minecraftforge.common.loot.LootTableIdCondition;
 import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.item.ItemRegistry;
-import net.tejty.gamediscs.loot.ItemModifier;
+import net.tejty.gamediscs.util.loot.ItemModifier;
 public class DiscLootModifierProvider extends GlobalLootModifierProvider{
     public DiscLootModifierProvider(PackOutput output) {
         super(output, GameDiscsMod.MODID);

@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.tejty.gamediscs.loot.LootModifiers;
+import net.tejty.gamediscs.util.loot.LootModifiers;
 import net.tejty.gamediscs.util.creativetab.CreativeTabs;
 import net.tejty.gamediscs.item.ItemRegistry;
 import net.tejty.gamediscs.util.networking.ModMessages;
