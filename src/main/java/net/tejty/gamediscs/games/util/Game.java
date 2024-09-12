@@ -18,37 +18,65 @@ import net.tejty.gamediscs.util.networking.packet.SetBestScoreC2SPacket;
 import java.util.Objects;
 import java.util.Random;
 public class Game {
+    // Current stage of the game
     public GameStage stage = GameStage.START;
+    // Controls of the game
     public Controls controls = new Controls(this);
+    // Dimensions of the game area
     public static final int WIDTH = 140;
     public static final int HEIGHT = 100;
+    // Random
     public final Random random = new Random();
+    // Tick counter
     public int ticks = 0;
+    // Score counter
     public int score = 0;
     public Game() {
 
     }
+
+    /**
+     * Resets all variables and prepares for start
+     */
     public synchronized void prepare() {
         stage = GameStage.START;
         ticks = 1;
     }
+
+    /**
+     * Starts the game
+     */
     public synchronized void start() {
         score = 0;
         stage = GameStage.PLAYING;
         ticks = 1;
     }
+
+    /**
+     * Stops the game, shows die screen, and sets the best score
+     */
     public synchronized  void die() {
         if (getConsole().getItem() instanceof GamingConsoleItem) {
-            if (GamingConsoleItem.getBestScore(getConsole(), this.getClass().getName().substring(this.getClass().getPackageName().length() + 1), Minecraft.getInstance().player) < score) {
-                ModMessages.sendToServer(new SetBestScoreC2SPacket(this.getClass().getName().substring(this.getClass().getPackageName().length() + 1), score));
+            // Tries to set the best score
+            String gameName = this.getClass().getName().substring(this.getClass().getPackageName().length() + 1);
+            if (GamingConsoleItem.getBestScore(getConsole(), gameName, Minecraft.getInstance().player) < score) {
+                ModMessages.sendToServer(new SetBestScoreC2SPacket(gameName, score));
             }
         }
+        // Sets game stage to DIED and resets tick counter
         stage = GameStage.DIED;
         ticks = 1;
     }
+
+    /**
+     * @return Game Console this game is running at
+     */
     private ItemStack getConsole() {
+        // Gets player of this client
         Player player = Minecraft.getInstance().player;
         assert player != null;
+
+        // Returns item player has in mainhand or offhand, depending on if its Gaming Console
         ItemStack item = player.getMainHandItem();
         if (item.getItem() instanceof GamingConsoleItem) {
             return item;
@@ -59,25 +87,56 @@ public class Game {
                 return item;
             }
         }
+        // If there is no Gaming Console in mainhand or offhand of the player, it creates a new one
         return new ItemStack(ItemRegistry.GAMING_CONSOLE.get());
     }
+
+    /**
+     * Updates everything by one tick
+     */
     public synchronized void tick() {
+        // Calls gameTick depending on game stage and game tick duration
         if (stage == GameStage.PLAYING && ticks % gameTickDuration() == 0) {
             gameTick();
         }
+        // Counts ticks
         ticks++;
     }
+
+    /**
+     * Updates everything in game by one tick
+     */
     public synchronized void gameTick() {
     }
+
+    /**
+     * Renders the whole game
+     * @param graphics GuiGraphics used for rendering
+     * @param posX X position of the game area
+     * @param posY Y position of the game area
+     */
     public synchronized void render(GuiGraphics graphics, int posX, int posY) {
+        // Renders background
         if (getBackground() != null) {
             graphics.blit(getBackground(), posX, posY, 0, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
         }
+        // Renders overlay
         renderOverlay(graphics, posX, posY);
     }
+
+    /**
+     * Renders all overlay things including score, die screen, and "press any key" text
+     * @param graphics GuiGraphics used for rendering
+     * @param posX X position
+     * @param posY Y position
+     */
     public synchronized void renderOverlay(GuiGraphics graphics, int posX, int posY) {
+        // saving font
         Font font = Minecraft.getInstance().font;
+
+        // If outside the game
         if (stage != GameStage.PLAYING) {
+            // Render "press any key" text
             graphics.drawString(
                     font,
                     Component.translatable("gui.gamingconsole.press_any_key"),
@@ -94,9 +153,15 @@ public class Game {
                     0xFFFFFF,
                     false
             );
+            // Renders died / won screen
             if (stage == GameStage.DIED || stage == GameStage.WON) {
+                // Renders score board
                 graphics.blit(new ResourceLocation("gamediscs:textures/gui/score_board.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
+
+                // Text based on won or died
                 Component component = stage == GameStage.DIED ? Component.translatable("gui.gamingconsole.died").withStyle(ChatFormatting.BOLD, ChatFormatting.DARK_RED) : Component.translatable("gui.gamingconsole.won").withStyle(ChatFormatting.BOLD, ChatFormatting.DARK_GREEN);
+
+                // Renders the outline of the text (four times renders the same text pushed by 1px to all directions)
                 graphics.drawString(
                         font,
                         component,
@@ -130,8 +195,10 @@ public class Game {
                         false
                 );
 
+                // Sets the text to be with lighter color
                 component = stage == GameStage.DIED ? Component.translatable("gui.gamingconsole.died").withStyle(ChatFormatting.BOLD, ChatFormatting.RED) : Component.translatable("gui.gamingconsole.won").withStyle(ChatFormatting.BOLD, ChatFormatting.GREEN);
 
+                // Renders the text
                 graphics.drawString(
                         font,
                         component,
@@ -140,6 +207,8 @@ public class Game {
                         Objects.requireNonNull(component.getStyle().getColor()).getValue(),
                         false
                 );
+
+                // Renders score text
                 component = Component.translatable("gui.gamingconsole.score").append(": ").append(String.valueOf(score)).withStyle(ChatFormatting.YELLOW);
                 graphics.drawString(
                         font,
@@ -149,8 +218,10 @@ public class Game {
                         Objects.requireNonNull(component.getStyle().getColor()).getValue(),
                         false
                 );
+
+                // Renders best score text
                 int bestScore = GamingConsoleItem.getBestScore(getConsole(), this.getClass().getName().substring(this.getClass().getPackageName().length() + 1), Minecraft.getInstance().player);
-                component = Component.translatable("gui.gamingconsole.best_score").append(": ").append(String.valueOf(bestScore)).withStyle(ChatFormatting.YELLOW);
+                component = Component.translatable(score >= bestScore ? "gui.gamingconsole.new_best_score" : "gui.gamingconsole.best_score").append(": ").append(String.valueOf(bestScore)).withStyle(score >= bestScore ? ChatFormatting.GREEN : ChatFormatting.YELLOW);
                 graphics.drawString(
                         font,
                         component,
@@ -162,9 +233,12 @@ public class Game {
             }
         }
         else {
+            // If current game has score box, it renders it
             if (showScoreBox()) {
                 graphics.blit(new ResourceLocation("gamediscs:textures/gui/score_box.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
             }
+
+            // Renders score
             graphics.drawString(
                     font,
                     Component.translatable("gui.gamingconsole.score").append(": ").append(String.valueOf(score)),
@@ -183,33 +257,76 @@ public class Game {
             );
         }
     }
+
+    /**
+     * On button down
+     * @param button The button that was pressed
+     */
     public synchronized void buttonDown(Button button) {
+        // Starts the game
         if ((stage == GameStage.START || stage == GameStage.RETRY) && ticks > 8) {
             start();
         }
+        // Prepares the game
         else if ((stage == GameStage.WON || stage == GameStage.DIED) && ticks > 8) {
             prepare();
         }
-        //Minecraft.getInstance().player.displayClientMessage(Component.literal("inGame: " + button), false);
     }
+
+    /**
+     * On button up
+     * @param button The button that was released
+     */
     public synchronized void buttonUp(Button button) {
 
     }
+
+    /**
+     * @return Game tickt duration
+     */
     public int gameTickDuration() {
-        return 1;
+        return 1; // Determines how often the game ticks (1 game tick duration = 20 game ticks per second, 2 game tick duration = 10 game ticks per second)
     }
+
+    /**
+     * @return Resource location of background image
+     */
     public ResourceLocation getBackground() {
         return null;
     }
+
+    /**
+     * @return Determines if this game shows score box
+     */
     public boolean showScoreBox() {
         return true;
     }
+
+    /**
+     * @return Color of score
+     */
     public int scoreColor() {
-        return 0xFFFFFF;
+        return 0xFFFFFF; // Default is white
     }
+
+    /**
+     * @return Display name of the game
+     */
     public Component getName() {return Component.empty();}
+
+    /**
+     * @return Resource location to icon of the game
+     */
     public ResourceLocation getIcon() {return null;}
+
+    /**
+     * @return Display color of the game
+     */
     public ChatFormatting getColor() {return ChatFormatting.YELLOW;}
+
+    /**
+     * @return True if the game is an empty game (default Game, not its child), false otherwise
+     */
     public boolean isEmpty() {
         return this.getClass().equals(Game.class);
     }
