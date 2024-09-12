@@ -15,7 +15,7 @@ import java.util.List;
 public class FlappyBirdGame extends Game {
     // The main player Sprite
     private Sprite bird = new Sprite(new Vec2(10, 30), new Vec2(10, 8), new ResourceLocation("gamediscs:textures/games/sprite/bird.png"));
-    // List of pillars
+    // List of pipes
     private List<Sprite> pipes = new ArrayList<Sprite>();
     // Ground Sprite
     private final Sprite ground = new Sprite(new Vec2(0, HEIGHT - 16), new Vec2(156, 16), new ResourceLocation("gamediscs:textures/games/sprite/ground.png"));

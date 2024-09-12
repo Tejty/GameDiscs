@@ -3,17 +3,26 @@ package net.tejty.gamediscs.games.util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec2;
+import net.tejty.gamediscs.games.graphics.Image;
+import net.tejty.gamediscs.games.graphics.Renderer;
+
 public class Sprite {
     // Properties of the Sprite
     private Vec2 pos;
     private Vec2 size;
     private Vec2 vel;
-    private ResourceLocation image;
-    public Sprite(Vec2 pos, Vec2 size, ResourceLocation image) {
+    private Renderer image;
+    public Sprite(Vec2 pos, Vec2 size, Renderer image) {
         this.pos = pos;
         this.size = size;
         this.image = image;
         this.vel = Vec2.ZERO;
+    }
+
+    public Sprite(Vec2 pos, Vec2 size, ResourceLocation image) {
+        this.pos = pos;
+        this.size = size;
+        this.image = new Image(image, (int)size.x, (int)size.y);
     }
 
     // getters and setters
@@ -56,11 +65,14 @@ public class Sprite {
     public void addVelocity(Vec2 vel) {
         this.vel = this.vel.add(vel);
     }
-    public ResourceLocation getImage() {
+    public Renderer getImage() {
         return image;
     }
-    public void setImage(ResourceLocation image) {
+    public void setImage(Image image) {
         this.image = image;
+    }
+    public void setImage(ResourceLocation image) {
+        this.image = new Image(image, (int)this.size.x, (int)this.size.y);
     }
     public void tick() {
         this.pos = this.pos.add(this.vel);
@@ -86,6 +98,6 @@ public class Sprite {
      * @param gameY Y position of game
      */
     public void render(GuiGraphics graphics, int gameX, int gameY) {
-        graphics.blit(image, gameX + (int)pos.x, gameY + (int)pos.y, 0, 0, 0, (int)size.x, (int)size.y, (int)size.x, (int)size.y);
+        image.render(graphics, gameX + (int)this.pos.x, gameY + (int)this.pos.y);
     }
 }
