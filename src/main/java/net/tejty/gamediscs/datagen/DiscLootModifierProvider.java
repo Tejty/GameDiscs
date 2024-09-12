@@ -14,6 +14,12 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
     public DiscLootModifierProvider(PackOutput output) {
         super(output, GameDiscsMod.MODID);
     }
+
+    /**
+     * The Generation chance is depending on randomChance.
+     * To chance the value set something between 1.0F - 0.0F "1.0F is 100% and 0.0F 0%"
+     */
+
     @Override
     protected void start() {
         add("flappy_bird_disc_from_simple_dungeon", new ItemModifier(new LootItemCondition[] {
