@@ -1,0 +1,4 @@
+// 1.20.1	2024-09-12T17:01:10.6742686	Global Loot Modifiers : gamediscs
+886301b7406e5a5b61910e702eff8ff88aa8106f data/forge/loot_modifiers/global_loot_modifiers.json
+d7083da66260079881484329ab718c76a81b7fe0 data/gamediscs/loot_modifiers/flappy_bird_disc_from_simple_dungeon.json
+0bd5d238472758914744106eb72e7f03708d3b8f data/gamediscs/loot_modifiers/slime_disc_from_simple_dungeon.json
