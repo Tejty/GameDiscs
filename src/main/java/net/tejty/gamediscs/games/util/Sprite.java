@@ -4,6 +4,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec2;
 public class Sprite {
+    // Properties of the Sprite
     private Vec2 pos;
     private Vec2 size;
     private Vec2 vel;
@@ -14,6 +15,8 @@ public class Sprite {
         this.image = image;
         this.vel = Vec2.ZERO;
     }
+
+    // getters and setters
     public Vec2 getPos() {
         return pos;
     }
@@ -62,6 +65,11 @@ public class Sprite {
     public void tick() {
         this.pos = this.pos.add(this.vel);
     }
+
+    /**
+     * @param other Sprite to check if it's colliding with it
+     * @return True, if they collide together, false otherwise
+     */
     public boolean isTouching(Sprite other) {
         return (
                 this.getX() < other.getX() + other.getWidth() &&
@@ -70,6 +78,13 @@ public class Sprite {
                 this.getY() + this.getHeight() > other.getY()
         );
     }
+
+    /**
+     * Renders the sprite
+     * @param graphics GuiGraphics used for rendering
+     * @param gameX X position of game
+     * @param gameY Y position of game
+     */
     public void render(GuiGraphics graphics, int gameX, int gameY) {
         graphics.blit(image, gameX + (int)pos.x, gameY + (int)pos.y, 0, 0, 0, (int)size.x, (int)size.y, (int)size.x, (int)size.y);
     }
