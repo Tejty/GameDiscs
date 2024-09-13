@@ -67,7 +67,7 @@ public class Sprite {
     public Renderer getImage() {
         return image;
     }
-    public void setImage(Image image) {
+    public void setImage(Renderer image) {
         this.image = image;
     }
     public void setImage(ResourceLocation image) {

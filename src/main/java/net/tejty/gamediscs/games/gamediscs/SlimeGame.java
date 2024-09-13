@@ -4,6 +4,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec2;
+import net.tejty.gamediscs.games.graphics.DirectionalImage;
+import net.tejty.gamediscs.games.graphics.Image;
 import net.tejty.gamediscs.games.util.Game;
 import net.tejty.gamediscs.games.util.GameStage;
 import net.tejty.gamediscs.games.util.Sprite;
@@ -16,17 +18,13 @@ public class SlimeGame extends Game {
 
     // TODO image class, multi-directional image class, animated image class
     // All images (I know it's a lot of them)
-    private static final ResourceLocation HEAD_LEFT = new ResourceLocation("gamediscs:textures/games/sprite/slime_head_left.png");
-    private static final ResourceLocation HEAD_RIGHT = new ResourceLocation("gamediscs:textures/games/sprite/slime_head_right.png");
-    private static final ResourceLocation HEAD_DOWN = new ResourceLocation("gamediscs:textures/games/sprite/slime_head_down.png");
-    private static final ResourceLocation HEAD_UP = new ResourceLocation("gamediscs:textures/games/sprite/slime_head_up.png");
+    private final DirectionalImage HEAD = new DirectionalImage(
+            new ResourceLocation("gamediscs:textures/games/sprite/slime_head.png"), 8, 32);
+    private final DirectionalImage TAIL = new DirectionalImage(
+            new ResourceLocation("gamediscs:textures/games/sprite/slime_tail.png"), 8, 32);
+    private final DirectionalImage CONNECTION = new DirectionalImage(
+            new ResourceLocation("gamediscs:textures/games/sprite/slime_connection.png"), 8, 32);
     private static final ResourceLocation BODY = new ResourceLocation("gamediscs:textures/games/sprite/slime_body.png");
-    private static final ResourceLocation TAIL_LEFT = new ResourceLocation("gamediscs:textures/games/sprite/slime_tail_left.png");
-    private static final ResourceLocation TAIL_RIGHT = new ResourceLocation("gamediscs:textures/games/sprite/slime_tail_right.png");
-    private static final ResourceLocation TAIL_DOWN = new ResourceLocation("gamediscs:textures/games/sprite/slime_tail_down.png");
-    private static final ResourceLocation TAIL_UP = new ResourceLocation("gamediscs:textures/games/sprite/slime_tail_up.png");
-    private static final ResourceLocation CONNECT_HORIZONTAL = new ResourceLocation("gamediscs:textures/games/sprite/slime_connect_horizontal.png");
-    private static final ResourceLocation CONNECT_VERTICAL = new ResourceLocation("gamediscs:textures/games/sprite/slime_connect_vertical.png");
     private static final ResourceLocation APPLE = new ResourceLocation("gamediscs:textures/games/sprite/apple.png");
 
     // Start position of the actual game field
@@ -141,10 +139,10 @@ public class SlimeGame extends Game {
         for (int i = slime.size() - 1; i >= 0; i--) {
             // Sets the image of the renderer to the corresponding slime part
             if (i == 0) {
-                slimeRenderer.setImage(getTail(VecUtil.get4DirectionTo(slime.get(0), slime.get(1))));
+                slimeRenderer.setImage(TAIL.setImage(VecUtil.get4DirectionTo(slime.get(0), slime.get(1))));
             }
             else if (i == slime.size() - 1) {
-                slimeRenderer.setImage(getHead(VecUtil.get4DirectionTo(slime.get(slime.size()-2), slime.get(slime.size() - 1))));
+                slimeRenderer.setImage(HEAD.setImage(VecUtil.get4DirectionTo(slime.get(slime.size()-2), slime.get(slime.size() - 1))));
             }
             else {
                 slimeRenderer.setImage(BODY);
@@ -161,7 +159,7 @@ public class SlimeGame extends Game {
                 slimeRenderer.setPos(calcPos(part.add(VecUtil.getFrom(VecUtil.get4DirectionTo(part, slime.get(i+1))).scale(0.5f))));
 
                 // Sets the corresponding image based on rotation
-                slimeRenderer.setImage(getConnect(VecUtil.get4DirectionTo(part, slime.get(i+1))));
+                slimeRenderer.setImage(CONNECTION.setImage(VecUtil.get4DirectionTo(part, slime.get(i+1))));
 
                 // Renders the connection
                 slimeRenderer.render(graphics, posX, posY);
@@ -200,43 +198,6 @@ public class SlimeGame extends Game {
                 }
             }
         }
-    }
-
-    /**
-     * @param direction Direction of the head
-     * @return Image of head pointing in given direction
-     */
-    private ResourceLocation getHead(int direction) {
-        return switch (direction) {
-            case 0 -> HEAD_UP;
-            case 1 -> HEAD_RIGHT;
-            case 3 -> HEAD_LEFT;
-            default -> HEAD_DOWN;
-        };
-    }
-
-    /**
-     * @param direction Direction of the tail
-     * @return Image of tail pointing in given direction
-     */
-    private ResourceLocation getTail(int direction) {
-        return switch (direction) {
-            case 0 -> TAIL_UP;
-            case 1 -> TAIL_RIGHT;
-            case 3 -> TAIL_LEFT;
-            default -> TAIL_DOWN;
-        };
-    }
-
-    /**
-     * @param direction Direction of the connection
-     * @return Image of connection pointing in given direction
-     */
-    private ResourceLocation getConnect(int direction) {
-        return switch (direction) {
-            case 0, 2 -> CONNECT_VERTICAL;
-            default -> CONNECT_HORIZONTAL;
-        };
     }
 
     /**

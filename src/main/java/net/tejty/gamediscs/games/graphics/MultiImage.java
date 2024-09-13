@@ -21,8 +21,9 @@ public class MultiImage extends Renderer {
         }
     }
 
-    public void setImage(int index) {
+    public MultiImage setImage(int index) {
         current = Math.min(Math.max(index, 0), count() - 1);
+        return this;
     }
 
     public int count() {
