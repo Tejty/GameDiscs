@@ -28,11 +28,11 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_simple_dungeon", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/simple_dungeon")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_simple_dungeon", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/simple_dungeon")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_SLIME.get()));
 
 
@@ -41,11 +41,11 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_stronghold_corridor", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/stronghold_corridor")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_stronghold_corridor", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/stronghold_corridor")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_SLIME.get()));
 
 
@@ -54,11 +54,11 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_stronghold_crossing", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/stronghold_crossing")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_stronghold_crossing", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/stronghold_crossing")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_SLIME.get()));
 
 
@@ -67,11 +67,11 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_stronghold_library", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/stronghold_library")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_stronghold_library", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/stronghold_library")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_SLIME.get()));
 
 
@@ -80,11 +80,11 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_end_city_treasure", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/end_city_treasure")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_end_city_treasure", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/end_city_treasure")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_SLIME.get()));
 
 
@@ -93,11 +93,11 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_woodland_mansion", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/woodland_mansion")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_woodland_mansion", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/woodland_mansion")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_SLIME.get()));
 
 
@@ -106,11 +106,11 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_buried_treasure", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/buried_treasure")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_buried_treasure", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/buried_treasure")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_SLIME.get()));
 
 
@@ -119,11 +119,11 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_ruined_portal", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/ruined_portal")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_ruined_portal", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/ruined_portal")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_SLIME.get()));
 
 
@@ -132,11 +132,11 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_ancient_city", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/ancient_city")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_ancient_city", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/ancient_city")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_SLIME.get()));
 
 
@@ -145,11 +145,11 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_ancient_city_ice_box", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/ancient_city_ice_box")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_ancient_city_ice_box", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/ancient_city_ice_box")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_SLIME.get()));
 
 
@@ -158,11 +158,11 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_abandoned_mineshaft", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/abandoned_mineshaft")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_abandoned_mineshaft", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/abandoned_mineshaft")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_SLIME.get()));
 
 
@@ -171,11 +171,11 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_jungle_temple", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/jungle_temple")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_jungle_temple", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/jungle_temple")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_SLIME.get()));
 
 
@@ -184,11 +184,11 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_desert_pyramid", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/desert_pyramid")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_desert_pyramid", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/desert_pyramid")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_SLIME.get()));
 
 
@@ -197,11 +197,11 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_bastion_bridge", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/bastion_bridge")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_bastion_bridge", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/bastion_bridge")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_SLIME.get()));
 
 
@@ -210,11 +210,11 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_bastion_hoglin_stable", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/bastion_hoglin_stable")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_bastion_hoglin_stable", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/bastion_hoglin_stable")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_SLIME.get()));
 
 
@@ -223,11 +223,11 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_bastion_other", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/bastion_other")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_bastion_other", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/bastion_other")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_SLIME.get()));
 
 
@@ -236,11 +236,11 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_bastion_treasure", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/bastion_treasure")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_bastion_treasure", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/bastion_treasure")).build(),
-                LootItemRandomChanceCondition.randomChance(0.5F).build() },
+                LootItemRandomChanceCondition.randomChance(0.2F).build() },
                 ItemRegistry.GAME_DISC_SLIME.get()));
     }
 }
