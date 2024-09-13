@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec2;
+import net.tejty.gamediscs.games.graphics.AnimatedImage;
 import net.tejty.gamediscs.games.util.Game;
 import net.tejty.gamediscs.games.util.GameStage;
 import net.tejty.gamediscs.games.util.Sprite;
@@ -14,11 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 public class FlappyBirdGame extends Game {
     // The main player Sprite
-    private Sprite bird = new Sprite(new Vec2(10, 30), new Vec2(10, 8), new ResourceLocation("gamediscs:textures/games/sprite/bird.png"));
+    private Sprite bird = new Sprite(new Vec2(10, 30), new Vec2(10, 8),
+            new AnimatedImage(
+                    new ResourceLocation("gamediscs:textures/games/sprite/bird.png"),
+                    8, 32, 4, 2)
+    );
     // List of pipes
     private List<Sprite> pipes = new ArrayList<Sprite>();
     // Ground Sprite
-    private final Sprite ground = new Sprite(new Vec2(0, HEIGHT - 16), new Vec2(156, 16), new ResourceLocation("gamediscs:textures/games/sprite/ground.png"));
+    private final Sprite ground = new Sprite(new Vec2(0, HEIGHT - 16), new Vec2(156, 16),
+            new ResourceLocation("gamediscs:textures/games/sprite/ground.png"));
 
     // Countdown of spawning another pillar
     private int pipeSpawnTimer = 0;
@@ -33,7 +39,11 @@ public class FlappyBirdGame extends Game {
         super.prepare();
 
         // Resets everything
-        bird = new Sprite(new Vec2(10, 30), new Vec2(10, 8), new ResourceLocation("gamediscs:textures/games/sprite/bird.png"));
+        bird = new Sprite(new Vec2(10, 30), new Vec2(10, 8),
+                new AnimatedImage(
+                        new ResourceLocation("gamediscs:textures/games/sprite/bird.png"),
+                        8, 32, 4, 2)
+        );
         pipes = new ArrayList<>();
         ground.setVelocity(new Vec2(-2.5f, 0));
     }
@@ -50,6 +60,11 @@ public class FlappyBirdGame extends Game {
     public synchronized void tick() {
         // Calls tick of super
         super.tick();
+
+        // Animating bee
+        if (stage != GameStage.DIED) {
+            bird.animTick();
+        }
 
         // If it's not died or won, the ground moves
         if (stage != GameStage.DIED && stage != GameStage.WON) {

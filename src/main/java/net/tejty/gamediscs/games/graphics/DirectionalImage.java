@@ -8,15 +8,7 @@ import java.util.List;
 
 public class DirectionalImage extends MultiImage {
     public DirectionalImage(ResourceLocation location, int fileWidth, int fileHeight) {
-        super(fromFile(location, fileWidth, fileHeight));
-    }
-
-    public static List<Image> fromFile(ResourceLocation location, int fileWidth, int fileHeight) {
-        List<Image> images = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            images.add(new Image(location, fileWidth, fileHeight, 0, fileHeight / 4 * i, fileWidth, fileHeight / 4));
-        }
-        return images;
+        this(location, fileWidth, fileHeight, fromFile(fileWidth, fileHeight, 4));
     }
 
     public DirectionalImage(ResourceLocation file, int fileWidth, int fileHeight, List<Rect2i> rects) {

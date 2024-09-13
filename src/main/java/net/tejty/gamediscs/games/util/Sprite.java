@@ -3,6 +3,7 @@ package net.tejty.gamediscs.games.util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec2;
+import net.tejty.gamediscs.games.graphics.AnimatedImage;
 import net.tejty.gamediscs.games.graphics.Image;
 import net.tejty.gamediscs.games.graphics.Renderer;
 
@@ -75,6 +76,11 @@ public class Sprite {
     }
     public void tick() {
         this.pos = this.pos.add(this.vel);
+    }
+    public void animTick() {
+        if (this.image instanceof AnimatedImage animation) {
+            animation.tick();
+        }
     }
 
     /**
