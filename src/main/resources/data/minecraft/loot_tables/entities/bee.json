@@ -16,7 +16,7 @@
         {
           "type": "minecraft:tag",
           "expand": true,
-          "name": "gamediscs:mob_drop_game_discs"
+          "name": "gamediscs:bee_drops_game_disc"
         }
       ],
       "rolls": 1.0
