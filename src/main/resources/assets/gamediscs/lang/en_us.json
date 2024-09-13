@@ -14,7 +14,6 @@
   "gui.gamingconsole.won": "You won!",
   "gui.gamingconsole.died": "You lost!",
 
-  "gamediscs.tooltip.game": "Game:",
   "gamediscs.flappy_bird": "Flappy Bee",
   "gamediscs.slime": "Slime"
 }
