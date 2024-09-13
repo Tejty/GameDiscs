@@ -171,7 +171,7 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
          */
         add("flappy_bird_disc_from_jungle_temple", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/jungle_temple")).build(),
-                LootItemRandomChanceCondition.randomChance(0.2F).build() },
+                LootItemRandomChanceCondition.randomChance(0.5F).build() },
                 ItemRegistry.GAME_DISC_FLAPPY_BIRD.get()));
         add("slime_disc_from_jungle_temple", new ItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("chests/jungle_temple")).build(),
