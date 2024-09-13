@@ -228,6 +228,12 @@ public class GamingConsoleScreen extends Screen {
                 flag = true;
             }
         }
+        else {
+            if (key == 81) {
+                this.minecraft.setScreen(null);
+                return true;
+            }
+        }
         if (game != null) {
             // Sets the buttons in game's controls to pressed state if the button was pressed
             switch (key) {
