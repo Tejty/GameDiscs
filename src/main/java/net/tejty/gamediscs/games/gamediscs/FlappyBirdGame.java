@@ -18,7 +18,7 @@ public class FlappyBirdGame extends Game {
     private Sprite bird = new Sprite(new Vec2(10, 30), new Vec2(10, 8),
             new AnimatedImage(
                     new ResourceLocation("gamediscs:textures/games/sprite/bird.png"),
-                    8, 32, 4, 2)
+                    10, 32, 4, 2)
     );
     // List of pipes
     private List<Sprite> pipes = new ArrayList<Sprite>();
@@ -42,7 +42,7 @@ public class FlappyBirdGame extends Game {
         bird = new Sprite(new Vec2(10, 30), new Vec2(10, 8),
                 new AnimatedImage(
                         new ResourceLocation("gamediscs:textures/games/sprite/bird.png"),
-                        8, 32, 4, 2)
+                        10, 32, 4, 2)
         );
         pipes = new ArrayList<>();
         ground.setVelocity(new Vec2(-2.5f, 0));
