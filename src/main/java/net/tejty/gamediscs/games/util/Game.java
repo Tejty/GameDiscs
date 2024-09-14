@@ -8,6 +8,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.games.controls.Controls;
 import net.tejty.gamediscs.item.ItemRegistry;
@@ -17,6 +19,7 @@ import net.tejty.gamediscs.util.networking.packet.SetBestScoreC2SPacket;
 
 import java.util.Objects;
 import java.util.Random;
+
 public class Game {
     // Current stage of the game
     public GameStage stage = GameStage.START;
@@ -38,6 +41,7 @@ public class Game {
     /**
      * Resets all variables and prepares for start
      */
+    @OnlyIn(Dist.CLIENT)
     public synchronized void prepare() {
         stage = GameStage.START;
         ticks = 1;
@@ -46,6 +50,7 @@ public class Game {
     /**
      * Starts the game
      */
+    @OnlyIn(Dist.CLIENT)
     public synchronized void start() {
         score = 0;
         stage = GameStage.PLAYING;
@@ -55,6 +60,7 @@ public class Game {
     /**
      * Stops the game, shows die screen, and sets the best score
      */
+    @OnlyIn(Dist.CLIENT)
     public synchronized  void die() {
         if (getConsole().getItem() instanceof GamingConsoleItem) {
             // Tries to set the best score
@@ -71,6 +77,7 @@ public class Game {
     /**
      * @return Game Console this game is running at
      */
+    @OnlyIn(Dist.CLIENT)
     private ItemStack getConsole() {
         // Gets player of this client
         Player player = Minecraft.getInstance().player;
@@ -94,6 +101,7 @@ public class Game {
     /**
      * Updates everything by one tick
      */
+    @OnlyIn(Dist.CLIENT)
     public synchronized void tick() {
         // Calls gameTick depending on game stage and game tick duration
         if (stage == GameStage.PLAYING && ticks % gameTickDuration() == 0) {
@@ -106,6 +114,7 @@ public class Game {
     /**
      * Updates everything in game by one tick
      */
+    @OnlyIn(Dist.CLIENT)
     public synchronized void gameTick() {
     }
 
@@ -115,6 +124,7 @@ public class Game {
      * @param posX X position of the game area
      * @param posY Y position of the game area
      */
+    @OnlyIn(Dist.CLIENT)
     public synchronized void render(GuiGraphics graphics, int posX, int posY) {
         // Renders background
         if (getBackground() != null) {
@@ -130,6 +140,7 @@ public class Game {
      * @param posX X position
      * @param posY Y position
      */
+    @OnlyIn(Dist.CLIENT)
     public synchronized void renderOverlay(GuiGraphics graphics, int posX, int posY) {
         // saving font
         Font font = Minecraft.getInstance().font;
@@ -262,6 +273,7 @@ public class Game {
      * On button down
      * @param button The button that was pressed
      */
+    @OnlyIn(Dist.CLIENT)
     public synchronized void buttonDown(Button button) {
         // Starts the game
         if ((stage == GameStage.START || stage == GameStage.RETRY) && ticks > 8) {
@@ -277,6 +289,7 @@ public class Game {
      * On button up
      * @param button The button that was released
      */
+    @OnlyIn(Dist.CLIENT)
     public synchronized void buttonUp(Button button) {
 
     }
@@ -284,6 +297,7 @@ public class Game {
     /**
      * @return Game tickt duration
      */
+    @OnlyIn(Dist.CLIENT)
     public int gameTickDuration() {
         return 1; // Determines how often the game ticks (1 game tick duration = 20 game ticks per second, 2 game tick duration = 10 game ticks per second)
     }
@@ -291,6 +305,7 @@ public class Game {
     /**
      * @return Resource location of background image
      */
+    @OnlyIn(Dist.CLIENT)
     public ResourceLocation getBackground() {
         return null;
     }
@@ -298,6 +313,7 @@ public class Game {
     /**
      * @return Determines if this game shows score box
      */
+    @OnlyIn(Dist.CLIENT)
     public boolean showScoreBox() {
         return true;
     }
@@ -305,6 +321,7 @@ public class Game {
     /**
      * @return Color of score
      */
+    @OnlyIn(Dist.CLIENT)
     public int scoreColor() {
         return 0xFFFFFF; // Default is white
     }
@@ -312,21 +329,25 @@ public class Game {
     /**
      * @return Display name of the game
      */
+    @OnlyIn(Dist.CLIENT)
     public Component getName() {return Component.empty();}
 
     /**
      * @return Resource location to icon of the game
      */
+    @OnlyIn(Dist.CLIENT)
     public ResourceLocation getIcon() {return null;}
 
     /**
      * @return Display color of the game
      */
+    @OnlyIn(Dist.CLIENT)
     public ChatFormatting getColor() {return ChatFormatting.YELLOW;}
 
     /**
      * @return True if the game is an empty game (default Game, not its child), false otherwise
      */
+    @OnlyIn(Dist.CLIENT)
     public boolean isEmpty() {
         return this.getClass().equals(Game.class);
     }
