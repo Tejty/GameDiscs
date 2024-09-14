@@ -52,9 +52,9 @@ public class SoundPlayer {
         play(SoundRegistry.GAME_OVER.get(), 0.9f, 2f);
     }
     public void playSelect() {
-        play(SoundRegistry.SELECT.get(), 0.5f);
+        play(SoundRegistry.SELECT.get(), 0.5f, 0.5f);
     }
     public void playConfirm() {
-        play(SoundRegistry.CONFIRM.get());
+        play(SoundRegistry.CONFIRM.get(), 1f, 0.5f);
     }
 }
