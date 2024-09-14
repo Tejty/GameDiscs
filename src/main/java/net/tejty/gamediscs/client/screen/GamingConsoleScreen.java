@@ -221,11 +221,13 @@ public class GamingConsoleScreen extends Screen {
             if (key == 81) {
                 game = new Game();
                 flag = true;
+                game.soundPlayer.playConfirm();
             }
             // If the key was R, resets the game by calling prepare() method
             else if (key == 82) {
                 game.prepare();
                 flag = true;
+                game.soundPlayer.playConfirm();
             }
         }
         else {
@@ -273,6 +275,7 @@ public class GamingConsoleScreen extends Screen {
                 }
                 selected = newSelected;
                 flag = true;
+                game.soundPlayer.playSelect();
             }
             // S moves the selection down
             if (key == S) {
@@ -282,6 +285,7 @@ public class GamingConsoleScreen extends Screen {
                 }
                 selected = newSelected;
                 flag = true;
+                game.soundPlayer.playSelect();
             }
             // Space selects game
             if ((key == SPACE || key == ENTER) && !availableGames.isEmpty()) {
@@ -289,6 +293,7 @@ public class GamingConsoleScreen extends Screen {
                 newGame.prepare();
                 game = newGame;
                 flag = true;
+                game.soundPlayer.playConfirm();
             }
         }
         return (super.keyPressed(key, pScanCode, pModifiers) || flag);

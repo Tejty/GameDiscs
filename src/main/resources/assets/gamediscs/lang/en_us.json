@@ -18,5 +18,10 @@
   "gamediscs.slime": "Slime",
 
   "sounds.gamediscs.jump": "Gaming Console - Jumped",
-  "sounds.gamediscs.click": "Gaming Console - Button Clicked"
+  "sounds.gamediscs.click": "Gaming Console - Button Clicked",
+  "sounds.gamediscs.point": "Gaming Console - Point",
+  "sounds.gamediscs.new_best": "Gaming Console - New Best",
+  "sounds.gamediscs.game_over": "Gaming Console - Game Over",
+  "sounds.gamediscs.select": "Gaming Console - Select",
+  "sounds.gamediscs.confirm": "Gaming Console - Confirm"
 }

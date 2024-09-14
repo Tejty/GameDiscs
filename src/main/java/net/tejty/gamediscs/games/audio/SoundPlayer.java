@@ -42,4 +42,19 @@ public class SoundPlayer {
     public void playJump() {
         playRandom(SoundRegistry.JUMP.get(), 0.8f, 1.2f, 0.8f, 1.2f);
     }
+    public void playPoint() {
+        play(SoundRegistry.POINT.get(), 1f, 0.7f);
+    }
+    public void playNewBest() {
+        play(SoundRegistry.NEW_BEST.get(), 1.5f, 2f);
+    }
+    public void playGameOver() {
+        play(SoundRegistry.GAME_OVER.get(), 0.9f, 2f);
+    }
+    public void playSelect() {
+        play(SoundRegistry.SELECT.get(), 0.5f);
+    }
+    public void playConfirm() {
+        play(SoundRegistry.CONFIRM.get());
+    }
 }

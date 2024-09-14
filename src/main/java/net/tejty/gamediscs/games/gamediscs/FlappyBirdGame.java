@@ -111,6 +111,8 @@ public class FlappyBirdGame extends Game {
             if (flag && pipe.getX() + pipe.getWidth() < bird.getX()) {
                 // Adds score
                 score++;
+                // Play sound
+                soundPlayer.playPoint();
             }
 
             // If the pipe is outside the game, it is removed
@@ -181,6 +183,9 @@ public class FlappyBirdGame extends Game {
         // If an action button was pressed, bird sets velocity to up (jumps)
         if (button.isActionButton()) {
             bird.setVelocity(new Vec2(0, -4.5f));
+            if (stage == GameStage.PLAYING) {
+                soundPlayer.playJump();
+            }
         }
     }
     @Override

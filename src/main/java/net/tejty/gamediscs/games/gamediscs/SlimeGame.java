@@ -3,6 +3,7 @@ package net.tejty.gamediscs.games.gamediscs;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.Vec2;
 import net.tejty.gamediscs.games.graphics.DirectionalImage;
 import net.tejty.gamediscs.games.graphics.Image;
@@ -11,6 +12,7 @@ import net.tejty.gamediscs.games.util.GameStage;
 import net.tejty.gamediscs.games.util.Sprite;
 import net.tejty.gamediscs.games.util.VecUtil;
 import net.tejty.gamediscs.games.controls.Button;
+import net.tejty.gamediscs.sounds.SoundRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,6 +126,7 @@ public class SlimeGame extends Game {
                 // If there is an apple, it respawns, and the score grows
                 respawnApple();
                 score++;
+                soundPlayer.play(SoundEvents.GENERIC_EAT);
             }
         }
     }
@@ -222,11 +225,15 @@ public class SlimeGame extends Game {
 
         // Changes the direction of the slime if a corresponding key was pressed
         if (stage == GameStage.PLAYING) {
+            Vec2 oldDirection = direction;
             switch (button) {
                 case UP -> direction = VecUtil.VEC_UP;
                 case RIGHT -> direction = VecUtil.VEC_RIGHT;
                 case DOWN -> direction = VecUtil.VEC_DOWN;
                 case LEFT -> direction = VecUtil.VEC_LEFT;
+            }
+            if (!VecUtil.is(oldDirection, direction)) {
+                    soundPlayer.play(SoundEvents.SLIME_SQUISH, 0.1f, 0.5f);
             }
         }
     }

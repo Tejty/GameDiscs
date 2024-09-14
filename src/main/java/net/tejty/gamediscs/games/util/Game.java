@@ -70,6 +70,10 @@ public class Game {
             String gameName = this.getClass().getName().substring(this.getClass().getPackageName().length() + 1);
             if (GamingConsoleItem.getBestScore(getConsole(), gameName, Minecraft.getInstance().player) < score) {
                 ModMessages.sendToServer(new SetBestScoreC2SPacket(gameName, score));
+                soundPlayer.playNewBest();
+            }
+            else {
+                soundPlayer.playGameOver();
             }
         }
         // Sets game stage to DIED and resets tick counter

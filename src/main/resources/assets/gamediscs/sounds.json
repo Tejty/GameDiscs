@@ -2,17 +2,43 @@
   "jump": {
     "subtitles": "sounds.gamediscs.jump",
     "sounds": [
-      "gamediscs:jump0",
-      "gamediscs:jump1",
-      "gamediscs:jump2",
-      "gamediscs:jump3",
-      "gamediscs:jump4"
+      "gamediscs:jump"
     ]
   },
   "click": {
     "subtitles": "sounds.gamediscs.click",
     "sounds": [
-      "gamediscs:click0"
+      "gamediscs:click"
+    ]
+  },
+  "point": {
+    "subtitles": "sounds.gamediscs.point",
+    "sounds": [
+      "gamediscs:point"
+    ]
+  },
+  "new_best": {
+    "subtitles": "sounds.gamediscs.new_best",
+    "sounds": [
+      "gamediscs:new_best"
+    ]
+  },
+  "game_over": {
+    "subtitles": "sounds.gamediscs.game_over",
+    "sounds": [
+      "gamediscs:game_over"
+    ]
+  },
+  "select": {
+    "subtitles": "sounds.gamediscs.select",
+    "sounds": [
+      "gamediscs:select"
+    ]
+  },
+  "confirm": {
+    "subtitles": "sounds.gamediscs.confirm",
+    "sounds": [
+      "gamediscs:confirm"
     ]
   }
 }
