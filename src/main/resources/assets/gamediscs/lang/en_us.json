@@ -15,5 +15,8 @@
   "gui.gamingconsole.died": "You lost!",
 
   "gamediscs.flappy_bird": "Flappy Bee",
-  "gamediscs.slime": "Slime"
+  "gamediscs.slime": "Slime",
+
+  "sounds.gamediscs.jump": "Gaming Console - Jumped",
+  "sounds.gamediscs.click": "Gaming Console - Button Clicked"
 }

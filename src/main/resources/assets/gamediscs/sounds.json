@@ -1,0 +1,18 @@
+{
+  "jump": {
+    "subtitles": "sounds.gamediscs.jump",
+    "sounds": [
+      "gamediscs:jump0",
+      "gamediscs:jump1",
+      "gamediscs:jump2",
+      "gamediscs:jump3",
+      "gamediscs:jump4"
+    ]
+  },
+  "click": {
+    "subtitles": "sounds.gamediscs.click",
+    "sounds": [
+      "gamediscs:click0"
+    ]
+  }
+}

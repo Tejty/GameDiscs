@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.tejty.gamediscs.games.audio.SoundPlayer;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.games.controls.Controls;
 import net.tejty.gamediscs.item.ItemRegistry;
@@ -25,6 +26,8 @@ public class Game {
     public GameStage stage = GameStage.START;
     // Controls of the game
     public Controls controls = new Controls(this);
+    // Sound player
+    public SoundPlayer soundPlayer = new SoundPlayer();
     // Dimensions of the game area
     public static final int WIDTH = 140;
     public static final int HEIGHT = 100;
@@ -275,6 +278,7 @@ public class Game {
      */
     @OnlyIn(Dist.CLIENT)
     public synchronized void buttonDown(Button button) {
+        soundPlayer.playClick(true);
         // Starts the game
         if ((stage == GameStage.START || stage == GameStage.RETRY) && ticks > 8) {
             start();
@@ -291,7 +295,7 @@ public class Game {
      */
     @OnlyIn(Dist.CLIENT)
     public synchronized void buttonUp(Button button) {
-
+        soundPlayer.playClick(false);
     }
 
     /**

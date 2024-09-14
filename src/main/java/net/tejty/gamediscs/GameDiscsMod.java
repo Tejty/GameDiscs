@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.tejty.gamediscs.sounds.SoundRegistry;
 import net.tejty.gamediscs.util.loot.LootModifiers;
 import net.tejty.gamediscs.util.creativetab.CreativeTabs;
 import net.tejty.gamediscs.item.ItemRegistry;
@@ -25,6 +26,7 @@ public class GameDiscsMod {
         ItemRegistry.register(modEventBus); //Registering items
         CreativeTabs.register(modEventBus); //Register creative tab
         LootModifiers.register(modEventBus); //Register loot modifier class
+        SoundRegistry.register(modEventBus); //Registering sounds
 
         modEventBus.addListener(this::commonSetup); //Register the commonSetup method for modloading
         MinecraftForge.EVENT_BUS.register(this); //Register ourselves for server and other game events we are interested in
