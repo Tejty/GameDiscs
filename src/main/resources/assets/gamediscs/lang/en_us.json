@@ -1,9 +1,20 @@
 {
   "creativetab.game_discs_tab": "Game Discs",
 
+
+  "gamediscs.flappy_bird": "Flappy Bee",
+  "gamediscs.slime": "Slime",
+
+
   "item.gamediscs.gaming_console": "Gaming Console",
+  "item.gamediscs.redstone_circuit": "Redstone Circuit",
+  "item.gamediscs.processor": "Processor",
+  "item.gamediscs.battery": "Battery",
+  "item.gamediscs.display": "Display",
+  "item.gamediscs.control_pad": "Control Pad",
   "item.gamediscs.game_disc_flappy_bird": "Game Disc",
   "item.gamediscs.game_disc_slime": "Game Disc",
+
 
   "gui.gamingconsole.title": "Gaming Console",
   "gui.gamingconsole.press_any_key": "Press any key",
@@ -14,8 +25,6 @@
   "gui.gamingconsole.won": "You won!",
   "gui.gamingconsole.died": "You lost!",
 
-  "gamediscs.flappy_bird": "Flappy Bee",
-  "gamediscs.slime": "Slime",
 
   "sounds.gamediscs.jump": "Gaming Console - Jumped",
   "sounds.gamediscs.click": "Gaming Console - Button Clicked",

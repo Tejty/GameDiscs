@@ -17,27 +17,23 @@ public class ItemRegistry {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, GameDiscsMod.MODID);
     public static final RegistryObject<Item> GAMING_CONSOLE = ITEMS.register("gaming_console",
-            () -> new GamingConsoleItem(
-                    new Item.Properties()
-                            .rarity(Rarity.UNCOMMON)
-            )
-    );
+            () -> new GamingConsoleItem(new Item.Properties().rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> GAME_DISC_FLAPPY_BIRD = ITEMS.register("game_disc_flappy_bird",
-            () -> new GameDiscItem(
-                    new Item.Properties()
-                            .rarity(Rarity.RARE),
-                    FlappyBirdGame::new,
-                    Component.translatable("gamediscs.flappy_bird").withStyle(ChatFormatting.YELLOW)
-            )
-    );
-    public static final RegistryObject<Item> GAME_DISC_SLIME = ITEMS.register("game_disc_slime",
-            () -> new GameDiscItem(
-                    new Item.Properties()
-                            .rarity(Rarity.RARE),
-                    SlimeGame::new,
-                    Component.translatable("gamediscs.slime").withStyle(ChatFormatting.DARK_GREEN)
-            )
-    );
+            () -> new GameDiscItem(new Item.Properties().rarity(Rarity.RARE), FlappyBirdGame::new, Component.translatable("gamediscs.flappy_bird").withStyle(ChatFormatting.YELLOW)));
+    public static final RegistryObject<Item> GAME_DISC_SLIME = ITEMS.register("game_disc_slime", () -> new GameDiscItem(
+                    new Item.Properties().rarity(Rarity.RARE), SlimeGame::new, Component.translatable("gamediscs.slime").withStyle(ChatFormatting.DARK_GREEN)));
+    public static final RegistryObject<Item> REDSTONE_CIRCUIT = ITEMS.register("redstone_circuit",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PROCESSOR = ITEMS.register("processor",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> BATTERY = ITEMS.register("battery",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> DISPLAY = ITEMS.register("display",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CONTROL_PAD = ITEMS.register("control_pad",
+            () -> new Item(new Item.Properties()));
+
+
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

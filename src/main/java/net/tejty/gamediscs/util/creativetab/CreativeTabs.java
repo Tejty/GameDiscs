@@ -20,6 +20,11 @@ public class CreativeTabs {
                     .title(Component.translatable("creativetab.game_discs_tab"))
                     .displayItems((itemDisplayParameters, output) -> {
                         output.accept(ItemRegistry.GAMING_CONSOLE.get());
+                        output.accept(ItemRegistry.REDSTONE_CIRCUIT.get());
+                        output.accept(ItemRegistry.PROCESSOR.get());
+                        output.accept(ItemRegistry.BATTERY.get());
+                        output.accept(ItemRegistry.DISPLAY.get());
+                        output.accept(ItemRegistry.CONTROL_PAD.get());
                         output.accept(ItemRegistry.GAME_DISC_FLAPPY_BIRD.get());
                         output.accept(ItemRegistry.GAME_DISC_SLIME.get());
                     })
