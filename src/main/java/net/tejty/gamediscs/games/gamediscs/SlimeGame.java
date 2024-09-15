@@ -5,12 +5,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.Vec2;
+import net.tejty.gamediscs.games.graphics.BreakParticleRenderer;
 import net.tejty.gamediscs.games.graphics.DirectionalImage;
 import net.tejty.gamediscs.games.graphics.Image;
-import net.tejty.gamediscs.games.util.Game;
-import net.tejty.gamediscs.games.util.GameStage;
-import net.tejty.gamediscs.games.util.Sprite;
-import net.tejty.gamediscs.games.util.VecUtil;
+import net.tejty.gamediscs.games.graphics.ParticleRenderer;
+import net.tejty.gamediscs.games.util.*;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.sounds.SoundRegistry;
 
@@ -124,11 +123,14 @@ public class SlimeGame extends Game {
             }
             else {
                 // If there is an apple, it respawns, and the score grows
+                spawnParticleExplosion(() -> new BreakParticleRenderer(APPLE, 8, 8), apple.getCenterPos(), 15, 3, 5, ParticleLevel.GAME);
                 respawnApple();
                 score++;
                 soundPlayer.play(SoundEvents.GENERIC_EAT);
             }
         }
+
+        addParticle(new Particle(calcPos(slime.get(0).add(VecUtil.randomFloat(Vec2.ZERO, new Vec2(1, 1), random))), new BreakParticleRenderer(BODY, 8, 8), random.nextInt(20, 50), ParticleLevel.RUNNING_GAME));
     }
     @Override
     public synchronized void render(GuiGraphics graphics, int posX, int posY) {
@@ -137,6 +139,9 @@ public class SlimeGame extends Game {
 
         // Renders apple
         apple.render(graphics, posX, posY);
+
+        // Renders particles
+        renderParticles(graphics, posX, posY);
 
         // Renders slime
         for (int i = slime.size() - 1; i >= 0; i--) {

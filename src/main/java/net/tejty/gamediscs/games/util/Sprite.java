@@ -13,6 +13,7 @@ public class Sprite {
     private Vec2 size = Vec2.ZERO;
     private Vec2 vel = Vec2.ZERO;
     private Renderer image = new Renderer();
+    private boolean shown = true;
     public Sprite(Vec2 pos, Vec2 size, Renderer image) {
         this.pos = pos;
         this.size = size;
@@ -74,6 +75,12 @@ public class Sprite {
     public void setImage(ResourceLocation image) {
         this.image = new Image(image, (int)this.size.x, (int)this.size.y);
     }
+    public void show() {
+        shown = true;
+    }
+    public void hide() {
+        shown = false;
+    }
     public void tick() {
         this.pos = this.pos.add(this.vel);
     }
@@ -103,6 +110,8 @@ public class Sprite {
      * @param gameY Y position of game
      */
     public void render(GuiGraphics graphics, int gameX, int gameY) {
-        image.render(graphics, gameX + (int)this.pos.x, gameY + (int)this.pos.y);
+        if (shown) {
+            image.render(graphics, gameX + (int) this.pos.x, gameY + (int) this.pos.y);
+        }
     }
 }

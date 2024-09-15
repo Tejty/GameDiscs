@@ -1,5 +1,6 @@
 package net.tejty.gamediscs.games.util;
 
+import com.ibm.icu.text.MessagePattern;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -8,18 +9,25 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.tejty.gamediscs.games.audio.SoundPlayer;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.games.controls.Controls;
+import net.tejty.gamediscs.games.graphics.ParticleColor;
+import net.tejty.gamediscs.games.graphics.ParticleRenderer;
+import net.tejty.gamediscs.games.graphics.Renderer;
 import net.tejty.gamediscs.item.ItemRegistry;
 import net.tejty.gamediscs.item.custom.GamingConsoleItem;
 import net.tejty.gamediscs.util.networking.ModMessages;
 import net.tejty.gamediscs.util.networking.packet.SetBestScoreC2SPacket;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.function.Supplier;
 
 public class Game {
     // Current stage of the game
@@ -37,6 +45,8 @@ public class Game {
     public int ticks = 0;
     // Score counter
     public int score = 0;
+    // Particles
+    private List<Particle> particles = new ArrayList<>();
     public Game() {
 
     }
@@ -48,6 +58,7 @@ public class Game {
     public synchronized void prepare() {
         stage = GameStage.START;
         ticks = 1;
+        particles.clear();
     }
 
     /**
@@ -71,11 +82,14 @@ public class Game {
             if (GamingConsoleItem.getBestScore(getConsole(), gameName, Minecraft.getInstance().player) < score) {
                 ModMessages.sendToServer(new SetBestScoreC2SPacket(gameName, score));
                 soundPlayer.playNewBest();
+
+                spawnConfetti();
             }
             else {
                 soundPlayer.playGameOver();
             }
         }
+
         // Sets game stage to DIED and resets tick counter
         stage = GameStage.DIED;
         ticks = 1;
@@ -113,6 +127,17 @@ public class Game {
         // Calls gameTick depending on game stage and game tick duration
         if (stage == GameStage.PLAYING && ticks % gameTickDuration() == 0) {
             gameTick();
+        }
+        // Move particles
+        int i = 0;
+        while (i < particles.size()) {
+            Particle particle = particles.get(i);
+            particle.tick();
+            if (particle.isDead()) {
+                particles.remove(i);
+                i--;
+            }
+            i++;
         }
         // Counts ticks
         ticks++;
@@ -274,6 +299,19 @@ public class Game {
                     false
             );
         }
+
+        for (Particle particle : particles) {
+            if (particle.isForOverlay()) {
+                particle.render(graphics, posX, posY, stage);
+            }
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public synchronized void renderParticles(GuiGraphics graphics, int posX, int posY) {
+        for (Particle particle : particles) {
+            particle.render(graphics, posX, posY, stage);
+        }
     }
 
     /**
@@ -290,6 +328,31 @@ public class Game {
         // Prepares the game
         else if ((stage == GameStage.WON || stage == GameStage.DIED) && ticks > 8) {
             prepare();
+        }
+    }
+
+    public Particle addParticle(Particle particle) {
+        particles.add(particle);
+        return particle;
+    }
+    public void spawnParticleExplosion(Supplier<Renderer> renderer, Vec2 pos, int count, int speed, int lifetime, ParticleLevel level) {
+        for (int i = 0; i < count; i++) {
+            Particle particle = new Particle(pos, renderer.get(), random.nextInt(lifetime / 2, lifetime), level);
+            particle.setVelocity(new Vec2(random.nextFloat(-speed, speed), random.nextFloat(-speed, speed)));
+            particles.add(particle);
+        }
+    }
+
+    public void spawnConfetti() {
+        for (int i = 0; i < 30; i++) {
+            Particle particle = new ConfettiParticle(new Vec2(0, HEIGHT), ParticleColor.random(random), random.nextInt(50, 70), ParticleLevel.OVERLAY);
+            particle.setVelocity(new Vec2(random.nextFloat(1, 10), random.nextFloat(-25, -10)));
+            particles.add(particle);
+        }
+        for (int i = 0; i < 30; i++) {
+            Particle particle = new ConfettiParticle(new Vec2(WIDTH, HEIGHT), ParticleColor.random(random), random.nextInt(50, 70), ParticleLevel.OVERLAY);
+            particle.setVelocity(new Vec2(random.nextFloat(-10, -1), random.nextFloat(-25, -10)));
+            particles.add(particle);
         }
     }
 

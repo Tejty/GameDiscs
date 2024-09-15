@@ -6,16 +6,16 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec2;
 import net.tejty.gamediscs.games.graphics.AnimatedImage;
-import net.tejty.gamediscs.games.util.Game;
-import net.tejty.gamediscs.games.util.GameStage;
-import net.tejty.gamediscs.games.util.Sprite;
+import net.tejty.gamediscs.games.graphics.BreakParticleRenderer;
+import net.tejty.gamediscs.games.graphics.ParticleColor;
+import net.tejty.gamediscs.games.util.*;
 import net.tejty.gamediscs.games.controls.Button;
 
 import java.util.ArrayList;
 import java.util.List;
 public class FlappyBirdGame extends Game {
     // The main player Sprite
-    private Sprite bird = new Sprite(new Vec2(10, 30), new Vec2(10, 8),
+    private Sprite bird = new Sprite(new Vec2(20, 30), new Vec2(10, 8),
             new AnimatedImage(
                     new ResourceLocation("gamediscs:textures/games/sprite/bird.png"),
                     10, 32, 4, 2)
@@ -39,13 +39,14 @@ public class FlappyBirdGame extends Game {
         super.prepare();
 
         // Resets everything
-        bird = new Sprite(new Vec2(10, 30), new Vec2(10, 8),
+        bird = new Sprite(new Vec2(20, 30), new Vec2(10, 8),
                 new AnimatedImage(
                         new ResourceLocation("gamediscs:textures/games/sprite/bird.png"),
                         10, 32, 4, 2)
         );
         pipes = new ArrayList<>();
         ground.setVelocity(new Vec2(-2.5f, 0));
+        bird.show();
     }
 
     @Override
@@ -134,8 +135,26 @@ public class FlappyBirdGame extends Game {
             die();
         }
 
+        if (ticks % 2 == 0) {
+            addParticle(new Particle(bird.getCenterPos(), ParticleColor.WHITE, 9, ParticleLevel.RUNNING_GAME)).setVelocity(new Vec2(-2.5f, 0));
+        }
+
         // Counting down the pipe spawning
         pipeSpawnTimer--;
+    }
+
+    @Override
+    public synchronized void die() {
+        super.die();
+        bird.hide();
+        spawnParticleExplosion(
+                () -> new BreakParticleRenderer(new ResourceLocation("gamediscs:textures/games/sprite/bird.png"), 10, 32),
+                bird.getCenterPos(),
+                20,
+                2,
+                10,
+                ParticleLevel.GAME
+        );
     }
 
     /**
@@ -171,6 +190,9 @@ public class FlappyBirdGame extends Game {
 
         // Renders ground
         ground.render(graphics, posX, posY);
+
+        // Renders particles
+        renderParticles(graphics, posX, posY);
 
         // Renders overlay
         renderOverlay(graphics, posX, posY);
