@@ -284,7 +284,7 @@ public class Game {
             // Renders score
             graphics.drawString(
                     font,
-                    Component.translatable("gui.gamingconsole.score").append(": ").append(String.valueOf(score)),
+                    (scoreText() ? Component.translatable("gui.gamingconsole.score").append(": ") : Component.empty()).append(String.valueOf(score)),
                     posX + 2,
                     posY + 2,
                     0x373737,
@@ -292,7 +292,7 @@ public class Game {
             );
             graphics.drawString(
                     font,
-                    Component.translatable("gui.gamingconsole.score").append(": ").append(String.valueOf(score)),
+                    (scoreText() ? Component.translatable("gui.gamingconsole.score").append(": ") : Component.empty()).append(String.valueOf(score)),
                     posX + 1,
                     posY + 1,
                     scoreColor(),
@@ -395,6 +395,14 @@ public class Game {
     @OnlyIn(Dist.CLIENT)
     public int scoreColor() {
         return 0xFFFFFF; // Default is white
+    }
+
+    /**
+     * @return Determines if score will be rendered with "Score:" before the number
+     */
+    @OnlyIn(Dist.CLIENT)
+    public boolean scoreText() {
+        return true; // Default is true
     }
 
     /**

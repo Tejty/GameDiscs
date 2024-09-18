@@ -23,6 +23,8 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider{
     @Override
     protected void start() {
 
+        // TODO loop for all loot tables and all games, so we don't have to make it in this stupid way
+        // TODO include blocktris in generation
         /*
          * Simple Dungeon
          */
