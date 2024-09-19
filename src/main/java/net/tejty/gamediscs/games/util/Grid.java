@@ -23,12 +23,27 @@ public class Grid {
         this.images = new MultiImage(images);
     }
 
+    public int tileSize() {
+        return size;
+    }
+
+    public int width() {
+        return map.length;
+    }
+    public int height() {
+        return map[0].length;
+    }
+
     public int get(int x, int y) {
         return map[x][y];
     }
 
     public void set(int x, int y, int value) {
         map[x][y] = value;
+    }
+
+    public MultiImage getImages() {
+        return images;
     }
 
     public void render(GuiGraphics graphics, int posX, int posY) {
