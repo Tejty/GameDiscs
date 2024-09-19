@@ -3,12 +3,18 @@ package net.tejty.gamediscs.games.controls;
 import net.tejty.gamediscs.games.util.Game;
 public class Controls {
     // Stores state of all buttons
-    private boolean UP;
-    private boolean DOWN;
-    private boolean LEFT;
-    private boolean RIGHT;
-    private boolean BUTTON1;
-    private boolean BUTTON2;
+    private boolean up;
+    private boolean down;
+    private boolean left;
+    private boolean right;
+    private boolean button1;
+    private boolean button2;
+    private boolean was_up;
+    private boolean was_down;
+    private boolean was_left;
+    private boolean was_right;
+    private boolean was_b1;
+    private boolean was_b2;
 
     // Stores the game
     private final Game game;
@@ -28,40 +34,46 @@ public class Controls {
             // If the button is [button], changes the [button]'s state to [isDown],
             // and sets callEvent to true if the button wasn't in the state before
             case UP -> {
-                if (!UP && isDown) {
+                if (!up && isDown) {
                     callEvent = true;
+                    was_up = true;
                 }
-                UP = isDown;
+                up = isDown;
             }
             case DOWN -> {
-                if (!DOWN && isDown) {
+                if (!down && isDown) {
                     callEvent = true;
+                    was_down = true;
                 }
-                DOWN = isDown;
+                down = isDown;
             }
             case LEFT -> {
-                if (!LEFT && isDown) {
+                if (!left && isDown) {
                     callEvent = true;
+                    was_left = true;
                 }
-                LEFT = isDown;
+                left = isDown;
             }
             case RIGHT -> {
-                if (!RIGHT && isDown) {
+                if (!right && isDown) {
                     callEvent = true;
+                    was_right = true;
                 }
-                RIGHT = isDown;
+                right = isDown;
             }
             case BUTTON1 -> {
-                if (!BUTTON1 && isDown) {
+                if (!button1 && isDown) {
                     callEvent = true;
+                    was_b1 = true;
                 }
-                BUTTON1 = isDown;
+                button1 = isDown;
             }
             case BUTTON2 -> {
-                if (!BUTTON2 && isDown) {
+                if (!button2 && isDown) {
                     callEvent = true;
+                    was_b2 = true;
                 }
-                BUTTON2 = isDown;
+                button2 = isDown;
             }
         }
         // Calls the key changing event in game, if callEvent is true (calls buttonDown(), or buttonUp(), based on the isDown)
@@ -81,12 +93,43 @@ public class Controls {
      */
     public boolean isButtonDown(Button button) {
         return switch (button) {
-            case UP -> UP;
-            case DOWN -> DOWN;
-            case LEFT -> LEFT;
-            case RIGHT -> RIGHT;
-            case BUTTON1 -> BUTTON1;
-            case BUTTON2 -> BUTTON2;
+            case UP -> up;
+            case DOWN -> down;
+            case LEFT -> left;
+            case RIGHT -> right;
+            case BUTTON1 -> button1;
+            case BUTTON2 -> button2;
         };
+    }
+
+    public boolean wasButtonDown(Button button) {
+        boolean toReturn = false;
+        switch (button) {
+            case UP -> {
+                toReturn = was_up;
+                was_up = false;
+            }
+            case DOWN -> {
+                toReturn = was_down;
+                was_down = false;
+            }
+            case LEFT -> {
+                toReturn = was_left;
+                was_left = false;
+            }
+            case RIGHT -> {
+                toReturn = was_right;
+                was_right = false;
+            }
+            case BUTTON1 -> {
+                toReturn = was_b1;
+                was_b1 = false;
+            }
+            case BUTTON2 -> {
+                toReturn = was_b2;
+                was_b2 = false;
+            }
+        }
+        return toReturn;
     }
 }
