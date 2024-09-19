@@ -4,6 +4,7 @@
 
   "gamediscs.flappy_bird": "Flappy Bee",
   "gamediscs.slime": "Slime",
+  "gamediscs.blocktris": "Blocktris",
 
 
   "item.gamediscs.gaming_console": "Gaming Console",
@@ -33,6 +34,5 @@
   "sounds.gamediscs.new_best": "Gaming Console - New Best",
   "sounds.gamediscs.game_over": "Gaming Console - Game Over",
   "sounds.gamediscs.select": "Gaming Console - Select",
-  "sounds.gamediscs.confirm": "Gaming Console - Confirm",
-  "gamediscs.blocktris": "Blocktris"
+  "sounds.gamediscs.confirm": "Gaming Console - Confirm"
 }
