@@ -3,32 +3,29 @@
   "category": "misc",
   "group": "gaming",
   "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "D": {
+      "item": "gamediscs:display"
+    },
+    "P": {
+      "item": "gamediscs:processor"
+    },
     "R": {
-      "item": "minecraft:redstone"
-    },
-    "C": {
-      "item": "minecraft:comparator"
-    },
-    "L": {
-      "item": "minecraft:redstone_lamp"
-    },
-    "E": {
-      "item": "minecraft:repeater"
-    },
-    "N": {
-      "item": "minecraft:note_block"
+      "item": "gamediscs:redstone_circuit"
     },
     "B": {
-      "tag": "minecraft:buttons"
+      "item": "gamediscs:battery"
     },
-    "G": {
-      "tag": "gamediscs:glass_panes"
+    "C": {
+      "item": "gamediscs:control_pad"
     }
   },
   "pattern": [
-    "RGR",
-    "ELC",
-    "BBN"
+    "IDI",
+    "RPR",
+    "BCB"
   ],
   "result": {
     "item": "gamediscs:gaming_console"
