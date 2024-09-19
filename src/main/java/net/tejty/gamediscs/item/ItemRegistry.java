@@ -18,11 +18,8 @@ public class ItemRegistry {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, GameDiscsMod.MODID);
 
-
-
     public static final RegistryObject<Item> GAMING_CONSOLE = ITEMS.register("gaming_console",
             () -> new GamingConsoleItem(new Item.Properties().rarity(Rarity.UNCOMMON)));
-
     public static final RegistryObject<Item> GAME_DISC_FLAPPY_BIRD = ITEMS.register("game_disc_flappy_bird",
             () -> new GameDiscItem(new Item.Properties().rarity(Rarity.RARE), FlappyBirdGame::new, Component.translatable("gamediscs.flappy_bird").withStyle(ChatFormatting.YELLOW)));
     public static final RegistryObject<Item> GAME_DISC_SLIME = ITEMS.register("game_disc_slime", () -> new GameDiscItem(
@@ -42,7 +39,6 @@ public class ItemRegistry {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CONTROL_PAD = ITEMS.register("control_pad",
             () -> new Item(new Item.Properties()));
-
 
 
     public static void register(IEventBus eventBus) {
