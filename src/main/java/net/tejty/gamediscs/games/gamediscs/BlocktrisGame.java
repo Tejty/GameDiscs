@@ -1,20 +1,24 @@
 package net.tejty.gamediscs.games.gamediscs;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.Vec2;
 import net.tejty.gamediscs.games.controls.Button;
+import net.tejty.gamediscs.games.graphics.BasicParticleRenderer;
+import net.tejty.gamediscs.games.graphics.BreakParticleRenderer;
 import net.tejty.gamediscs.games.graphics.MultiImage;
-import net.tejty.gamediscs.games.util.BlocktrisPiece;
-import net.tejty.gamediscs.games.util.Game;
-import net.tejty.gamediscs.games.util.GameStage;
-import net.tejty.gamediscs.games.util.Grid;
+import net.tejty.gamediscs.games.graphics.ParticleColor;
+import net.tejty.gamediscs.games.util.*;
+import net.tejty.gamediscs.sounds.SoundRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BlocktrisGame extends Game {
-    private Grid grid;
+    public Grid grid;
     private BlocktrisPiece piece;
     private BlocktrisPiece hold = null;
     private List<BlocktrisPiece> nexts = new ArrayList<>();
@@ -36,7 +40,7 @@ public class BlocktrisGame extends Game {
                 BlocktrisPiece.PIECES.get(type).get(),
                 4, 1,
                 type,
-                grid
+                this
         );
     }
 
@@ -57,7 +61,7 @@ public class BlocktrisGame extends Game {
                 BlocktrisPiece.PIECES.get(type).get(),
                 4, 1,
                 type,
-                grid
+                this
         );
         nexts.clear();
         hold = null;
@@ -73,7 +77,7 @@ public class BlocktrisGame extends Game {
                             BlocktrisPiece.PIECES.get(type).get(),
                             4, 1,
                             type,
-                            grid
+                            this
                     )
             );
         }
@@ -90,7 +94,7 @@ public class BlocktrisGame extends Game {
 
     @Override
     public int gameTickDuration() {
-        return (int)(10f / ((float)score / 30f + 1f));
+        return (int)(10f / ((float)score / 50f + 1f));
     }
 
     @Override
@@ -113,6 +117,14 @@ public class BlocktrisGame extends Game {
             hold.renderCentered(graphics, posX, posY);
         }
 
+        Font font = Minecraft.getInstance().font;
+        Component text = Component.translatable("gui.gamingconsole.hold");
+        graphics.drawString(font, text, 22 + posX - font.width(text.getVisualOrderText()) / 2, 16 + posY, 0x555555, false);
+        text = Component.translatable("gui.gamingconsole.next");
+        graphics.drawString(font, text, 118 + posX - font.width(text.getVisualOrderText()) / 2, 6 + posY, 0x555555, false);
+
+        renderParticles(graphics, posX, posY);
+
         renderOverlay(graphics, posX, posY);
     }
 
@@ -122,17 +134,21 @@ public class BlocktrisGame extends Game {
         if (stage == GameStage.PLAYING && ticks > 5) {
             if (button == Button.UP) {
                 piece.rotate();
+                soundPlayer.play(SoundRegistry.SWING.get(), 1.5f, 0.5f);
                 placementCooldown = 10;
             }
             if (button == Button.LEFT) {
                 piece.move(-1, 0);
+                soundPlayer.play(SoundRegistry.SHOOT.get(), 2.5f, 0.1f);
                 placementCooldown = 10;
             }
             if (button == Button.RIGHT) {
                 piece.move(1, 0);
+                soundPlayer.play(SoundRegistry.SHOOT.get(), 2.5f, 0.1f);
                 placementCooldown = 10;
             }
             if (button == Button.DOWN) {
+                soundPlayer.play(SoundRegistry.SHOOT.get(), 2.5f, 0.1f);
                 if (piece.move(0, 1)) {
                     placePiece();
                 }
@@ -141,11 +157,13 @@ public class BlocktrisGame extends Game {
                 }
             }
             if (button == Button.BUTTON1) {
+                soundPlayer.play(SoundRegistry.EXPLOSION.get(), 0.7f, 0.5f);
                 piece.hardDrop();
                 placePiece();
             }
             if (button == Button.BUTTON2) {
                 if (!switched) {
+                    soundPlayer.play(SoundRegistry.SWITCH.get(), 0.6f, 0.5f);
                     BlocktrisPiece oldHold = hold;
                     hold = piece;
                     if (oldHold != null) {
@@ -166,11 +184,14 @@ public class BlocktrisGame extends Game {
         if (stage == GameStage.PLAYING && ticks % 2 == 0) {
             if (controls.isButtonDown(Button.LEFT) && !controls.wasButtonDown(Button.LEFT)) {
                 piece.move(-1, 0);
+                soundPlayer.play(SoundRegistry.SHOOT.get(), 2.5f, 0.1f);
             }
             if (controls.isButtonDown(Button.RIGHT) && !controls.wasButtonDown(Button.RIGHT)) {
                 piece.move(1, 0);
+                soundPlayer.play(SoundRegistry.SHOOT.get(), 2.5f, 0.1f);
             }
             if (controls.isButtonDown(Button.DOWN) && !controls.wasButtonDown(Button.DOWN)) {
+                soundPlayer.play(SoundRegistry.SHOOT.get(), 2.5f, 0.1f);
                 if (piece.move(0, 1)) {
                     placePiece();
                 }
@@ -201,6 +222,17 @@ public class BlocktrisGame extends Game {
                     combo++;
                     for (int line = y - 1; line >= 0; line--) {
                         for (int x = 0; x < grid.width(); x++) {
+                            if (line == y - 1) {
+                                spawnParticleExplosion(
+                                        () ->
+                                                new BasicParticleRenderer(ParticleColor.random(random)),
+                                        new Vec2(45 + x * 5, y * 5 - 15),
+                                        4,
+                                        3,
+                                        5,
+                                        ParticleLevel.RUNNING_GAME
+                                );
+                            }
                             grid.set(x, line + 1, grid.get(x, line));
                         }
                     }
@@ -210,6 +242,9 @@ public class BlocktrisGame extends Game {
             }
 
             score += combo * combo;
+            if (combo > 0) {
+                soundPlayer.playPoint();
+            }
 
             piece = getNext();
             piece.setPos(4, 1);
@@ -229,7 +264,7 @@ public class BlocktrisGame extends Game {
                         BlocktrisPiece.PIECES.get(type).get(),
                         4, 1,
                         type,
-                        grid
+                        this
                 )
         );
         toReturn.setPos(4, 1);

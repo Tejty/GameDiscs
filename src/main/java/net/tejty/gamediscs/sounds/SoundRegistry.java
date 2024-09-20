@@ -19,6 +19,10 @@ public class SoundRegistry {
     public static final RegistryObject<SoundEvent> GAME_OVER = registerSoundEvents("game_over");
     public static final RegistryObject<SoundEvent> SELECT = registerSoundEvents("select");
     public static final RegistryObject<SoundEvent> CONFIRM = registerSoundEvents("confirm");
+    public static final RegistryObject<SoundEvent> EXPLOSION = registerSoundEvents("explosion");
+    public static final RegistryObject<SoundEvent> SHOOT = registerSoundEvents("shoot");
+    public static final RegistryObject<SoundEvent> SWING = registerSoundEvents("swing");
+    public static final RegistryObject<SoundEvent> SWITCH = registerSoundEvents("switch");
 
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {
         return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(GameDiscsMod.MODID, name)));

@@ -2,12 +2,16 @@ package net.tejty.gamediscs.games.util;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.phys.Vec2;
+import net.tejty.gamediscs.games.gamediscs.BlocktrisGame;
+import net.tejty.gamediscs.games.graphics.BasicParticleRenderer;
+import net.tejty.gamediscs.games.graphics.ParticleColor;
 
 import java.util.List;
 import java.util.function.Supplier;
 
 public class BlocktrisPiece {
     private final List<List<Vec2>> variants;
+    private final BlocktrisGame game;
     private int x;
     private int y;
     private int rotation;
@@ -164,12 +168,13 @@ public class BlocktrisPiece {
             S
     );
 
-    public BlocktrisPiece(List<List<Vec2>> variants, int x, int y, int color, Grid grid) {
+    public BlocktrisPiece(List<List<Vec2>> variants, int x, int y, int color, BlocktrisGame game) {
         this.variants = variants;
         this.x = x;
         this.y = y;
         this.color = color;
-        this.grid = grid;
+        this.grid = game.grid;
+        this.game = game;
     }
 
     public List<Vec2> current() {

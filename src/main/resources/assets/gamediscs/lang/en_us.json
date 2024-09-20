@@ -34,5 +34,11 @@
   "sounds.gamediscs.new_best": "Gaming Console - New Best",
   "sounds.gamediscs.game_over": "Gaming Console - Game Over",
   "sounds.gamediscs.select": "Gaming Console - Select",
-  "sounds.gamediscs.confirm": "Gaming Console - Confirm"
+  "sounds.gamediscs.confirm": "Gaming Console - Confirm",
+  "sounds.gamediscs.explosion": "Gaming Console - Explosion",
+  "sounds.gamediscs.shoot": "Gaming Console - Shoot",
+  "sounds.gamediscs.swing": "Gaming Console - Swing",
+  "sounds.gamediscs.switch": "Gaming Console - Switch",
+  "gui.gamingconsole.hold": "Hold",
+  "gui.gamingconsole.next": "Next"
 }

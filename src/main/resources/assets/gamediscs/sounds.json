@@ -40,5 +40,29 @@
     "sounds": [
       "gamediscs:confirm"
     ]
+  },
+  "explosion": {
+    "subtitles": "sounds.gamediscs.explosion",
+    "sounds": [
+      "gamediscs:explosion"
+    ]
+  },
+  "shoot": {
+    "subtitles": "sounds.gamediscs.shoot",
+    "sounds": [
+      "gamediscs:shoot"
+    ]
+  },
+  "swing": {
+    "subtitles": "sounds.gamediscs.swing",
+    "sounds": [
+      "gamediscs:swing"
+    ]
+  },
+  "switch": {
+    "subtitles": "sounds.gamediscs.switch",
+    "sounds": [
+      "gamediscs:switch"
+    ]
   }
 }
