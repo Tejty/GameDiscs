@@ -7,18 +7,12 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.Vec2;
 import net.tejty.gamediscs.games.graphics.BreakParticleRenderer;
 import net.tejty.gamediscs.games.graphics.DirectionalImage;
-import net.tejty.gamediscs.games.graphics.Image;
-import net.tejty.gamediscs.games.graphics.ParticleRenderer;
 import net.tejty.gamediscs.games.util.*;
 import net.tejty.gamediscs.games.controls.Button;
-import net.tejty.gamediscs.sounds.SoundRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
 public class SlimeGame extends Game {
-
-    // TODO image class, multi-directional image class, animated image class
-    // All images (I know it's a lot of them)
     private final DirectionalImage HEAD = new DirectionalImage(
             new ResourceLocation("gamediscs:textures/games/sprite/slime_head.png"), 8, 32);
     private final DirectionalImage TAIL = new DirectionalImage(

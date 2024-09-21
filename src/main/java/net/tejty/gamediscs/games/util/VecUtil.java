@@ -1,7 +1,9 @@
 package net.tejty.gamediscs.games.util;
 
 import net.minecraft.world.phys.Vec2;
+import org.joml.Matrix2d;
 
+import java.util.List;
 import java.util.Random;
 public class VecUtil {
     // Direction constants as integers
@@ -15,6 +17,16 @@ public class VecUtil {
     public static Vec2 VEC_RIGHT = new Vec2(1, 0);
     public static Vec2 VEC_DOWN = new Vec2(0, 1);
     public static Vec2 VEC_LEFT = new Vec2(-1, 0);
+    public static final List<Vec2> RELATIVES = List.of(
+            new Vec2(-1, -1),
+            new Vec2(0, -1),
+            new Vec2(1, -1),
+            new Vec2(1, 0),
+            new Vec2(1, 1),
+            new Vec2(0, 1),
+            new Vec2(-1, 1),
+            new Vec2(-1, 0)
+    );
 
     /**
      * @param xy X and Y
@@ -100,5 +112,12 @@ public class VecUtil {
      */
     public static Vec2 randomFloat(Vec2 min, Vec2 max, Random random) {
         return new Vec2(random.nextFloat(min.x, max.x), random.nextFloat(min.y, max.y));
+    }
+
+    /**
+     * @return Rounded vector
+     */
+    public static Vec2 round(Vec2 vec) {
+        return new Vec2(Math.round(vec.x), Math.round(vec.y));
     }
 }

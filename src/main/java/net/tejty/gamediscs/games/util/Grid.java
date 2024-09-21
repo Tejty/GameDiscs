@@ -1,6 +1,7 @@
 package net.tejty.gamediscs.games.util;
 
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.world.phys.Vec2;
 import net.tejty.gamediscs.games.graphics.Image;
 import net.tejty.gamediscs.games.graphics.MultiImage;
 
@@ -34,10 +35,16 @@ public class Grid {
         return map[0].length;
     }
 
+    public int get(Vec2 pos) {
+        return map[(int)pos.x][(int)pos.y];
+    }
     public int get(int x, int y) {
         return map[x][y];
     }
 
+    public void set(Vec2 pos, int value) {
+        map[(int)pos.x][(int)pos.y] = value;
+    }
     public void set(int x, int y, int value) {
         map[x][y] = value;
     }
@@ -52,6 +59,10 @@ public class Grid {
                 renderTile(graphics, posX, posY, x, y);
             }
         }
+    }
+
+    public boolean isIn(Vec2 pos) {
+        return pos.x >= 0 && pos.y >= 0 && pos.x < width() && pos.y < height();
     }
 
     private void renderTile(GuiGraphics graphics, int posX, int posY, int x, int y) {

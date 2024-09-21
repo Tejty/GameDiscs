@@ -12,6 +12,7 @@ import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.games.gamediscs.BlocktrisGame;
 import net.tejty.gamediscs.games.gamediscs.FlappyBirdGame;
 import net.tejty.gamediscs.games.gamediscs.SlimeGame;
+import net.tejty.gamediscs.games.gamediscs.TntSweeperGame;
 import net.tejty.gamediscs.item.custom.GameDiscItem;
 import net.tejty.gamediscs.item.custom.GamingConsoleItem;
 public class ItemRegistry {
@@ -26,6 +27,8 @@ public class ItemRegistry {
                     new Item.Properties().rarity(Rarity.RARE), SlimeGame::new, Component.translatable("gamediscs.slime").withStyle(ChatFormatting.DARK_GREEN)));
     public static final RegistryObject<Item> GAME_DISC_BLOCKTRIS = ITEMS.register("game_disc_blocktris", () -> new GameDiscItem(
                     new Item.Properties().rarity(Rarity.RARE), BlocktrisGame::new, Component.translatable("gamediscs.blocktris").withStyle(ChatFormatting.BLUE)));
+    public static final RegistryObject<Item> GAME_DISC_TNT_SWEEPER = ITEMS.register("game_disc_tnt_sweeper", () -> new GameDiscItem(
+                    new Item.Properties().rarity(Rarity.RARE), TntSweeperGame::new, Component.translatable("gamediscs.tnt_sweeper").withStyle(ChatFormatting.RED)));
 
 
 

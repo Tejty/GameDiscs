@@ -16,6 +16,7 @@
   "item.gamediscs.game_disc_flappy_bird": "Game Disc",
   "item.gamediscs.game_disc_slime": "Game Disc",
   "item.gamediscs.game_disc_blocktris": "Game Disc",
+  "item.gamediscs.game_disc_tnt_sweeper": "Game Disc",
 
 
   "gui.gamingconsole.title": "Gaming Console",
@@ -40,5 +41,6 @@
   "sounds.gamediscs.swing": "Gaming Console - Swing",
   "sounds.gamediscs.switch": "Gaming Console - Switch",
   "gui.gamingconsole.hold": "Hold",
-  "gui.gamingconsole.next": "Next"
+  "gui.gamingconsole.next": "Next",
+  "gamediscs.tnt_sweeper": "Tnt Sweeper"
 }

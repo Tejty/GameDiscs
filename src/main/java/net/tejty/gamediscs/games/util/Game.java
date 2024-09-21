@@ -1,12 +1,12 @@
 package net.tejty.gamediscs.games.util;
 
-import com.ibm.icu.text.MessagePattern;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec2;
@@ -16,10 +16,10 @@ import net.tejty.gamediscs.games.audio.SoundPlayer;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.games.controls.Controls;
 import net.tejty.gamediscs.games.graphics.ParticleColor;
-import net.tejty.gamediscs.games.graphics.ParticleRenderer;
 import net.tejty.gamediscs.games.graphics.Renderer;
 import net.tejty.gamediscs.item.ItemRegistry;
 import net.tejty.gamediscs.item.custom.GamingConsoleItem;
+import net.tejty.gamediscs.sounds.SoundRegistry;
 import net.tejty.gamediscs.util.networking.ModMessages;
 import net.tejty.gamediscs.util.networking.packet.SetBestScoreC2SPacket;
 
@@ -92,6 +92,26 @@ public class Game {
 
         // Sets game stage to DIED and resets tick counter
         stage = GameStage.DIED;
+        ticks = 1;
+    }
+
+    /**
+     * Stops the game, shows win screen, and sets the best score
+     */
+    @OnlyIn(Dist.CLIENT)
+    public synchronized  void win() {
+        soundPlayer.playNewBest();
+        spawnConfetti();
+        if (getConsole().getItem() instanceof GamingConsoleItem) {
+            // Tries to set the best score
+            String gameName = this.getClass().getName().substring(this.getClass().getPackageName().length() + 1);
+            if (GamingConsoleItem.getBestScore(getConsole(), gameName, Minecraft.getInstance().player) < score) {
+                ModMessages.sendToServer(new SetBestScoreC2SPacket(gameName, score));
+            }
+        }
+
+        // Sets game stage to DIED and resets tick counter
+        stage = GameStage.WON;
         ticks = 1;
     }
 
@@ -180,22 +200,24 @@ public class Game {
         // If outside the game
         if (stage != GameStage.PLAYING) {
             // Render "press any key" text
-            graphics.drawString(
-                    font,
-                    Component.translatable("gui.gamingconsole.press_any_key"),
-                    posX + (WIDTH - font.width(Component.translatable("gui.gamingconsole.press_any_key").getVisualOrderText())) / 2 + 1,
-                    posY + HEIGHT - font.lineHeight - 1,
-                    0x373737,
-                    false
-            );
-            graphics.drawString(
-                    font,
-                    Component.translatable("gui.gamingconsole.press_any_key"),
-                    posX + (WIDTH - font.width(Component.translatable("gui.gamingconsole.press_any_key").getVisualOrderText())) / 2,
-                    posY + HEIGHT - font.lineHeight - 2,
-                    0xFFFFFF,
-                    false
-            );
+            if (showPressAnyKey()) {
+                graphics.drawString(
+                        font,
+                        Component.translatable("gui.gamingconsole.press_any_key"),
+                        posX + (WIDTH - font.width(Component.translatable("gui.gamingconsole.press_any_key").getVisualOrderText())) / 2 + 1,
+                        posY + HEIGHT - font.lineHeight - 1,
+                        0x373737,
+                        false
+                );
+                graphics.drawString(
+                        font,
+                        Component.translatable("gui.gamingconsole.press_any_key"),
+                        posX + (WIDTH - font.width(Component.translatable("gui.gamingconsole.press_any_key").getVisualOrderText())) / 2,
+                        posY + HEIGHT - font.lineHeight - 2,
+                        0xFFFFFF,
+                        false
+                );
+            }
             // Renders died / won screen
             if (stage == GameStage.DIED || stage == GameStage.WON) {
                 // Renders score board
@@ -277,27 +299,29 @@ public class Game {
         }
         else {
             // If current game has score box, it renders it
-            if (showScoreBox()) {
+            if (showScoreBox() && showScore()) {
                 graphics.blit(new ResourceLocation("gamediscs:textures/gui/score_box.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
             }
 
-            // Renders score
-            graphics.drawString(
-                    font,
-                    (scoreText() ? Component.translatable("gui.gamingconsole.score").append(": ") : Component.empty()).append(String.valueOf(score)),
-                    posX + 2,
-                    posY + 2,
-                    0x373737,
-                    false
-            );
-            graphics.drawString(
-                    font,
-                    (scoreText() ? Component.translatable("gui.gamingconsole.score").append(": ") : Component.empty()).append(String.valueOf(score)),
-                    posX + 1,
-                    posY + 1,
-                    scoreColor(),
-                    false
-            );
+            if (showScore()) {
+                // Renders score
+                graphics.drawString(
+                        font,
+                        (scoreText() ? Component.translatable("gui.gamingconsole.score").append(": ") : Component.empty()).append(String.valueOf(score)),
+                        posX + 2,
+                        posY + 2,
+                        0x373737,
+                        false
+                );
+                graphics.drawString(
+                        font,
+                        (scoreText() ? Component.translatable("gui.gamingconsole.score").append(": ") : Component.empty()).append(String.valueOf(score)),
+                        posX + 1,
+                        posY + 1,
+                        scoreColor(),
+                        false
+                );
+            }
         }
 
         for (Particle particle : particles) {
@@ -338,6 +362,14 @@ public class Game {
     public void spawnParticleExplosion(Supplier<Renderer> renderer, Vec2 pos, int count, int speed, int lifetime, ParticleLevel level) {
         for (int i = 0; i < count; i++) {
             Particle particle = new Particle(pos, renderer.get(), random.nextInt(lifetime / 2, lifetime), level);
+            particle.setVelocity(new Vec2(random.nextFloat(-speed, speed), random.nextFloat(-speed, speed)));
+            particles.add(particle);
+        }
+    }
+    public void spawnParticleExplosion(Vec2 pos, int count, int speed, int lifetime, ParticleLevel level) {
+        soundPlayer.play(SoundEvents.GENERIC_EXPLODE, 1.5f, 0.1f);
+        for (int i = 0; i < count; i++) {
+            Particle particle = new ExplosionParticle(pos, random.nextInt(lifetime / 2, lifetime), level);
             particle.setVelocity(new Vec2(random.nextFloat(-speed, speed), random.nextFloat(-speed, speed)));
             particles.add(particle);
         }
@@ -386,6 +418,14 @@ public class Game {
      */
     @OnlyIn(Dist.CLIENT)
     public boolean showScoreBox() {
+        return true;
+    }
+
+    public boolean showScore() {
+        return true;
+    }
+
+    public boolean showPressAnyKey() {
         return true;
     }
 

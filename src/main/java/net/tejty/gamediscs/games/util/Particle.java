@@ -8,7 +8,7 @@ import net.tejty.gamediscs.games.graphics.*;
 public class Particle {
     // Properties of the Particle
     private int lifetime;
-    private ParticleLevel level;
+    public ParticleLevel level;
     private Vec2 pos = Vec2.ZERO;
     private Vec2 vel = Vec2.ZERO;
     private Renderer image = new Renderer();

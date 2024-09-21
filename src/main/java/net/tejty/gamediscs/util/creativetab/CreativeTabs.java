@@ -28,6 +28,7 @@ public class CreativeTabs {
                         output.accept(ItemRegistry.GAME_DISC_FLAPPY_BIRD.get());
                         output.accept(ItemRegistry.GAME_DISC_SLIME.get());
                         output.accept(ItemRegistry.GAME_DISC_BLOCKTRIS.get());
+                        output.accept(ItemRegistry.GAME_DISC_TNT_SWEEPER.get());
                     })
                     .build()
     );
