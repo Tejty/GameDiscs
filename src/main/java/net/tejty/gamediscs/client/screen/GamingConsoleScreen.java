@@ -336,4 +336,11 @@ public class GamingConsoleScreen extends Screen {
         }
         return (super.keyPressed(pKeyCode, pScanCode, pModifiers) || flag);
     }
+
+    @Override
+    public void onClose() {
+        super.onClose();
+
+        game = null;
+    }
 }
