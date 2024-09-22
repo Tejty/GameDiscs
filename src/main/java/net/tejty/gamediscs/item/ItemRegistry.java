@@ -9,10 +9,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.tejty.gamediscs.GameDiscsMod;
-import net.tejty.gamediscs.games.gamediscs.BlocktrisGame;
-import net.tejty.gamediscs.games.gamediscs.FlappyBirdGame;
-import net.tejty.gamediscs.games.gamediscs.SlimeGame;
-import net.tejty.gamediscs.games.gamediscs.TntSweeperGame;
+import net.tejty.gamediscs.games.gamediscs.*;
 import net.tejty.gamediscs.item.custom.GameDiscItem;
 import net.tejty.gamediscs.item.custom.GamingConsoleItem;
 public class ItemRegistry {
@@ -29,6 +26,8 @@ public class ItemRegistry {
                     new Item.Properties().rarity(Rarity.RARE), BlocktrisGame::new, Component.translatable("gamediscs.blocktris").withStyle(ChatFormatting.BLUE)));
     public static final RegistryObject<Item> GAME_DISC_TNT_SWEEPER = ITEMS.register("game_disc_tnt_sweeper", () -> new GameDiscItem(
                     new Item.Properties().rarity(Rarity.RARE), TntSweeperGame::new, Component.translatable("gamediscs.tnt_sweeper").withStyle(ChatFormatting.RED)));
+    public static final RegistryObject<Item> GAME_DISC_PONG = ITEMS.register("game_disc_pong", () -> new GameDiscItem(
+                    new Item.Properties().rarity(Rarity.RARE), PongGame::new, Component.translatable("gamediscs.pong_game").withStyle(ChatFormatting.WHITE)));
 
 
 

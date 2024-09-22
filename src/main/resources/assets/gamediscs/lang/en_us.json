@@ -5,6 +5,8 @@
   "gamediscs.flappy_bird": "Flappy Bee",
   "gamediscs.slime": "Slime",
   "gamediscs.blocktris": "Blocktris",
+  "gamediscs.tnt_sweeper": "Tnt Sweeper",
+  "gamediscs.pong": "Pong",
 
 
   "item.gamediscs.gaming_console": "Gaming Console",
@@ -17,6 +19,7 @@
   "item.gamediscs.game_disc_slime": "Game Disc",
   "item.gamediscs.game_disc_blocktris": "Game Disc",
   "item.gamediscs.game_disc_tnt_sweeper": "Game Disc",
+  "item.gamediscs.game_disc_pong": "Game Disc",
 
 
   "gui.gamingconsole.title": "Gaming Console",
@@ -27,6 +30,8 @@
   "gui.gamingconsole.new_best_score": "New Best",
   "gui.gamingconsole.won": "You won!",
   "gui.gamingconsole.died": "You lost!",
+  "gui.gamingconsole.hold": "Hold",
+  "gui.gamingconsole.next": "Next",
 
 
   "sounds.gamediscs.jump": "Gaming Console - Jumped",
@@ -39,8 +44,5 @@
   "sounds.gamediscs.explosion": "Gaming Console - Explosion",
   "sounds.gamediscs.shoot": "Gaming Console - Shoot",
   "sounds.gamediscs.swing": "Gaming Console - Swing",
-  "sounds.gamediscs.switch": "Gaming Console - Switch",
-  "gui.gamingconsole.hold": "Hold",
-  "gui.gamingconsole.next": "Next",
-  "gamediscs.tnt_sweeper": "Tnt Sweeper"
+  "sounds.gamediscs.switch": "Gaming Console - Switch"
 }
