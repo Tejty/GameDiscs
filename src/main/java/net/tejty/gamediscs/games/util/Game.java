@@ -45,6 +45,13 @@ public class Game {
     public int ticks = 0;
     // Score counter
     public int score = 0;
+    // Lives
+    public int lives = maxLives();
+
+    public int maxLives() {
+        return 1;
+    }
+
     // Particles
     private List<Particle> particles = new ArrayList<>();
     public Game() {
@@ -56,6 +63,10 @@ public class Game {
      */
     @OnlyIn(Dist.CLIENT)
     public synchronized void prepare() {
+        if (stage == GameStage.DIED) {
+            score = 0;
+            lives = maxLives();
+        }
         stage = GameStage.START;
         ticks = 1;
         particles.clear();
@@ -66,7 +77,6 @@ public class Game {
      */
     @OnlyIn(Dist.CLIENT)
     public synchronized void start() {
-        score = 0;
         stage = GameStage.PLAYING;
         ticks = 1;
     }
@@ -76,23 +86,29 @@ public class Game {
      */
     @OnlyIn(Dist.CLIENT)
     public synchronized  void die() {
-        if (getConsole().getItem() instanceof GamingConsoleItem) {
-            // Tries to set the best score
-            String gameName = this.getClass().getName().substring(this.getClass().getPackageName().length() + 1);
-            if (GamingConsoleItem.getBestScore(getConsole(), gameName, Minecraft.getInstance().player) < score) {
-                ModMessages.sendToServer(new SetBestScoreC2SPacket(gameName, score));
-                soundPlayer.playNewBest();
+        lives--;
+        if (lives <= 0) {
+            if (getConsole().getItem() instanceof GamingConsoleItem) {
+                // Tries to set the best score
+                String gameName = this.getClass().getName().substring(this.getClass().getPackageName().length() + 1);
+                if (GamingConsoleItem.getBestScore(getConsole(), gameName, Minecraft.getInstance().player) < score) {
+                    ModMessages.sendToServer(new SetBestScoreC2SPacket(gameName, score));
+                    soundPlayer.playNewBest();
 
-                spawnConfetti();
+                    spawnConfetti();
+                } else {
+                    soundPlayer.playGameOver();
+                }
             }
-            else {
-                soundPlayer.playGameOver();
-            }
+
+            // Sets game stage to DIED and resets tick counter
+            stage = GameStage.DIED;
+            ticks = 1;
         }
-
-        // Sets game stage to DIED and resets tick counter
-        stage = GameStage.DIED;
-        ticks = 1;
+        else {
+            soundPlayer.play(SoundRegistry.EXPLOSION.get());
+            prepare();
+        }
     }
 
     /**

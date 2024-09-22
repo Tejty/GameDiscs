@@ -63,8 +63,9 @@ public class Sprite {
     public void setVelocity(Vec2 vel) {
         this.vel = vel;
     }
-    public void addVelocity(Vec2 vel) {
+    public Sprite addVelocity(Vec2 vel) {
         this.vel = this.vel.add(vel);
+        return this;
     }
     public Renderer getImage() {
         return image;

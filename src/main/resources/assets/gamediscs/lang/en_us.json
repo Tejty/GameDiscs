@@ -20,6 +20,7 @@
   "item.gamediscs.game_disc_blocktris": "Game Disc",
   "item.gamediscs.game_disc_tnt_sweeper": "Game Disc",
   "item.gamediscs.game_disc_pong": "Game Disc",
+  "item.gamediscs.game_disc_froggie": "Game Disc",
 
 
   "gui.gamingconsole.title": "Gaming Console",
@@ -44,5 +45,7 @@
   "sounds.gamediscs.explosion": "Gaming Console - Explosion",
   "sounds.gamediscs.shoot": "Gaming Console - Shoot",
   "sounds.gamediscs.swing": "Gaming Console - Swing",
-  "sounds.gamediscs.switch": "Gaming Console - Switch"
+  "sounds.gamediscs.switch": "Gaming Console - Switch",
+  "gamediscs.froggie": "Froggie",
+  "gamediscs.pong_game": "Pong"
 }

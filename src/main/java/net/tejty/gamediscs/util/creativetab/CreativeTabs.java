@@ -30,6 +30,7 @@ public class CreativeTabs {
                         output.accept(ItemRegistry.GAME_DISC_BLOCKTRIS.get());
                         output.accept(ItemRegistry.GAME_DISC_TNT_SWEEPER.get());
                         output.accept(ItemRegistry.GAME_DISC_PONG.get());
+                        output.accept(ItemRegistry.GAME_DISC_FROGGIE.get());
                     })
                     .build()
     );
