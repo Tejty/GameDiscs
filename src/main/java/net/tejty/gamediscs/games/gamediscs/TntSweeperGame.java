@@ -5,6 +5,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.Vec2;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.games.graphics.ExplosionParticleRenderer;
@@ -208,10 +209,12 @@ public class TntSweeperGame extends Game {
                     grid.set(selectionPos, FLAG);
                     flags--;
                     checkForWin();
+                    soundPlayer.play(SoundEvents.WOOL_PLACE);
                 }
                 else if (grid.get(selectionPos) == FLAG) {
                     grid.set(selectionPos, NOTHING);
                     flags++;
+                    soundPlayer.play(SoundEvents.WOOL_BREAK);
                 }
             }
         }
@@ -245,6 +248,7 @@ public class TntSweeperGame extends Game {
                         dig(pos.add(rel));
                     }
                 }
+                soundPlayer.play(SoundEvents.DEEPSLATE_BRICKS_BREAK);
                 checkForWin();
             }
         }
