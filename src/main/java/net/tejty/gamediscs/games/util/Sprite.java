@@ -42,6 +42,12 @@ public class Sprite {
     public void setPos(Vec2 pos) {
         this.pos = pos;
     }
+    public void setX(float x) {
+        this.pos = new Vec2(x, getY());
+    }
+    public void setY(float y) {
+        this.pos = new Vec2(getX(), y);
+    }
     public void moveBy(Vec2 offset) {
         pos = pos.add(offset);
     }
@@ -60,8 +66,9 @@ public class Sprite {
     public Vec2 getVelocity() {
         return vel;
     }
-    public void setVelocity(Vec2 vel) {
+    public Sprite setVelocity(Vec2 vel) {
         this.vel = vel;
+        return this;
     }
     public Sprite addVelocity(Vec2 vel) {
         this.vel = this.vel.add(vel);

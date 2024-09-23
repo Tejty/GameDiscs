@@ -4,11 +4,42 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.Vec2;
 import net.tejty.gamediscs.games.controls.Button;
+import net.tejty.gamediscs.games.graphics.MultiImage;
 import net.tejty.gamediscs.games.util.*;
 
 public class PongGame extends Game {
-    // Here you can create variables for the game
+    private Sprite player = new Sprite(
+            new Vec2(10, HEIGHT / 2 - 10),
+            new Vec2(5, 20),
+            new ResourceLocation("minecraft:textures/block/white_concrete.png")
+    );
+    private Sprite oponent = new Sprite(
+            new Vec2(WIDTH - 15, HEIGHT / 2 - 10),
+            new Vec2(5, 20),
+            new ResourceLocation("minecraft:textures/block/white_concrete.png")
+    );
+    private Sprite ball = new Sprite(
+            new Vec2(WIDTH / 2 - 2, HEIGHT / 2 - 2),
+            new Vec2(4, 4),
+            new ResourceLocation("minecraft:textures/block/white_concrete.png")
+    );
+    private Sprite numberRenderer = new Sprite(
+            new Vec2(0, 0),
+            new Vec2(8, 12),
+            new MultiImage(
+                    new ResourceLocation("gamediscs:textures/games/sprite/numbers.png"),
+                    8,
+                    120,
+                    10
+            )
+    );
+
+    private static final int SPEED = 3;
+    private int oponentScore = 0;
+    private int ballTimer;
+    private int ballSpeed = 3;
 
     public PongGame() {
         super();
@@ -20,7 +51,29 @@ public class PongGame extends Game {
         super.prepare();
 
         // Resets everything
-        // here
+        player = new Sprite(
+                new Vec2(10, HEIGHT / 2 - 10),
+                new Vec2(5, 20),
+                new ResourceLocation("minecraft:textures/block/white_concrete.png")
+        );
+        oponent = new Sprite(
+                new Vec2(WIDTH - 15, HEIGHT / 2 - 10),
+                new Vec2(5, 20),
+                new ResourceLocation("minecraft:textures/block/white_concrete.png")
+        );
+        ballSpeed = 3;
+        ball = new Sprite(
+                new Vec2(WIDTH / 2 - 2, HEIGHT / 2 - 2),
+                new Vec2(4, 4),
+                new ResourceLocation("minecraft:textures/block/white_concrete.png")
+        ).setVelocity(new Vec2((random.nextInt(1) * 2 - 1) * 2, (random.nextInt(1) * 2 - 1) * 2));
+    }
+
+    public void resetBall() {
+        ballSpeed = 3;
+        ball.setPos(new Vec2(WIDTH / 2 - 2, HEIGHT / 2 - 2));
+        ball.setVelocity(new Vec2(random.nextInt(1) * 2 - 1, random.nextInt(1) * 2 - 1).normalized().scale(ballSpeed));
+        ballTimer = 60;
     }
 
     @Override
@@ -29,7 +82,7 @@ public class PongGame extends Game {
         super.start();
 
         // Make everything on start
-        // here
+        ballTimer = 60;
     }
     @Override
     public synchronized void tick() {
@@ -37,7 +90,9 @@ public class PongGame extends Game {
         super.tick();
 
         // Make animation tick or anything that ticks even if the game is in DIED state
-        // here
+        if (ballTimer > 0) {
+            ballTimer--;
+        }
     }
     @Override
     public synchronized void gameTick() {
@@ -45,8 +100,39 @@ public class PongGame extends Game {
         super.gameTick();
 
         // Ticks all sprites and everything that ticks only when the game is running
-        // here
-        // Example: yourSprite.tick();
+        if (controls.isButtonDown(Button.UP)) {
+            player.moveBy(VecUtil.VEC_UP.scale(SPEED));
+        }
+        if (controls.isButtonDown(Button.DOWN)) {
+            player.moveBy(VecUtil.VEC_DOWN.scale(SPEED));
+        }
+        player.setY(Math.min(Math.max(player.getY(), 0), HEIGHT - player.getHeight()));
+
+        if (ballTimer <= 0) {
+            ball.moveBy(new Vec2(ball.getVelocity().x, 0));
+            if (ball.getX() < 0) {
+                oponentScore++;
+                resetBall();
+            }
+            if (ball.getX() + ball.getWidth() > WIDTH) {
+                score++;
+                resetBall();
+            }
+            if (ballTimer <= 0) {
+                ball.moveBy(new Vec2(0, ball.getVelocity().y));
+                if (ball.getY() < 0 || ball.getY() + ball.getHeight() > HEIGHT) {
+                    ball.moveBy(new Vec2(0, -ball.getVelocity().y));
+                    ball.setVelocity(new Vec2(ball.getVelocity().x, -ball.getVelocity().y));
+                }
+
+                if (ball.isTouching(player)) {
+                    ball.setVelocity(ball.getCenterPos().add(player.getCenterPos().add(new Vec2(-2, 0)).negated()).normalized().scale(ballSpeed));
+                }
+                if (ball.isTouching(oponent)) {
+                    ball.setVelocity(ball.getCenterPos().add(oponent.getCenterPos().add(new Vec2(2, 0)).negated()).normalized().scale(ballSpeed));
+                }
+            }
+        }
     }
 
     @Override
@@ -65,11 +151,33 @@ public class PongGame extends Game {
         super.render(graphics, posX, posY);
 
         // Renders all sprites and everything
-        // here
-        // Example: yourSprite.render(graphics, posX, poY);
+        player.render(graphics, posX, posY);
+        oponent.render(graphics, posX, posY);
+        ball.render(graphics, posX, posY);
 
         // Renders particles
         renderParticles(graphics, posX, posY);
+
+        // Render score
+        if (score < 10) {
+            if (numberRenderer.getImage() instanceof MultiImage image) {
+                image.setImage(score);
+            }
+            numberRenderer.setPos(new Vec2(WIDTH / 2 - numberRenderer.getWidth() - 3, 0));
+            numberRenderer.render(graphics, posX, posY);
+        }
+        else {
+            if (numberRenderer.getImage() instanceof MultiImage image) {
+                image.setImage(1);
+            }
+            numberRenderer.setPos(new Vec2(WIDTH / 2 - numberRenderer.getWidth() * 2 - 3 * 2, 0));
+            numberRenderer.render(graphics, posX, posY);
+            if (numberRenderer.getImage() instanceof MultiImage image) {
+                image.setImage(0);
+            }
+            numberRenderer.setPos(new Vec2(WIDTH / 2 - numberRenderer.getWidth() - 3, 0));
+            numberRenderer.render(graphics, posX, posY);
+        }
 
         // Renders overlay
         renderOverlay(graphics, posX, posY);
@@ -80,22 +188,14 @@ public class PongGame extends Game {
         super.buttonDown(button);
 
         // Execute code when a specific button is pressed
-        // here
-        // Example: if (button == Button.UP) { [Do something] }
-        // Example: if (button.isActionButton()) { [Do something] }
     }
     @Override
     public ResourceLocation getBackground() {
         return new ResourceLocation("gamediscs:textures/games/background/pong_background.png");
     }
     @Override
-    public boolean showScoreBox() {
+    public boolean showScore() {
         return false;
-    }
-    @Override
-    public int scoreColor() {
-        // Color for score text
-        return ChatFormatting.YELLOW.getColor();
     }
     @Override
     public Component getName() {
