@@ -63,13 +63,9 @@ public class Game {
      */
     @OnlyIn(Dist.CLIENT)
     public synchronized void prepare() {
-        if (stage == GameStage.DIED) {
-            score = 0;
-            lives = maxLives();
-        }
-        stage = GameStage.START;
-        ticks = 1;
-        particles.clear();
+        score = 0;
+        lives = maxLives();
+        respawn();
     }
 
     /**
@@ -86,29 +82,36 @@ public class Game {
      */
     @OnlyIn(Dist.CLIENT)
     public synchronized  void die() {
-        lives--;
-        if (lives <= 0) {
-            if (getConsole().getItem() instanceof GamingConsoleItem) {
-                // Tries to set the best score
-                String gameName = this.getClass().getName().substring(this.getClass().getPackageName().length() + 1);
-                if (GamingConsoleItem.getBestScore(getConsole(), gameName, Minecraft.getInstance().player) < score) {
-                    ModMessages.sendToServer(new SetBestScoreC2SPacket(gameName, score));
-                    soundPlayer.playNewBest();
-
-                    spawnConfetti();
-                } else {
-                    soundPlayer.playGameOver();
-                }
+        if (getConsole().getItem() instanceof GamingConsoleItem) {
+            // Tries to set the best score
+            String gameName = this.getClass().getName().substring(this.getClass().getPackageName().length() + 1);
+            if (GamingConsoleItem.getBestScore(getConsole(), gameName, Minecraft.getInstance().player) < score) {
+                ModMessages.sendToServer(new SetBestScoreC2SPacket(gameName, score));
+                soundPlayer.playNewBest();
+                spawnConfetti();
+            } else {
+                soundPlayer.playGameOver();
             }
+        }
 
-            // Sets game stage to DIED and resets tick counter
-            stage = GameStage.DIED;
-            ticks = 1;
+        // Sets game stage to DIED and resets tick counter
+        stage = GameStage.DIED;
+        ticks = 1;
+    }
+
+    public synchronized void lostLife() {
+        lives--;
+        soundPlayer.play(SoundRegistry.EXPLOSION.get());
+        respawn();
+        if (lives <= 0) {
+            die();
         }
-        else {
-            soundPlayer.play(SoundRegistry.EXPLOSION.get());
-            prepare();
-        }
+    }
+
+    public synchronized void respawn() {
+        stage = GameStage.START;
+        ticks = 1;
+        particles.clear();
     }
 
     /**
@@ -126,7 +129,7 @@ public class Game {
             }
         }
 
-        // Sets game stage to DIED and resets tick counter
+        // Sets game stage to WON and resets tick counter
         stage = GameStage.WON;
         ticks = 1;
     }
