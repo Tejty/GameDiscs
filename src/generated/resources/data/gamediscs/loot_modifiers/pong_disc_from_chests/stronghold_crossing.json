@@ -1,0 +1,14 @@
+{
+  "type": "gamediscs:add_item",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/stronghold_crossing"
+    },
+    {
+      "chance": 0.2,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "item": "gamediscs:game_disc_pong"
+}
