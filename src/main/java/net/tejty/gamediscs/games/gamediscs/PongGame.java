@@ -39,7 +39,7 @@ public class PongGame extends Game {
     private static final int SPEED = 3;
     private int oponentScore = 0;
     private int ballTimer;
-    private int ballSpeed = 3;
+    private float ballSpeed = 3;
 
     public PongGame() {
         super();
@@ -61,18 +61,18 @@ public class PongGame extends Game {
                 new Vec2(5, 20),
                 new ResourceLocation("minecraft:textures/block/white_concrete.png")
         );
-        ballSpeed = 3;
+        ballSpeed = 4;
         ball = new Sprite(
                 new Vec2(WIDTH / 2 - 2, HEIGHT / 2 - 2),
                 new Vec2(4, 4),
                 new ResourceLocation("minecraft:textures/block/white_concrete.png")
-        ).setVelocity(new Vec2((random.nextInt(1) * 2 - 1) * 2, (random.nextInt(1) * 2 - 1) * 2));
+        ).setVelocity(new Vec2((random.nextInt(2) * 2 - 1) * 2, (random.nextInt(2) * 2 - 1) * 2));
     }
 
     public void resetBall() {
-        ballSpeed = 3;
+        ballSpeed = 4;
         ball.setPos(new Vec2(WIDTH / 2 - 2, HEIGHT / 2 - 2));
-        ball.setVelocity(new Vec2(random.nextInt(1) * 2 - 1, random.nextInt(1) * 2 - 1).normalized().scale(ballSpeed));
+        ball.setVelocity(new Vec2(random.nextInt(2) * 2 - 1, random.nextInt(2) * 2 - 1).normalized().scale(ballSpeed));
         ballTimer = 60;
     }
 
@@ -99,6 +99,10 @@ public class PongGame extends Game {
         // Calls game tick of super
         super.gameTick();
 
+        if (ticks % 20 == 0) {
+            ballSpeed += 0.1f;
+        }
+
         // Ticks all sprites and everything that ticks only when the game is running
         if (controls.isButtonDown(Button.UP)) {
             player.moveBy(VecUtil.VEC_UP.scale(SPEED));
@@ -106,7 +110,14 @@ public class PongGame extends Game {
         if (controls.isButtonDown(Button.DOWN)) {
             player.moveBy(VecUtil.VEC_DOWN.scale(SPEED));
         }
+        if (ball.getCenterPos().y < oponent.getCenterPos().y) {
+            oponent.moveBy(VecUtil.VEC_UP.scale(SPEED));
+        }
+        if (ball.getCenterPos().y > oponent.getCenterPos().y) {
+            oponent.moveBy(VecUtil.VEC_DOWN.scale(SPEED));
+        }
         player.setY(Math.min(Math.max(player.getY(), 0), HEIGHT - player.getHeight()));
+        oponent.setY(Math.min(Math.max(oponent.getY(), 0), HEIGHT - oponent.getHeight()));
 
         if (ballTimer <= 0) {
             ball.moveBy(new Vec2(ball.getVelocity().x, 0));
@@ -116,6 +127,7 @@ public class PongGame extends Game {
             }
             if (ball.getX() + ball.getWidth() > WIDTH) {
                 score++;
+                soundPlayer.playPoint();
                 resetBall();
             }
             if (ballTimer <= 0) {
@@ -123,15 +135,25 @@ public class PongGame extends Game {
                 if (ball.getY() < 0 || ball.getY() + ball.getHeight() > HEIGHT) {
                     ball.moveBy(new Vec2(0, -ball.getVelocity().y));
                     ball.setVelocity(new Vec2(ball.getVelocity().x, -ball.getVelocity().y));
+                    soundPlayer.playJump();
                 }
 
                 if (ball.isTouching(player)) {
                     ball.setVelocity(ball.getCenterPos().add(player.getCenterPos().add(new Vec2(-2, 0)).negated()).normalized().scale(ballSpeed));
+                    soundPlayer.playJump();
                 }
                 if (ball.isTouching(oponent)) {
                     ball.setVelocity(ball.getCenterPos().add(oponent.getCenterPos().add(new Vec2(2, 0)).negated()).normalized().scale(ballSpeed));
+                    soundPlayer.playJump();
                 }
             }
+        }
+
+        if (score >= 10) {
+            win();
+        }
+        if (oponentScore >= 10) {
+            die();
         }
     }
 
@@ -163,19 +185,40 @@ public class PongGame extends Game {
             if (numberRenderer.getImage() instanceof MultiImage image) {
                 image.setImage(score);
             }
-            numberRenderer.setPos(new Vec2(WIDTH / 2 - numberRenderer.getWidth() - 3, 0));
+            numberRenderer.setPos(new Vec2(WIDTH / 2 - numberRenderer.getWidth() - 4, 4));
             numberRenderer.render(graphics, posX, posY);
         }
         else {
             if (numberRenderer.getImage() instanceof MultiImage image) {
                 image.setImage(1);
             }
-            numberRenderer.setPos(new Vec2(WIDTH / 2 - numberRenderer.getWidth() * 2 - 3 * 2, 0));
+            numberRenderer.setPos(new Vec2(WIDTH / 2 - numberRenderer.getWidth() * 2 - 4 * 2, 4));
             numberRenderer.render(graphics, posX, posY);
             if (numberRenderer.getImage() instanceof MultiImage image) {
                 image.setImage(0);
             }
-            numberRenderer.setPos(new Vec2(WIDTH / 2 - numberRenderer.getWidth() - 3, 0));
+            numberRenderer.setPos(new Vec2(WIDTH / 2 - numberRenderer.getWidth() - 4, 4));
+            numberRenderer.render(graphics, posX, posY);
+        }
+
+
+        if (oponentScore < 10) {
+            if (numberRenderer.getImage() instanceof MultiImage image) {
+                image.setImage(oponentScore);
+            }
+            numberRenderer.setPos(new Vec2(WIDTH / 2 + 4, 4));
+            numberRenderer.render(graphics, posX, posY);
+        }
+        else {
+            if (numberRenderer.getImage() instanceof MultiImage image) {
+                image.setImage(1);
+            }
+            numberRenderer.setPos(new Vec2(WIDTH / 2 + 4, 4));
+            numberRenderer.render(graphics, posX, posY);
+            if (numberRenderer.getImage() instanceof MultiImage image) {
+                image.setImage(0);
+            }
+            numberRenderer.setPos(new Vec2(WIDTH / 2 + numberRenderer.getWidth() + 4 * 2, 4));
             numberRenderer.render(graphics, posX, posY);
         }
 
