@@ -67,6 +67,7 @@ public class PongGame extends Game {
                 new Vec2(4, 4),
                 new ResourceLocation("minecraft:textures/block/white_concrete.png")
         ).setVelocity(new Vec2((random.nextInt(2) * 2 - 1) * 2, (random.nextInt(2) * 2 - 1) * 2));
+        oponentScore = 0;
     }
 
     public void resetBall() {
