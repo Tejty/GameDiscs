@@ -196,7 +196,7 @@ public class Game {
      * @param posY Y position of the game area
      */
     @OnlyIn(Dist.CLIENT)
-    public synchronized void render(GuiGraphics graphics, int posX, int posY) {
+    public synchronized void render(GuiGraphics graphics, int posX, int posY, int deltaTime) {
         // Renders background
         if (getBackground() != null) {
             graphics.blit(getBackground(), posX, posY, 0, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);

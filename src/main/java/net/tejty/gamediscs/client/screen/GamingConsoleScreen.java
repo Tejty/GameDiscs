@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.tejty.gamediscs.games.util.Game;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.item.custom.GameDiscItem;
+import net.tejty.gamediscs.util.time.MillisecondTimer;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -59,6 +60,9 @@ public class GamingConsoleScreen extends Screen {
     // Currently selected game
     private int selected = 0;
 
+    private final Timer timer;
+    private final MillisecondTimer millisecondTimer = new MillisecondTimer();
+
     // Game, the player is currently playing (if there is only Game, and not its child, it means there is no game selected, and game selection screen is showed)
     private Game game = new Game();
 
@@ -69,11 +73,14 @@ public class GamingConsoleScreen extends Screen {
         availableGames = scanForGames();
 
         // Creates timer that calls tick() in Game every 50ms (20 times per second)
-        Timer timer = new Timer(50, e -> {
+        timer = new Timer(50, e -> {
             if (game != null) {
                 game.tick();
             }
+            millisecondTimer.reset();
         });
+        millisecondTimer = new MillisecondTimer();
+        millisecondTimer.reset();
 
         // Starts the timer
         timer.start();
@@ -116,7 +123,7 @@ public class GamingConsoleScreen extends Screen {
 
         // Renders the game itself
         if (!game.isEmpty()) {
-            game.render(graphics, x, y);
+            game.render(graphics, x, y, millisecondTimer.getElapsedTime());
         }
         else {
             // If the game is empty, renders game selection screen
