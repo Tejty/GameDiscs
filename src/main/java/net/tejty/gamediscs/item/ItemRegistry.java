@@ -30,6 +30,8 @@ public class ItemRegistry {
                     new Item.Properties().rarity(Rarity.RARE), PongGame::new, Component.translatable("gamediscs.pong_game").withStyle(ChatFormatting.WHITE)));
     public static final RegistryObject<Item> GAME_DISC_FROGGIE = ITEMS.register("game_disc_froggie", () -> new GameDiscItem(
                     new Item.Properties().rarity(Rarity.RARE), FroggieGame::new, Component.translatable("gamediscs.froggie").withStyle(ChatFormatting.GREEN)));
+    public static final RegistryObject<Item> GAME_DISC_RABBIT = ITEMS.register("game_disc_rabbit", () -> new GameDiscItem(
+                    new Item.Properties().rarity(Rarity.RARE), RabbitGame::new, Component.translatable("gamediscs.rabbit").withStyle(ChatFormatting.GOLD)));
 
 
 
