@@ -5,6 +5,10 @@
   "gamediscs.flappy_bird": "Flappy Bee",
   "gamediscs.slime": "Slime",
   "gamediscs.blocktris": "Blocktris",
+  "gamediscs.tnt_sweeper": "Tnt Sweeper",
+  "gamediscs.pong": "Pong",
+  "gamediscs.froggie": "Froggie",
+  "gamediscs.pong_game": "Pong",
 
 
   "item.gamediscs.gaming_console": "Spielkonsole",
@@ -16,6 +20,9 @@
   "item.gamediscs.game_disc_flappy_bird": "Spiele Disc",
   "item.gamediscs.game_disc_slime": "Spiele Disc",
   "item.gamediscs.game_disc_blocktris": "Spiele Disc",
+  "item.gamediscs.game_disc_tnt_sweeper": "Spiele Disc",
+  "item.gamediscs.game_disc_pong": "Spiele Disc",
+  "item.gamediscs.game_disc_froggie": "Spiele Disc",
 
 
   "gui.gamingconsole.title": "Spielkonsole",
@@ -26,6 +33,8 @@
   "gui.gamingconsole.new_best_score": "Rekord",
   "gui.gamingconsole.won": "Gewonnen!",
   "gui.gamingconsole.died": "Verloren!",
+  "gui.gamingconsole.hold": "Halten",
+  "gui.gamingconsole.next": "Nächste",
 
 
   "sounds.gamediscs.jump": "Spielkonsole - Gesprungen",
@@ -34,5 +43,9 @@
   "sounds.gamediscs.new_best": "Spielkonsole - Neuer Rekord",
   "sounds.gamediscs.game_over": "Spielkonsole - Verloren",
   "sounds.gamediscs.select": "Spielkonsole - Auswählen",
-  "sounds.gamediscs.confirm": "Spielkonsole - Bestätigen"
+  "sounds.gamediscs.confirm": "Spielkonsole - Bestätigen",
+  "sounds.gamediscs.explosion": "Spielkonsole - Explosion",
+  "sounds.gamediscs.shoot": "Spielkonsole - Schuss",
+  "sounds.gamediscs.swing": "Spielkonsole - Schwung",
+  "sounds.gamediscs.switch": "Spielkonsole - Wechsel"
 }
