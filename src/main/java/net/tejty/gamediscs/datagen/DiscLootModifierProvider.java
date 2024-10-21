@@ -10,35 +10,19 @@ import net.minecraftforge.common.loot.LootTableIdCondition;
 import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.item.ItemRegistry;
 import net.tejty.gamediscs.util.loot.ItemModifier;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class DiscLootModifierProvider extends GlobalLootModifierProvider {
     public DiscLootModifierProvider(PackOutput output) {
-        super(output, GameDiscsMod.MODID);
+        super(output, GameDiscsMod.MOD_ID);
     }
     @Override
     protected void start() {
         // Define all loot tables and their drop chances using a HashMap
-        Map<String, Float> lootTables = new HashMap<>();
-        lootTables.put("chests/simple_dungeon", 0.2F);
-        lootTables.put("chests/stronghold_corridor", 0.2F);
-        lootTables.put("chests/stronghold_crossing", 0.2F);
-        lootTables.put("chests/stronghold_library", 0.2F);
-        lootTables.put("chests/end_city_treasure", 0.2F);
-        lootTables.put("chests/woodland_mansion", 0.2F);
-        lootTables.put("chests/buried_treasure", 0.2F);
-        lootTables.put("chests/ruined_portal", 0.2F);
-        lootTables.put("chests/ancient_city", 0.2F);
-        lootTables.put("chests/ancient_city_ice_box", 0.2F);
-        lootTables.put("chests/abandoned_mineshaft", 0.2F);
-        lootTables.put("chests/jungle_temple", 0.2F);
-        lootTables.put("chests/desert_pyramid", 0.2F);
-        lootTables.put("chests/bastion_bridge", 0.2F);
-        lootTables.put("chests/bastion_hoglin_stable", 0.2F);
-        lootTables.put("chests/bastion_other", 0.2F);
-        lootTables.put("chests/bastion_treasure", 0.2F);
+        Map<String, Float> lootTables = getLootTableWithChance();
 
         // List of game discs with their corresponding item registrations
         Map<String, Object> gameDiscs = new HashMap<>();
@@ -64,5 +48,27 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider {
                 }, (Item) gameDisc));
             }
         }
+    }
+
+    private static @NotNull Map<String, Float> getLootTableWithChance() {
+        Map<String, Float> lootTables = new HashMap<>();
+        lootTables.put("chests/simple_dungeon", 0.2F);
+        lootTables.put("chests/stronghold_corridor", 0.2F);
+        lootTables.put("chests/stronghold_crossing", 0.2F);
+        lootTables.put("chests/stronghold_library", 0.2F);
+        lootTables.put("chests/end_city_treasure", 0.2F);
+        lootTables.put("chests/woodland_mansion", 0.2F);
+        lootTables.put("chests/buried_treasure", 0.2F);
+        lootTables.put("chests/ruined_portal", 0.2F);
+        lootTables.put("chests/ancient_city", 0.2F);
+        lootTables.put("chests/ancient_city_ice_box", 0.2F);
+        lootTables.put("chests/abandoned_mineshaft", 0.2F);
+        lootTables.put("chests/jungle_temple", 0.2F);
+        lootTables.put("chests/desert_pyramid", 0.2F);
+        lootTables.put("chests/bastion_bridge", 0.2F);
+        lootTables.put("chests/bastion_hoglin_stable", 0.2F);
+        lootTables.put("chests/bastion_other", 0.2F);
+        lootTables.put("chests/bastion_treasure", 0.2F);
+        return lootTables;
     }
 }
