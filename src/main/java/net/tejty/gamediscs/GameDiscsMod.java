@@ -1,7 +1,6 @@
 package net.tejty.gamediscs;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -17,32 +16,33 @@ import net.tejty.gamediscs.util.creativetab.CreativeTabs;
 import net.tejty.gamediscs.item.ItemRegistry;
 import net.tejty.gamediscs.util.networking.ModMessages;
 import org.slf4j.Logger;
-@Mod(GameDiscsMod.MODID) //The value here should match an entry in the META-INF/mods.toml file
+
+@Mod(GameDiscsMod.MOD_ID)
 public class GameDiscsMod {
-    public static final String MODID = "gamediscs"; //Define mod id in a common place for everything to reference
-    private static final Logger LOGGER = LogUtils.getLogger(); //Directly reference a slf4j logger
+    public static final String MOD_ID = "gamediscs";
+    private static final Logger LOGGER = LogUtils.getLogger();
     public GameDiscsMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        ItemRegistry.register(modEventBus); //Registering items
-        CreativeTabs.register(modEventBus); //Register creative tab
-        LootModifiers.register(modEventBus); //Register loot modifier class
-        SoundRegistry.register(modEventBus); //Registering sounds
+        ItemRegistry.register(modEventBus);
+        CreativeTabs.register(modEventBus);
+        LootModifiers.register(modEventBus);
+        SoundRegistry.register(modEventBus);
 
-        modEventBus.addListener(this::commonSetup); //Register the commonSetup method for modloading
-        MinecraftForge.EVENT_BUS.register(this); //Register ourselves for server and other game events we are interested in
+        modEventBus.addListener(this::commonSetup);
+        MinecraftForge.EVENT_BUS.register(this);
     }
     private void commonSetup(final FMLCommonSetupEvent event) {
-        ModMessages.register(); //Some common setup code
+        ModMessages.register();
     }
+
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        LOGGER.info("HELLO from server starting"); //Do something when the server starts
+
     }
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents { @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            LOGGER.info("HELLO FROM CLIENT SETUP"); //Some client setup code
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+
         }
     }
 }
