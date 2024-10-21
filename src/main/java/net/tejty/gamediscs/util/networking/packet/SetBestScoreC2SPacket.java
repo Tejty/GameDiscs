@@ -10,18 +10,22 @@ import java.util.function.Supplier;
 public class SetBestScoreC2SPacket {
     private final String game;
     private final int score;
+
     public SetBestScoreC2SPacket(String game, int score) {
         this.game = game;
         this.score = score;
     }
+
     public SetBestScoreC2SPacket(FriendlyByteBuf buf) {
         this.game = buf.readUtf();
         this.score = buf.readInt();
     }
+
     public void toBytes(FriendlyByteBuf buf) {
         buf.writeUtf(game);
         buf.writeInt(score);
     }
+
     public void handle(Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {

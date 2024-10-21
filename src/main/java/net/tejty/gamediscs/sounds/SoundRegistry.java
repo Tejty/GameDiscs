@@ -10,7 +10,7 @@ import net.tejty.gamediscs.GameDiscsMod;
 
 public class SoundRegistry {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
-            DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, GameDiscsMod.MODID);
+            DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, GameDiscsMod.MOD_ID);
 
     public static final RegistryObject<SoundEvent> JUMP = registerSoundEvents("jump");
     public static final RegistryObject<SoundEvent> CLICK = registerSoundEvents("click");
@@ -25,7 +25,7 @@ public class SoundRegistry {
     public static final RegistryObject<SoundEvent> SWITCH = registerSoundEvents("switch");
 
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {
-        return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(GameDiscsMod.MODID, name)));
+        return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(GameDiscsMod.MOD_ID, name)));
     }
 
     public static void register(IEventBus eventBus) {

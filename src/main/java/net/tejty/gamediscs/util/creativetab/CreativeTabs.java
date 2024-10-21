@@ -12,7 +12,7 @@ import net.tejty.gamediscs.item.ItemRegistry;
 
 public class CreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, GameDiscsMod.MODID);
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, GameDiscsMod.MOD_ID);
     public static final RegistryObject<CreativeModeTab> GAME_DISCS_TAB = CREATIVE_MODE_TABS.register("game_discs_tab",
             () -> CreativeModeTab
                     .builder()

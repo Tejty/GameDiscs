@@ -14,7 +14,7 @@ import net.tejty.gamediscs.item.custom.GameDiscItem;
 import net.tejty.gamediscs.item.custom.GamingConsoleItem;
 public class ItemRegistry {
     public static final DeferredRegister<Item> ITEMS =
-            DeferredRegister.create(ForgeRegistries.ITEMS, GameDiscsMod.MODID);
+            DeferredRegister.create(ForgeRegistries.ITEMS, GameDiscsMod.MOD_ID);
 
     public static final RegistryObject<Item> GAMING_CONSOLE = ITEMS.register("gaming_console",
             () -> new GamingConsoleItem(new Item.Properties().rarity(Rarity.UNCOMMON)));
