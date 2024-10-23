@@ -1,9 +1,13 @@
 package net.tejty.gamediscs.datagen;
 
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
 import net.minecraftforge.common.loot.LootTableIdCondition;
@@ -32,6 +36,22 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider {
         gameDiscs.put("tnt_sweeper", ItemRegistry.GAME_DISC_TNT_SWEEPER.get());
         gameDiscs.put("pong", ItemRegistry.GAME_DISC_PONG.get());
         gameDiscs.put("froggie", ItemRegistry.GAME_DISC_FROGGIE.get());
+
+        // List of mobs that drop a disc when killed a skeleton with their corresponding item registrations
+        Map<String, Object> mobDiscs = new HashMap<>();
+        mobDiscs.put("bee", ItemRegistry.GAME_DISC_FLAPPY_BIRD.get());
+        mobDiscs.put("slime", ItemRegistry.GAME_DISC_SLIME.get());
+        mobDiscs.put("frog", ItemRegistry.GAME_DISC_FROGGIE.get());
+
+        for (Map.Entry<String, Object> mobDiscEntry : mobDiscs.entrySet()) {
+            String mobName = mobDiscEntry.getKey();
+            Object gameDisc = mobDiscEntry.getValue();
+
+            add("mob_drops/" + mobName + "_drops_game_disc", new ItemModifier(new LootItemCondition[]{
+                    new LootTableIdCondition.Builder(new ResourceLocation("entities/" + mobName)).build(),
+                    LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.KILLER, EntityPredicate.Builder.entity().of(EntityTypeTags.SKELETONS).build()).build()
+            }, (Item) gameDisc));
+        }
 
         // Loop over each loot table and game disc, generating the necessary modifiers
         for (Map.Entry<String, Float> lootTableEntry : lootTables.entrySet()) {

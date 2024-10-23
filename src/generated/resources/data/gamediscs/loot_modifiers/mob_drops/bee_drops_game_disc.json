@@ -1,0 +1,17 @@
+{
+  "type": "gamediscs:add_item",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:entities/bee"
+    },
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "killer",
+      "predicate": {
+        "type": "#minecraft:skeletons"
+      }
+    }
+  ],
+  "item": "gamediscs:game_disc_flappy_bird"
+}
