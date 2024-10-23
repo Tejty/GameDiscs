@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec2;
+import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.games.graphics.BasicParticleRenderer;
 import net.tejty.gamediscs.games.graphics.BreakParticleRenderer;
@@ -32,7 +33,7 @@ public class BlocktrisGame extends Game {
                 23,
                 5,
                 new MultiImage(
-                        new ResourceLocation("gamediscs:textures/games/sprite/cubes.png"),
+                        new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/cubes.png"),
                         5, 40, 8));
 
         int type = random.nextInt(7);
@@ -53,7 +54,7 @@ public class BlocktrisGame extends Game {
                 23,
                 5,
                 new MultiImage(
-                        new ResourceLocation("gamediscs:textures/games/sprite/cubes.png"),
+                        new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/cubes.png"),
                         5, 40, 8));
 
         int type = random.nextInt(0, 7);
@@ -275,7 +276,7 @@ public class BlocktrisGame extends Game {
 
     @Override
     public ResourceLocation getBackground() {
-        return new ResourceLocation("gamediscs:textures/games/background/blocktris_bakground.png");
+        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/background/blocktris_bakground.png");
     }
 
     @Override
@@ -295,6 +296,6 @@ public class BlocktrisGame extends Game {
 
     @Override
     public ResourceLocation getIcon() {
-        return new ResourceLocation("gamediscs:textures/item/game_disc_blocktris.png");
+        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/item/game_disc_blocktris.png");
     }
 }

@@ -1,13 +1,15 @@
 package net.tejty.gamediscs.games.gamediscs;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec2;
+import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.games.graphics.MultiImage;
-import net.tejty.gamediscs.games.util.*;
+import net.tejty.gamediscs.games.util.Game;
+import net.tejty.gamediscs.games.util.Sprite;
+import net.tejty.gamediscs.games.util.VecUtil;
 
 public class PongGame extends Game {
     private Sprite player = new Sprite(
@@ -18,18 +20,18 @@ public class PongGame extends Game {
     private Sprite oponent = new Sprite(
             new Vec2(WIDTH - 15, HEIGHT / 2 - 10),
             new Vec2(5, 20),
-            new ResourceLocation("minecraft:textures/block/white_concrete.png")
+            new ResourceLocation("textures/block/white_concrete.png")
     );
     private Sprite ball = new Sprite(
             new Vec2(WIDTH / 2 - 2, HEIGHT / 2 - 2),
             new Vec2(4, 4),
-            new ResourceLocation("minecraft:textures/block/white_concrete.png")
+            new ResourceLocation("textures/block/white_concrete.png")
     );
     private Sprite numberRenderer = new Sprite(
             new Vec2(0, 0),
             new Vec2(8, 12),
             new MultiImage(
-                    new ResourceLocation("gamediscs:textures/games/sprite/numbers.png"),
+                    new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/numbers.png"),
                     8,
                     120,
                     10
@@ -235,7 +237,7 @@ public class PongGame extends Game {
     }
     @Override
     public ResourceLocation getBackground() {
-        return new ResourceLocation("gamediscs:textures/games/background/pong_background.png");
+        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/background/pong_background.png");
     }
     @Override
     public boolean showScore() {
@@ -249,6 +251,6 @@ public class PongGame extends Game {
     @Override
     public ResourceLocation getIcon() {
         // Change icon here:
-        return new ResourceLocation("gamediscs:textures/item/game_disc_pong_no_anim.png");
+        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/item/game_disc_pong_no_anim.png");
     }
 }

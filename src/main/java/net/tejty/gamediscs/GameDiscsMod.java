@@ -20,7 +20,7 @@ import org.slf4j.Logger;
 @Mod(GameDiscsMod.MOD_ID)
 public class GameDiscsMod {
     public static final String MOD_ID = "gamediscs";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     public GameDiscsMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ItemRegistry.register(modEventBus);
@@ -31,6 +31,7 @@ public class GameDiscsMod {
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
     }
+
     private void commonSetup(final FMLCommonSetupEvent event) {
         ModMessages.register();
     }
@@ -39,6 +40,7 @@ public class GameDiscsMod {
     public void onServerStarting(ServerStartingEvent event) {
 
     }
+
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents { @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {

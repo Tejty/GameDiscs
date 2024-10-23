@@ -7,6 +7,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.games.util.Game;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.item.custom.GameDiscItem;
@@ -21,7 +22,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class GamingConsoleScreen extends Screen {
-    private static final ResourceLocation BACKGROUD = new ResourceLocation("gamediscs:textures/gui/gaming_console.png");
+    private static final ResourceLocation BACKGROUD = new ResourceLocation(GameDiscsMod.MOD_ID, "textures/gui/gaming_console.png");
     private static final int CONSOLE_WIDTH = 160;
     private static final int CONSOLE_HEIGHT = 198;
 
@@ -138,7 +139,7 @@ public class GamingConsoleScreen extends Screen {
         // If there are some available games, it renders a selection marking on corresponding Y position
         if (!availableGames.isEmpty()) {
             graphics.blit(
-                    new ResourceLocation("gamediscs:textures/gui/selected.png"),
+                    new ResourceLocation(GameDiscsMod.MOD_ID, "textures/gui/selected.png"),
                     x,
                     y + 3 + font.lineHeight + 18 * selected - (Math.max(0, selected - 3) * 18),
                     0, 0, 0, 140, 18, 140, 18

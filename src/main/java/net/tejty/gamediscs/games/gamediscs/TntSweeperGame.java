@@ -7,8 +7,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.Vec2;
+import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.games.controls.Button;
-import net.tejty.gamediscs.games.graphics.ExplosionParticleRenderer;
 import net.tejty.gamediscs.games.graphics.Image;
 import net.tejty.gamediscs.games.graphics.MultiImage;
 import net.tejty.gamediscs.games.util.*;
@@ -18,8 +18,8 @@ import java.util.List;
 
 public class TntSweeperGame extends Game {
     private final MultiImage TILE = new MultiImage(
-            new ResourceLocation("gamediscs:textures/games/sprite/tnt_sweeper.png"), 6, 84, 14);
-    private static final ResourceLocation SELECT = new ResourceLocation("gamediscs:textures/games/sprite/select.png");
+            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/tnt_sweeper.png"), 6, 84, 14);
+    private static final ResourceLocation SELECT = new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/select.png");
 
     // Start position of the actual game field
     private static final Vec2 GAME_POS = new Vec2(1, 9);
@@ -74,6 +74,7 @@ public class TntSweeperGame extends Game {
     private static final int TNT = 11;
     private static final int BLOWN_TNT = 12;
     private static final int WRONG_FLAG = 13;
+
     private static int numberTile(int number) {
         return number + 2;
     }
@@ -94,6 +95,7 @@ public class TntSweeperGame extends Game {
         bombs = new ArrayList<>();
         flags = TNT_COUNT;
     }
+
     @Override
     public synchronized void start() {
         // Calls start of super
@@ -155,7 +157,6 @@ public class TntSweeperGame extends Game {
         // Renders particles
         renderParticles(graphics, posX, posY);
 
-
         // Renders overlay
         renderOverlay(graphics, posX, posY);
         Font font = Minecraft.getInstance().font;
@@ -184,11 +185,12 @@ public class TntSweeperGame extends Game {
     private Vec2 calcPos(Vec2 tile) {
         return tile.scale(TILE_SIZE).add(GAME_POS);
     }
+
     @Override
     public synchronized void buttonDown(Button button) {
         soundPlayer.playClick(true);
-        // Prepares the game
 
+        // Prepares the game
         if (stage == GameStage.PLAYING || stage == GameStage.START) {
             if (button == Button.UP) {
                 selectionPos = selectionPos.add(VecUtil.VEC_UP);
@@ -284,7 +286,7 @@ public class TntSweeperGame extends Game {
 
     @Override
     public ResourceLocation getBackground() {
-        return new ResourceLocation("gamediscs:textures/games/background/tnt_sweeper_background.png");
+        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/background/tnt_sweeper_background.png");
     }
     @Override
     public Component getName() {
@@ -292,6 +294,6 @@ public class TntSweeperGame extends Game {
     }
     @Override
     public ResourceLocation getIcon() {
-        return new ResourceLocation("gamediscs:textures/item/game_disc_tnt_sweeper.png");
+        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/item/game_disc_tnt_sweeper.png");
     }
 }

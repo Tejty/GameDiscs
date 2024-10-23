@@ -4,6 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.games.util.Game;
 
@@ -86,7 +87,7 @@ public class ExampleGame extends Game {
     @Override
     public ResourceLocation getBackground() {
         // Change here:
-        return new ResourceLocation("gamediscs:textures/games/background/your_background.png");
+        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/background/your_background.png");
     }
     @Override
     public boolean showScoreBox() {
@@ -106,6 +107,6 @@ public class ExampleGame extends Game {
     @Override
     public ResourceLocation getIcon() {
         // Change icon here:
-        return new ResourceLocation("gamediscs:textures/item/your_icon.png");
+        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/item/your_icon.png");
     }
 }

@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.games.audio.SoundPlayer;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.games.controls.Controls;
@@ -240,7 +241,7 @@ public class Game {
             // Renders died / won screen
             if (stage == GameStage.DIED || stage == GameStage.WON) {
                 // Renders score board
-                graphics.blit(new ResourceLocation("gamediscs:textures/gui/score_board.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
+                graphics.blit(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/gui/score_board.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
 
                 // Text based on won or died
                 Component component = stage == GameStage.DIED ? Component.translatable("gui.gamingconsole.died").withStyle(ChatFormatting.BOLD, ChatFormatting.DARK_RED) : Component.translatable("gui.gamingconsole.won").withStyle(ChatFormatting.BOLD, ChatFormatting.DARK_GREEN);
@@ -319,7 +320,7 @@ public class Game {
         else {
             // If current game has score box, it renders it
             if (showScoreBox() && showScore()) {
-                graphics.blit(new ResourceLocation("gamediscs:textures/gui/score_box.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
+                graphics.blit(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/gui/score_box.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
             }
 
             if (showScore()) {

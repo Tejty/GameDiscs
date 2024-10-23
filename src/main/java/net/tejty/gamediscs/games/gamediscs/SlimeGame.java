@@ -5,6 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.Vec2;
+import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.games.graphics.BreakParticleRenderer;
 import net.tejty.gamediscs.games.graphics.DirectionalImage;
 import net.tejty.gamediscs.games.util.*;
@@ -14,13 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 public class SlimeGame extends Game {
     private final DirectionalImage HEAD = new DirectionalImage(
-            new ResourceLocation("gamediscs:textures/games/sprite/slime_head.png"), 8, 32);
+            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_head.png"), 8, 32);
     private final DirectionalImage TAIL = new DirectionalImage(
-            new ResourceLocation("gamediscs:textures/games/sprite/slime_tail.png"), 8, 32);
+            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_tail.png"), 8, 32);
     private final DirectionalImage CONNECTION = new DirectionalImage(
-            new ResourceLocation("gamediscs:textures/games/sprite/slime_connection.png"), 8, 32);
-    private static final ResourceLocation BODY = new ResourceLocation("gamediscs:textures/games/sprite/slime_body.png");
-    private static final ResourceLocation APPLE = new ResourceLocation("gamediscs:textures/games/sprite/apple.png");
+            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_connection.png"), 8, 32);
+    private static final ResourceLocation BODY = new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_body.png");
+    private static final ResourceLocation APPLE = new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/apple.png");
 
     // Start position of the actual game field
     private static final Vec2 GAME_POS = new Vec2(6, 2);
@@ -242,7 +243,7 @@ public class SlimeGame extends Game {
     }
     @Override
     public ResourceLocation getBackground() {
-        return new ResourceLocation("gamediscs:textures/games/background/slime_background.png");
+        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/background/slime_background.png");
     }
     @Override
     public Component getName() {
@@ -250,6 +251,6 @@ public class SlimeGame extends Game {
     }
     @Override
     public ResourceLocation getIcon() {
-        return new ResourceLocation("gamediscs:textures/item/game_disc_slime.png");
+        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/item/game_disc_slime.png");
     }
 }
