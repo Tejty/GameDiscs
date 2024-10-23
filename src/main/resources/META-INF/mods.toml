@@ -1,7 +1,7 @@
 modLoader = "javafml" #mandatory
 license = "${mod_license}"
 issueTrackerURL="https://github.com/Tejty/GameDiscs/issues"
-loaderVersion="[39,)"
+loaderVersion="${loader_version_range}"
 
 [[mods]]
 modId = "gamediscs"
