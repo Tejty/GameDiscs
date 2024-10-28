@@ -1,0 +1,68 @@
+{
+  "jump": {
+    "subtitles": "sounds.gamediscs.jump",
+    "sounds": [
+      "gamediscs:jump"
+    ]
+  },
+  "click": {
+    "subtitles": "sounds.gamediscs.click",
+    "sounds": [
+      "gamediscs:click"
+    ]
+  },
+  "point": {
+    "subtitles": "sounds.gamediscs.point",
+    "sounds": [
+      "gamediscs:point"
+    ]
+  },
+  "new_best": {
+    "subtitles": "sounds.gamediscs.new_best",
+    "sounds": [
+      "gamediscs:new_best"
+    ]
+  },
+  "game_over": {
+    "subtitles": "sounds.gamediscs.game_over",
+    "sounds": [
+      "gamediscs:game_over"
+    ]
+  },
+  "select": {
+    "subtitles": "sounds.gamediscs.select",
+    "sounds": [
+      "gamediscs:select"
+    ]
+  },
+  "confirm": {
+    "subtitles": "sounds.gamediscs.confirm",
+    "sounds": [
+      "gamediscs:confirm"
+    ]
+  },
+  "explosion": {
+    "subtitles": "sounds.gamediscs.explosion",
+    "sounds": [
+      "gamediscs:explosion"
+    ]
+  },
+  "shoot": {
+    "subtitles": "sounds.gamediscs.shoot",
+    "sounds": [
+      "gamediscs:shoot"
+    ]
+  },
+  "swing": {
+    "subtitles": "sounds.gamediscs.swing",
+    "sounds": [
+      "gamediscs:swing"
+    ]
+  },
+  "switch": {
+    "subtitles": "sounds.gamediscs.switch",
+    "sounds": [
+      "gamediscs:switch"
+    ]
+  }
+}
