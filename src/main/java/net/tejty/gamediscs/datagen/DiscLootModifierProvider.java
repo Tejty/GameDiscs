@@ -43,16 +43,6 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider {
         mobDiscs.put("slime", ItemRegistry.GAME_DISC_SLIME.get());
         mobDiscs.put("frog", ItemRegistry.GAME_DISC_FROGGIE.get());
 
-        for (Map.Entry<String, Object> mobDiscEntry : mobDiscs.entrySet()) {
-            String mobName = mobDiscEntry.getKey();
-            Object gameDisc = mobDiscEntry.getValue();
-
-            add("mob_drops/" + mobName + "_drops_game_disc", new ItemModifier(new LootItemCondition[]{
-                    new LootTableIdCondition.Builder(new ResourceLocation("entities/" + mobName)).build(),
-                    LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.KILLER, EntityPredicate.Builder.entity().of(EntityTypeTags.SKELETONS).build()).build()
-            }, (Item) gameDisc));
-        }
-
         // Loop over each loot table and game disc, generating the necessary modifiers
         for (Map.Entry<String, Float> lootTableEntry : lootTables.entrySet()) {
             String lootTable = lootTableEntry.getKey();
@@ -67,6 +57,16 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider {
                         LootItemRandomChanceCondition.randomChance(chance).build()
                 }, (Item) gameDisc));
             }
+        }
+
+        for (Map.Entry<String, Object> mobDiscEntry : mobDiscs.entrySet()) {
+            String mobName = mobDiscEntry.getKey();
+            Object gameDisc = mobDiscEntry.getValue();
+
+            add("mob_drops/" + mobName + "_drops_game_disc", new ItemModifier(new LootItemCondition[]{
+                    new LootTableIdCondition.Builder(new ResourceLocation("entities/" + mobName)).build(),
+                    LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.KILLER, EntityPredicate.Builder.entity().of(EntityTypeTags.SKELETONS).build()).build()
+            }, (Item) gameDisc));
         }
     }
 

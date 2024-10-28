@@ -225,7 +225,7 @@ public class Game {
                         font,
                         Component.translatable("gui.gamingconsole.press_any_key"),
                         posX + (WIDTH - font.width(Component.translatable("gui.gamingconsole.press_any_key").getVisualOrderText())) / 2 + 1,
-                        posY + HEIGHT - font.lineHeight - 1,
+                        posY + HEIGHT - font.lineHeight - 1 - (ticks % 40 <= 20 ? 0 : 1),
                         0x373737,
                         false
                 );
@@ -233,7 +233,7 @@ public class Game {
                         font,
                         Component.translatable("gui.gamingconsole.press_any_key"),
                         posX + (WIDTH - font.width(Component.translatable("gui.gamingconsole.press_any_key").getVisualOrderText())) / 2,
-                        posY + HEIGHT - font.lineHeight - 2,
+                        posY + HEIGHT - font.lineHeight - 2 - (ticks % 40 <= 20 ? 0 : 1),
                         0xFFFFFF,
                         false
                 );
