@@ -11,18 +11,15 @@ import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.games.util.Game;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.item.custom.GameDiscItem;
-import net.tejty.gamediscs.util.time.MillisecondTimer;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class GamingConsoleScreen extends Screen {
-    private static final ResourceLocation BACKGROUD = new ResourceLocation(GameDiscsMod.MOD_ID, "textures/gui/gaming_console.png");
+    private static final ResourceLocation BACKGROUD = ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/gui/gaming_console.png");
     private static final int CONSOLE_WIDTH = 160;
     private static final int CONSOLE_HEIGHT = 198;
 
@@ -61,7 +58,7 @@ public class GamingConsoleScreen extends Screen {
     // Currently selected game
     private int selected = 0;
 
-    // Game, the player is currently playing (if there is only Game, and not its child, it means there is no game selected, and game selection screen is showed)
+    // Game, the player is currently playing (if there is only Game, and not its child, it means there is no game selected, and game selection screen is shown)
     private Game game = new Game();
 
     public GamingConsoleScreen(Component title) {
@@ -90,7 +87,7 @@ public class GamingConsoleScreen extends Screen {
     // Main rendering method
     @Override
     public void render(@NotNull GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
-        renderBackground(graphics);
+        renderBackground(graphics, pMouseX, pMouseY, pPartialTick);
         renderGameScreen(graphics, getConsoleX() + SCREEN_X, getConsoleY() + SCREEN_Y);
 
         renderButtons(graphics);
@@ -98,11 +95,8 @@ public class GamingConsoleScreen extends Screen {
     }
 
     @Override
-    public void renderBackground(GuiGraphics graphics) {
-        // Renders dark semitransparent background
-        super.renderBackground(graphics);
-
-        // Renders console image
+    public void renderBackground(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        super.renderBackground(graphics, mouseX, mouseY, partialTick);
         graphics.blit(BACKGROUD, getConsoleX(), getConsoleY(), 0, 0, 0, CONSOLE_WIDTH, CONSOLE_HEIGHT, 256, 256);
     }
 
@@ -139,7 +133,7 @@ public class GamingConsoleScreen extends Screen {
         // If there are some available games, it renders a selection marking on corresponding Y position
         if (!availableGames.isEmpty()) {
             graphics.blit(
-                    new ResourceLocation(GameDiscsMod.MOD_ID, "textures/gui/selected.png"),
+                    ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/gui/selected.png"),
                     x,
                     y + 3 + font.lineHeight + 18 * selected - (Math.max(0, selected - 3) * 18),
                     0, 0, 0, 140, 18, 140, 18

@@ -13,25 +13,25 @@ import net.tejty.gamediscs.games.util.VecUtil;
 
 public class PongGame extends Game {
     private Sprite player = new Sprite(
-            new Vec2(10, HEIGHT / 2 - 10),
+            new Vec2(10, (float) HEIGHT / 2 - 10),
             new Vec2(5, 20),
-            new ResourceLocation("minecraft:textures/block/white_concrete.png")
+            ResourceLocation.fromNamespaceAndPath("minecraft", "textures/block/white_concrete.png")
     );
     private Sprite oponent = new Sprite(
-            new Vec2(WIDTH - 15, HEIGHT / 2 - 10),
+            new Vec2(WIDTH - 15, (float) HEIGHT / 2 - 10),
             new Vec2(5, 20),
-            new ResourceLocation("textures/block/white_concrete.png")
+            ResourceLocation.fromNamespaceAndPath("minecraft","textures/block/white_concrete.png")
     );
     private Sprite ball = new Sprite(
-            new Vec2(WIDTH / 2 - 2, HEIGHT / 2 - 2),
+            new Vec2((float) WIDTH / 2 - 2, (float) HEIGHT / 2 - 2),
             new Vec2(4, 4),
-            new ResourceLocation("textures/block/white_concrete.png")
+            ResourceLocation.fromNamespaceAndPath("minecraft","textures/block/white_concrete.png")
     );
     private Sprite numberRenderer = new Sprite(
             new Vec2(0, 0),
             new Vec2(8, 12),
             new MultiImage(
-                    new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/numbers.png"),
+                    ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/numbers.png"),
                     8,
                     120,
                     10
@@ -54,27 +54,27 @@ public class PongGame extends Game {
 
         // Resets everything
         player = new Sprite(
-                new Vec2(10, HEIGHT / 2 - 10),
+                new Vec2(10, (float) HEIGHT / 2 - 10),
                 new Vec2(5, 20),
-                new ResourceLocation("minecraft:textures/block/white_concrete.png")
+                ResourceLocation.fromNamespaceAndPath("minecraft","textures/block/white_concrete.png")
         );
         oponent = new Sprite(
-                new Vec2(WIDTH - 15, HEIGHT / 2 - 10),
+                new Vec2(WIDTH - 15, (float) HEIGHT / 2 - 10),
                 new Vec2(5, 20),
-                new ResourceLocation("minecraft:textures/block/white_concrete.png")
+                ResourceLocation.fromNamespaceAndPath("minecraft","textures/block/white_concrete.png")
         );
         ballSpeed = 4;
         ball = new Sprite(
-                new Vec2(WIDTH / 2 - 2, HEIGHT / 2 - 2),
+                new Vec2((float) WIDTH / 2 - 2, (float) HEIGHT / 2 - 2),
                 new Vec2(4, 4),
-                new ResourceLocation("minecraft:textures/block/white_concrete.png")
+                ResourceLocation.fromNamespaceAndPath("minecraft","textures/block/white_concrete.png")
         ).setVelocity(new Vec2((random.nextInt(2) * 2 - 1) * 2, (random.nextInt(2) * 2 - 1) * 2));
         oponentScore = 0;
     }
 
     public void resetBall() {
         ballSpeed = 4;
-        ball.setPos(new Vec2(WIDTH / 2 - 2, HEIGHT / 2 - 2));
+        ball.setPos(new Vec2((float) WIDTH / 2 - 2, (float) HEIGHT / 2 - 2));
         ball.setVelocity(new Vec2(random.nextInt(2) * 2 - 1, random.nextInt(2) * 2 - 1).normalized().scale(ballSpeed));
         ballTimer = 60;
     }
@@ -188,19 +188,19 @@ public class PongGame extends Game {
             if (numberRenderer.getImage() instanceof MultiImage image) {
                 image.setImage(score);
             }
-            numberRenderer.setPos(new Vec2(WIDTH / 2 - numberRenderer.getWidth() - 4, 4));
+            numberRenderer.setPos(new Vec2((float) WIDTH / 2 - numberRenderer.getWidth() - 4, 4));
             numberRenderer.render(graphics, posX, posY);
         }
         else {
             if (numberRenderer.getImage() instanceof MultiImage image) {
                 image.setImage(1);
             }
-            numberRenderer.setPos(new Vec2(WIDTH / 2 - numberRenderer.getWidth() * 2 - 4 * 2, 4));
+            numberRenderer.setPos(new Vec2((float) WIDTH / 2 - numberRenderer.getWidth() * 2 - 4 * 2, 4));
             numberRenderer.render(graphics, posX, posY);
             if (numberRenderer.getImage() instanceof MultiImage image) {
                 image.setImage(0);
             }
-            numberRenderer.setPos(new Vec2(WIDTH / 2 - numberRenderer.getWidth() - 4, 4));
+            numberRenderer.setPos(new Vec2((float) WIDTH / 2 - numberRenderer.getWidth() - 4, 4));
             numberRenderer.render(graphics, posX, posY);
         }
 
@@ -209,19 +209,19 @@ public class PongGame extends Game {
             if (numberRenderer.getImage() instanceof MultiImage image) {
                 image.setImage(oponentScore);
             }
-            numberRenderer.setPos(new Vec2(WIDTH / 2 + 4, 4));
+            numberRenderer.setPos(new Vec2((float) WIDTH / 2 + 4, 4));
             numberRenderer.render(graphics, posX, posY);
         }
         else {
             if (numberRenderer.getImage() instanceof MultiImage image) {
                 image.setImage(1);
             }
-            numberRenderer.setPos(new Vec2(WIDTH / 2 + 4, 4));
+            numberRenderer.setPos(new Vec2((float) WIDTH / 2 + 4, 4));
             numberRenderer.render(graphics, posX, posY);
             if (numberRenderer.getImage() instanceof MultiImage image) {
                 image.setImage(0);
             }
-            numberRenderer.setPos(new Vec2(WIDTH / 2 + numberRenderer.getWidth() + 4 * 2, 4));
+            numberRenderer.setPos(new Vec2((float) WIDTH / 2 + numberRenderer.getWidth() + 4 * 2, 4));
             numberRenderer.render(graphics, posX, posY);
         }
 
@@ -237,7 +237,7 @@ public class PongGame extends Game {
     }
     @Override
     public ResourceLocation getBackground() {
-        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/background/pong_background.png");
+        return ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/background/pong_background.png");
     }
     @Override
     public boolean showScore() {
@@ -251,6 +251,6 @@ public class PongGame extends Game {
     @Override
     public ResourceLocation getIcon() {
         // Change icon here:
-        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/item/game_disc_pong_no_anim.png");
+        return ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/item/game_disc_pong_no_anim.png");
     }
 }

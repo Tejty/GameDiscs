@@ -87,7 +87,7 @@ public class ExampleGame extends Game {
     @Override
     public ResourceLocation getBackground() {
         // Change here:
-        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/background/your_background.png");
+        return ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/background/your_background.png");
     }
     @Override
     public boolean showScoreBox() {
@@ -107,6 +107,6 @@ public class ExampleGame extends Game {
     @Override
     public ResourceLocation getIcon() {
         // Change icon here:
-        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/item/your_icon.png");
+        return ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/item/your_icon.png");
     }
 }

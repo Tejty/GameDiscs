@@ -210,8 +210,8 @@ public class BlocktrisPiece {
             while (true) {
                 x = oldX;
                 y = oldY;
-                x += altPositions.get(i).x;
-                y += altPositions.get(i).y;
+                x += (int) altPositions.get(i).x;
+                y += (int) altPositions.get(i).y;
                 if (!isTouching()) {
                     break;
                 }

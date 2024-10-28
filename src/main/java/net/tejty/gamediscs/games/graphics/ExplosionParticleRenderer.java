@@ -10,7 +10,7 @@ public class ExplosionParticleRenderer extends Renderer {
     private final Particle particle;
 
     public ExplosionParticleRenderer(Particle particle) {
-        image = new MultiImage(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/explosion.png"), 2, 16, 8);
+        image = new MultiImage(ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/explosion.png"), 2, 16, 8);
         this.particle = particle;
     }
 

@@ -12,7 +12,11 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.tejty.gamediscs.client.screen.GamingConsoleScreen;
+import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
 public class GamingConsoleItem extends Item {
     public GamingConsoleItem(Properties properties) {
         super(properties.stacksTo(1));
@@ -20,7 +24,7 @@ public class GamingConsoleItem extends Item {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (level.isClientSide()) {
             Minecraft.getInstance().setScreen(new GamingConsoleScreen(Component.translatable("gui.gamingconsole.title")));
         }
@@ -33,7 +37,7 @@ public class GamingConsoleItem extends Item {
             stack.setTag(new CompoundTag());
         }
         CompoundTag nbtData = stack.getTag();
-        nbtData.putInt("gamediscs:" + game + ";" + player.getDisplayName().getString(), score);
+        nbtData.putInt("gamediscs:" + game + ";" + player.getStringUUID(), score);
         stack.setTag(nbtData);
 
         // TODO bestScore
@@ -44,7 +48,7 @@ public class GamingConsoleItem extends Item {
             return 0;
         }
         else {
-            return stack.getTag().getInt("gamediscs:" + game + ";" + player.getDisplayName().getString());
+            return stack.getTag().getInt("gamediscs:" + game + ";" + player.getStringUUID());
         }
     }
 }

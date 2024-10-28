@@ -1,6 +1,5 @@
 package net.tejty.gamediscs.games.gamediscs;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -11,7 +10,6 @@ import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.games.graphics.DirectionalImage;
 import net.tejty.gamediscs.games.graphics.Image;
-import net.tejty.gamediscs.games.graphics.Renderer;
 import net.tejty.gamediscs.games.util.Game;
 import net.tejty.gamediscs.games.util.GameStage;
 import net.tejty.gamediscs.games.util.Sprite;
@@ -25,7 +23,7 @@ public class FroggieGame extends Game {
             new Vec2(0, 0),
             new Vec2(7, 7),
             new DirectionalImage(
-                    new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/frog.png"),
+                    ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/frog.png"),
                     7,
                     28
             )
@@ -77,259 +75,257 @@ public class FroggieGame extends Game {
         // Resets everything
         minecarts.clear();
         logs.clear();
-        if (true) {
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(20, 12)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(-2, 0))
-            );
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(19, 12)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(-2, 0))
-            );
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(18, 12)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(-2, 0))
-            );
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(12, 12)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(-2, 0))
-            );
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(11, 12)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(-2, 0))
-            );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(20, 12)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(-2, 0))
+        );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(19, 12)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(-2, 0))
+        );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(18, 12)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(-2, 0))
+        );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(12, 12)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(-2, 0))
+        );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(11, 12)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(-2, 0))
+        );
 
 
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(0, 11)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(2f, 0))
-            );
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(10, 11)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(2f, 0))
-            );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(0, 11)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(2f, 0))
+        );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(10, 11)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(2f, 0))
+        );
 
 
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(15, 10)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(-4, 0))
-            );
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(16, 10)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(-4, 0))
-            );
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(5, 10)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(-4, 0))
-            );
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(6, 10)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(-4, 0))
-            );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(15, 10)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(-4, 0))
+        );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(16, 10)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(-4, 0))
+        );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(5, 10)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(-4, 0))
+        );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(6, 10)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(-4, 0))
+        );
 
 
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(13, 9)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(6, 0))
-            );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(13, 9)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(6, 0))
+        );
 
 
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(8, 8)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(-2, 0))
-            );
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(9, 8)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(-2, 0))
-            );
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(10, 8)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(-2, 0))
-            );
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(16, 8)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(-2, 0))
-            );
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(17, 8)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(-2, 0))
-            );
-            minecarts.add(
-                    new Sprite(
-                            getPos(new Vec2(18, 8)),
-                            new Vec2(7, 7),
-                            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
-                    ).addVelocity(new Vec2(-2, 0))
-            );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(8, 8)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(-2, 0))
+        );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(9, 8)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(-2, 0))
+        );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(10, 8)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(-2, 0))
+        );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(16, 8)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(-2, 0))
+        );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(17, 8)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(-2, 0))
+        );
+        minecarts.add(
+                new Sprite(
+                        getPos(new Vec2(18, 8)),
+                        new Vec2(7, 7),
+                        ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/minecart.png")
+                ).addVelocity(new Vec2(-2, 0))
+        );
 
 
-            logs.add(
-                    new Sprite(
-                            getPos(new Vec2(1, 5)),
-                            new Vec2(21, 7),
-                            new Image(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/log.png"), 63, 7, 0, 0, 21, 7)
-                    ).addVelocity(new Vec2(1, 0))
-            );
-            logs.add(
-                    new Sprite(
-                            getPos(new Vec2(5, 5)),
-                            new Vec2(21, 7),
-                            new Image(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/log.png"), 63, 7, 0, 0, 21, 7)
-                    ).addVelocity(new Vec2(1, 0))
-            );
-            logs.add(
-                    new Sprite(
-                            getPos(new Vec2(16, 5)),
-                            new Vec2(21, 7),
-                            new Image(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/log.png"), 63, 7, 0, 0, 21, 7)
-                    ).addVelocity(new Vec2(1, 0))
-            );
+        logs.add(
+                new Sprite(
+                        getPos(new Vec2(1, 5)),
+                        new Vec2(21, 7),
+                        new Image(ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/log.png"), 63, 7, 0, 0, 21, 7)
+                ).addVelocity(new Vec2(1, 0))
+        );
+        logs.add(
+                new Sprite(
+                        getPos(new Vec2(5, 5)),
+                        new Vec2(21, 7),
+                        new Image(ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/log.png"), 63, 7, 0, 0, 21, 7)
+                ).addVelocity(new Vec2(1, 0))
+        );
+        logs.add(
+                new Sprite(
+                        getPos(new Vec2(16, 5)),
+                        new Vec2(21, 7),
+                        new Image(ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/log.png"), 63, 7, 0, 0, 21, 7)
+                ).addVelocity(new Vec2(1, 0))
+        );
 
 
-            logs.add(
-                    new Sprite(
-                            getPos(new Vec2(1, 6)),
-                            new Vec2(14, 7),
-                            new Image(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/turtles.png"), 28, 7, 0, 0, 14, 7)
-                    ).addVelocity(new Vec2(-1, 0))
-            );
-            logs.add(
-                    new Sprite(
-                            getPos(new Vec2(4, 6)),
-                            new Vec2(14, 7),
-                            new Image(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/turtles.png"), 28, 7, 0, 0, 14, 7)
-                    ).addVelocity(new Vec2(-1, 0))
-            );
-            logs.add(
-                    new Sprite(
-                            getPos(new Vec2(9, 6)),
-                            new Vec2(14, 7),
-                            new Image(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/turtles.png"), 28, 7, 0, 0, 14, 7)
-                    ).addVelocity(new Vec2(-1, 0))
-            );
-            logs.add(
-                    new Sprite(
-                            getPos(new Vec2(15, 6)),
-                            new Vec2(14, 7),
-                            new Image(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/turtles.png"), 28, 7, 0, 0, 14, 7)
-                    ).addVelocity(new Vec2(-1, 0))
-            );
+        logs.add(
+                new Sprite(
+                        getPos(new Vec2(1, 6)),
+                        new Vec2(14, 7),
+                        new Image(ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/turtles.png"), 28, 7, 0, 0, 14, 7)
+                ).addVelocity(new Vec2(-1, 0))
+        );
+        logs.add(
+                new Sprite(
+                        getPos(new Vec2(4, 6)),
+                        new Vec2(14, 7),
+                        new Image(ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/turtles.png"), 28, 7, 0, 0, 14, 7)
+                ).addVelocity(new Vec2(-1, 0))
+        );
+        logs.add(
+                new Sprite(
+                        getPos(new Vec2(9, 6)),
+                        new Vec2(14, 7),
+                        new Image(ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/turtles.png"), 28, 7, 0, 0, 14, 7)
+                ).addVelocity(new Vec2(-1, 0))
+        );
+        logs.add(
+                new Sprite(
+                        getPos(new Vec2(15, 6)),
+                        new Vec2(14, 7),
+                        new Image(ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/turtles.png"), 28, 7, 0, 0, 14, 7)
+                ).addVelocity(new Vec2(-1, 0))
+        );
 
 
-            logs.add(
-                    new Sprite(
-                            getPos(new Vec2(2, 4)),
-                            new Vec2(63, 7),
-                            new Image(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/log.png"), 63, 7, 0, 0, 63, 7)
-                    ).addVelocity(new Vec2(2, 0))
-            );
+        logs.add(
+                new Sprite(
+                        getPos(new Vec2(2, 4)),
+                        new Vec2(63, 7),
+                        new Image(ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/log.png"), 63, 7, 0, 0, 63, 7)
+                ).addVelocity(new Vec2(2, 0))
+        );
 
 
-            logs.add(
-                    new Sprite(
-                            getPos(new Vec2(3, 3)),
-                            new Vec2(28, 7),
-                            new Image(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/turtles.png"), 28, 7, 0, 0, 28, 7)
-                    ).addVelocity(new Vec2(-2, 0))
-            );
-            logs.add(
-                    new Sprite(
-                            getPos(new Vec2(9, 3)),
-                            new Vec2(28, 7),
-                            new Image(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/turtles.png"), 28, 7, 0, 0, 28, 7)
-                    ).addVelocity(new Vec2(-2, 0))
-            );
-            logs.add(
-                    new Sprite(
-                            getPos(new Vec2(15, 3)),
-                            new Vec2(28, 7),
-                            new Image(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/turtles.png"), 28, 7, 0, 0, 28, 7)
-                    ).addVelocity(new Vec2(-2, 0))
-            );
+        logs.add(
+                new Sprite(
+                        getPos(new Vec2(3, 3)),
+                        new Vec2(28, 7),
+                        new Image(ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/turtles.png"), 28, 7, 0, 0, 28, 7)
+                ).addVelocity(new Vec2(-2, 0))
+        );
+        logs.add(
+                new Sprite(
+                        getPos(new Vec2(9, 3)),
+                        new Vec2(28, 7),
+                        new Image(ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/turtles.png"), 28, 7, 0, 0, 28, 7)
+                ).addVelocity(new Vec2(-2, 0))
+        );
+        logs.add(
+                new Sprite(
+                        getPos(new Vec2(15, 3)),
+                        new Vec2(28, 7),
+                        new Image(ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/turtles.png"), 28, 7, 0, 0, 28, 7)
+                ).addVelocity(new Vec2(-2, 0))
+        );
 
 
-            logs.add(
-                    new Sprite(
-                            getPos(new Vec2(1, 2)),
-                            new Vec2(35, 7),
-                            new Image(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/log.png"), 63, 7, 0, 0, 35, 7)
-                    ).addVelocity(new Vec2(2, 0))
-            );
-            logs.add(
-                    new Sprite(
-                            getPos(new Vec2(8, 2)),
-                            new Vec2(35, 7),
-                            new Image(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/log.png"), 63, 7, 0, 0, 35, 7)
-                    ).addVelocity(new Vec2(2, 0))
-            );
-            logs.add(
-                    new Sprite(
-                            getPos(new Vec2(14, 2)),
-                            new Vec2(35, 7),
-                            new Image(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/log.png"), 63, 7, 0, 0, 35, 7)
-                    ).addVelocity(new Vec2(2, 0))
-            );
-        }
+        logs.add(
+                new Sprite(
+                        getPos(new Vec2(1, 2)),
+                        new Vec2(35, 7),
+                        new Image(ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/log.png"), 63, 7, 0, 0, 35, 7)
+                ).addVelocity(new Vec2(2, 0))
+        );
+        logs.add(
+                new Sprite(
+                        getPos(new Vec2(8, 2)),
+                        new Vec2(35, 7),
+                        new Image(ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/log.png"), 63, 7, 0, 0, 35, 7)
+                ).addVelocity(new Vec2(2, 0))
+        );
+        logs.add(
+                new Sprite(
+                        getPos(new Vec2(14, 2)),
+                        new Vec2(35, 7),
+                        new Image(ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/log.png"), 63, 7, 0, 0, 35, 7)
+                ).addVelocity(new Vec2(2, 0))
+        );
     }
 
     @Override
     public synchronized void respawn() {
         super.respawn();
 
-        frog.setPos(new Vec2(WIDTH / 2 - TILE_SIZE / 2, 13 * TILE_SIZE));
+        frog.setPos(new Vec2((float) WIDTH / 2 - (float) TILE_SIZE / 2, 13 * TILE_SIZE));
         frog.setImage(new DirectionalImage(
-                new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/frog.png"),
+                ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/frog.png"),
                 7,
                 28
         ));
@@ -457,6 +453,7 @@ public class FroggieGame extends Game {
                         for (boolean checkHole : isHoleFull) {
                             if (!checkHole) {
                                 flag = false;
+                                break;
                             }
                         }
                         if (flag) {
@@ -587,7 +584,7 @@ public class FroggieGame extends Game {
     @Override
     public ResourceLocation getBackground() {
         // Change here:
-        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/background/froggie_background.png");
+        return ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/background/froggie_background.png");
     }
     @Override
     public boolean showScore() {
@@ -601,6 +598,6 @@ public class FroggieGame extends Game {
     @Override
     public ResourceLocation getIcon() {
         // Change icon here:
-        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/item/game_disc_froggie.png");
+        return ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/item/game_disc_froggie.png");
     }
 }

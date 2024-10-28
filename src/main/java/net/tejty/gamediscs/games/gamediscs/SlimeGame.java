@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 public class SlimeGame extends Game {
     private final DirectionalImage HEAD = new DirectionalImage(
-            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_head.png"), 8, 32);
+            ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_head.png"), 8, 32);
     private final DirectionalImage TAIL = new DirectionalImage(
-            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_tail.png"), 8, 32);
+            ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_tail.png"), 8, 32);
     private final DirectionalImage CONNECTION = new DirectionalImage(
-            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_connection.png"), 8, 32);
-    private static final ResourceLocation BODY = new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_body.png");
-    private static final ResourceLocation APPLE = new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/apple.png");
+            ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_connection.png"), 8, 32);
+    private static final ResourceLocation BODY = ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_body.png");
+    private static final ResourceLocation APPLE = ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/apple.png");
 
     // Start position of the actual game field
     private static final Vec2 GAME_POS = new Vec2(6, 2);
@@ -86,7 +86,7 @@ public class SlimeGame extends Game {
         super.gameTick();
 
         // Calculates new position of the slime
-        Vec2 newPos = slime.get(slime.size() - 1).add(direction);
+        Vec2 newPos = slime.getLast().add(direction);
 
         // If is outside the game field, player dies
         if (newPos.x >= GAME_WIDTH || newPos.x < 0 || newPos.y >= GAME_HEIGHT || newPos.y < 0) {
@@ -114,7 +114,7 @@ public class SlimeGame extends Game {
 
             // If there is no apple on the position, it removes tail part of the body
             if (!VecUtil.is(newPos, calcTile(apple.getPos()))) {
-                slime.remove(slime.get(0));
+                slime.remove(slime.getFirst());
             }
             else {
                 // If there is an apple, it respawns, and the score grows
@@ -125,7 +125,7 @@ public class SlimeGame extends Game {
             }
         }
 
-        addParticle(new Particle(calcPos(slime.get(0).add(VecUtil.randomFloat(Vec2.ZERO, new Vec2(1, 1), random))), new BreakParticleRenderer(BODY, 8, 8), random.nextInt(20, 50), ParticleLevel.RUNNING_GAME));
+        addParticle(new Particle(calcPos(slime.getFirst().add(VecUtil.randomFloat(Vec2.ZERO, new Vec2(1, 1), random))), new BreakParticleRenderer(BODY, 8, 8), random.nextInt(20, 50), ParticleLevel.RUNNING_GAME));
     }
     @Override
     public synchronized void render(GuiGraphics graphics, int posX, int posY) {
@@ -145,7 +145,7 @@ public class SlimeGame extends Game {
                 slimeRenderer.setImage(TAIL.setImage(VecUtil.get4DirectionTo(slime.get(0), slime.get(1))));
             }
             else if (i == slime.size() - 1) {
-                slimeRenderer.setImage(HEAD.setImage(VecUtil.get4DirectionTo(slime.get(slime.size()-2), slime.get(slime.size() - 1))));
+                slimeRenderer.setImage(HEAD.setImage(VecUtil.get4DirectionTo(slime.get(slime.size()-2), slime.getLast())));
             }
             else {
                 slimeRenderer.setImage(BODY);
@@ -243,7 +243,7 @@ public class SlimeGame extends Game {
     }
     @Override
     public ResourceLocation getBackground() {
-        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/background/slime_background.png");
+        return ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/background/slime_background.png");
     }
     @Override
     public Component getName() {
@@ -251,6 +251,6 @@ public class SlimeGame extends Game {
     }
     @Override
     public ResourceLocation getIcon() {
-        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/item/game_disc_slime.png");
+        return ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/item/game_disc_slime.png");
     }
 }

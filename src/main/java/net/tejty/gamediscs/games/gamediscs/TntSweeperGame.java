@@ -18,8 +18,8 @@ import java.util.List;
 
 public class TntSweeperGame extends Game {
     private final MultiImage TILE = new MultiImage(
-            new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/tnt_sweeper.png"), 6, 84, 14);
-    private static final ResourceLocation SELECT = new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/sprite/select.png");
+            ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/tnt_sweeper.png"), 6, 84, 14);
+    private static final ResourceLocation SELECT = ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/sprite/select.png");
 
     // Start position of the actual game field
     private static final Vec2 GAME_POS = new Vec2(1, 9);
@@ -126,16 +126,16 @@ public class TntSweeperGame extends Game {
         super.tick();
 
         if ((stage == GameStage.PLAYING || stage == GameStage.START) && ticks % 2 == 0) {
-            if (controls.isButtonDown(Button.UP) && !controls.wasButtonDown(Button.UP)) {
+            if (controls.isButtonDown(Button.UP) && controls.wasButtonDown(Button.UP)) {
                 selectionPos = selectionPos.add(VecUtil.VEC_UP);
             }
-            if (controls.isButtonDown(Button.DOWN) && !controls.wasButtonDown(Button.DOWN)) {
+            if (controls.isButtonDown(Button.DOWN) && controls.wasButtonDown(Button.DOWN)) {
                 selectionPos = selectionPos.add(VecUtil.VEC_DOWN);
             }
-            if (controls.isButtonDown(Button.LEFT) && !controls.wasButtonDown(Button.LEFT)) {
+            if (controls.isButtonDown(Button.LEFT) && controls.wasButtonDown(Button.LEFT)) {
                 selectionPos = selectionPos.add(VecUtil.VEC_LEFT);
             }
-            if (controls.isButtonDown(Button.RIGHT) && !controls.wasButtonDown(Button.RIGHT)) {
+            if (controls.isButtonDown(Button.RIGHT) && controls.wasButtonDown(Button.RIGHT)) {
                 selectionPos = selectionPos.add(VecUtil.VEC_RIGHT);
             }
             selectionPos = new Vec2(Math.min(Math.max(selectionPos.x, 0), GAME_WIDTH - 1), Math.min(Math.max(selectionPos.y, 0), GAME_HEIGHT - 1));
@@ -286,7 +286,7 @@ public class TntSweeperGame extends Game {
 
     @Override
     public ResourceLocation getBackground() {
-        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/games/background/tnt_sweeper_background.png");
+        return ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/games/background/tnt_sweeper_background.png");
     }
     @Override
     public Component getName() {
@@ -294,6 +294,6 @@ public class TntSweeperGame extends Game {
     }
     @Override
     public ResourceLocation getIcon() {
-        return new ResourceLocation(GameDiscsMod.MOD_ID, "textures/item/game_disc_tnt_sweeper.png");
+        return ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/item/game_disc_tnt_sweeper.png");
     }
 }

@@ -8,9 +8,11 @@ import net.minecraft.world.level.Level;
 import net.tejty.gamediscs.games.util.Game;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.function.Supplier;
 
+@ParametersAreNonnullByDefault
 public class GameDiscItem extends Item {
     private final Supplier<Game> gameSupplier;
     private final Component name;
@@ -26,9 +28,8 @@ public class GameDiscItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(name);
-
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        tooltipComponents.add(name);
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 }

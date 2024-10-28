@@ -1,6 +1,7 @@
 package net.tejty.gamediscs.datagen;
 
 import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.EntityTypeTags;
@@ -9,8 +10,8 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
-import net.minecraftforge.common.data.GlobalLootModifierProvider;
-import net.minecraftforge.common.loot.LootTableIdCondition;
+import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
+import net.neoforged.neoforge.common.loot.LootTableIdCondition;
 import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.item.ItemRegistry;
 import net.tejty.gamediscs.util.loot.ItemModifier;
@@ -18,11 +19,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 public class DiscLootModifierProvider extends GlobalLootModifierProvider {
-    public DiscLootModifierProvider(PackOutput output) {
-        super(output, GameDiscsMod.MOD_ID);
+    public DiscLootModifierProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries, GameDiscsMod.MOD_ID);
     }
+
     @Override
     protected void start() {
         // Define all loot tables and their drop chances using a HashMap
@@ -52,8 +55,8 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider {
                 String gameName = gameDiscEntry.getKey();
                 Object gameDisc = gameDiscEntry.getValue();
 
-                add(gameName + "_disc_from_" + lootTable, new ItemModifier(new LootItemCondition[]{
-                        new LootTableIdCondition.Builder(new ResourceLocation(lootTable)).build(),
+                add(gameName + "_disc_from_" + lootTable, new ItemModifier(new LootItemCondition[] {
+                        new LootTableIdCondition.Builder(ResourceLocation.fromNamespaceAndPath("minecraft", lootTable)).build(),
                         LootItemRandomChanceCondition.randomChance(chance).build()
                 }, (Item) gameDisc));
             }
@@ -63,9 +66,9 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider {
             String mobName = mobDiscEntry.getKey();
             Object gameDisc = mobDiscEntry.getValue();
 
-            add("mob_drops/" + mobName + "_drops_game_disc", new ItemModifier(new LootItemCondition[]{
-                    new LootTableIdCondition.Builder(new ResourceLocation("entities/" + mobName)).build(),
-                    LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.KILLER, EntityPredicate.Builder.entity().of(EntityTypeTags.SKELETONS).build()).build()
+            add("mob_drops/" + mobName + "_drops_game_disc",  new ItemModifier(new LootItemCondition[]{
+                    new LootTableIdCondition.Builder(ResourceLocation.fromNamespaceAndPath("minecraft","entities/" + mobName)).build(),
+                    LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.ATTACKER, EntityPredicate.Builder.entity().of(EntityTypeTags.SKELETONS).build()).build()
             }, (Item) gameDisc));
         }
     }

@@ -130,6 +130,6 @@ public class Controls {
                 was_b2 = false;
             }
         }
-        return toReturn;
+        return !toReturn;
     }
 }

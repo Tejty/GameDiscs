@@ -10,8 +10,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec2;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.games.audio.SoundPlayer;
 import net.tejty.gamediscs.games.controls.Button;
@@ -21,8 +22,8 @@ import net.tejty.gamediscs.games.graphics.Renderer;
 import net.tejty.gamediscs.item.ItemRegistry;
 import net.tejty.gamediscs.item.custom.GamingConsoleItem;
 import net.tejty.gamediscs.sounds.SoundRegistry;
-import net.tejty.gamediscs.util.networking.ModMessages;
-import net.tejty.gamediscs.util.networking.packet.SetBestScoreC2SPacket;
+import net.tejty.gamediscs.networking.ModMessages;
+import net.tejty.gamediscs.networking.packet.SetBestScorePacket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +88,7 @@ public class Game {
             // Tries to set the best score
             String gameName = this.getClass().getName().substring(this.getClass().getPackageName().length() + 1);
             if (GamingConsoleItem.getBestScore(getConsole(), gameName, Minecraft.getInstance().player) < score) {
-                ModMessages.sendToServer(new SetBestScoreC2SPacket(gameName, score));
+                PacketDistributor.sendToServer(new SetBestScorePacket(gameName, score));
                 soundPlayer.playNewBest();
                 spawnConfetti();
             } else {
@@ -126,7 +127,7 @@ public class Game {
             // Tries to set the best score
             String gameName = this.getClass().getName().substring(this.getClass().getPackageName().length() + 1);
             if (GamingConsoleItem.getBestScore(getConsole(), gameName, Minecraft.getInstance().player) < score) {
-                ModMessages.sendToServer(new SetBestScoreC2SPacket(gameName, score));
+                PacketDistributor.sendToServer(new SetBestScorePacket(gameName, score));
             }
         }
 
@@ -241,7 +242,7 @@ public class Game {
             // Renders died / won screen
             if (stage == GameStage.DIED || stage == GameStage.WON) {
                 // Renders score board
-                graphics.blit(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/gui/score_board.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
+                graphics.blit(ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/gui/score_board.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
 
                 // Text based on won or died
                 Component component = stage == GameStage.DIED ? Component.translatable("gui.gamingconsole.died").withStyle(ChatFormatting.BOLD, ChatFormatting.DARK_RED) : Component.translatable("gui.gamingconsole.won").withStyle(ChatFormatting.BOLD, ChatFormatting.DARK_GREEN);
@@ -320,7 +321,7 @@ public class Game {
         else {
             // If current game has score box, it renders it
             if (showScoreBox() && showScore()) {
-                graphics.blit(new ResourceLocation(GameDiscsMod.MOD_ID, "textures/gui/score_box.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
+                graphics.blit(ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/gui/score_box.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
             }
 
             if (showScore()) {
@@ -387,7 +388,7 @@ public class Game {
         }
     }
     public void spawnParticleExplosion(Vec2 pos, int count, int speed, int lifetime, ParticleLevel level) {
-        soundPlayer.play(SoundEvents.GENERIC_EXPLODE, 1.5f, 0.1f);
+        soundPlayer.play(SoundEvents.GENERIC_EXPLODE.value(), 1.5f, 0.1f);
         for (int i = 0; i < count; i++) {
             Particle particle = new ExplosionParticle(pos, random.nextInt(lifetime / 2, lifetime), level);
             particle.setVelocity(new Vec2(random.nextFloat(-speed, speed), random.nextFloat(-speed, speed)));
@@ -418,7 +419,7 @@ public class Game {
     }
 
     /**
-     * @return Game tickt duration
+     * @return Game tick duration
      */
     @OnlyIn(Dist.CLIENT)
     public int gameTickDuration() {

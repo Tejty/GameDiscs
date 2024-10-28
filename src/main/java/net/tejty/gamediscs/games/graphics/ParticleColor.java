@@ -22,7 +22,6 @@ public enum ParticleColor {
 
     public static ParticleColor random(Random random) {
         return switch (random.nextInt(0, 16)) {
-            case 0 -> WHITE;
             case 1 -> ORANGE;
             case 2 -> MAGENTA;
             case 3 -> LIGHT_BLUE;
