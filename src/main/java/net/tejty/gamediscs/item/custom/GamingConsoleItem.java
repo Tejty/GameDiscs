@@ -33,7 +33,8 @@ public class GamingConsoleItem extends Item {
             stack.setTag(new CompoundTag());
         }
         CompoundTag nbtData = stack.getTag();
-        nbtData.putInt("gamediscs:" + game + ";" + player.getDisplayName().getString(), score);
+        if (nbtData == null) return;
+        nbtData.putInt("gamediscs:" + game + ";" + player.getStringUUID(), score);
         stack.setTag(nbtData);
 
         // TODO bestScore
@@ -44,7 +45,12 @@ public class GamingConsoleItem extends Item {
             return 0;
         }
         else {
-            return stack.getTag().getInt("gamediscs:" + game + ";" + player.getDisplayName().getString());
+            CompoundTag nbtData = stack.getTag();
+            if (nbtData != null) {
+                return nbtData.getInt("gamediscs:" + game + ";" + player.getStringUUID());
+            } else {
+                return 0; // default value
+            }
         }
     }
 }
