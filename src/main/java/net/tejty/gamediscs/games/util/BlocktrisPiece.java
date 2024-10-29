@@ -3,8 +3,6 @@ package net.tejty.gamediscs.games.util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.phys.Vec2;
 import net.tejty.gamediscs.games.gamediscs.BlocktrisGame;
-import net.tejty.gamediscs.games.graphics.BasicParticleRenderer;
-import net.tejty.gamediscs.games.graphics.ParticleColor;
 
 import java.util.List;
 import java.util.function.Supplier;

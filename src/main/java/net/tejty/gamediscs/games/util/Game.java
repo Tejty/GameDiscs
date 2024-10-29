@@ -21,8 +21,8 @@ import net.tejty.gamediscs.games.graphics.ParticleColor;
 import net.tejty.gamediscs.games.graphics.Renderer;
 import net.tejty.gamediscs.item.ItemRegistry;
 import net.tejty.gamediscs.item.custom.GamingConsoleItem;
-import net.tejty.gamediscs.sounds.SoundRegistry;
 import net.tejty.gamediscs.networking.packet.SetBestScorePacket;
+import net.tejty.gamediscs.sounds.SoundRegistry;
 
 import java.util.ArrayList;
 import java.util.List;

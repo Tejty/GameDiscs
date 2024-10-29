@@ -8,8 +8,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.tejty.gamediscs.GameDiscsMod;
-import net.tejty.gamediscs.games.util.Game;
 import net.tejty.gamediscs.games.controls.Button;
+import net.tejty.gamediscs.games.util.Game;
 import net.tejty.gamediscs.item.custom.GameDiscItem;
 import org.jetbrains.annotations.NotNull;
 

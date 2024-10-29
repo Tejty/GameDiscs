@@ -3,7 +3,6 @@ package net.tejty.gamediscs.games.graphics;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AnimatedImage extends MultiImage {

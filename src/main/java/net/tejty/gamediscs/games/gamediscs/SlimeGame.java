@@ -6,10 +6,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.Vec2;
 import net.tejty.gamediscs.GameDiscsMod;
+import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.games.graphics.BreakParticleRenderer;
 import net.tejty.gamediscs.games.graphics.DirectionalImage;
 import net.tejty.gamediscs.games.util.*;
-import net.tejty.gamediscs.games.controls.Button;
 
 import java.util.ArrayList;
 import java.util.List;

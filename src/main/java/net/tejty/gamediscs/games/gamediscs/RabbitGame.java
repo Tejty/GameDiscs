@@ -1,7 +1,5 @@
 package net.tejty.gamediscs.games.gamediscs;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -10,8 +8,10 @@ import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.games.graphics.AnimatedImage;
 import net.tejty.gamediscs.games.graphics.BreakParticleRenderer;
-import net.tejty.gamediscs.games.graphics.ParticleColor;
-import net.tejty.gamediscs.games.util.*;
+import net.tejty.gamediscs.games.util.Game;
+import net.tejty.gamediscs.games.util.GameStage;
+import net.tejty.gamediscs.games.util.ParticleLevel;
+import net.tejty.gamediscs.games.util.Sprite;
 
 import java.util.ArrayList;
 import java.util.List;
