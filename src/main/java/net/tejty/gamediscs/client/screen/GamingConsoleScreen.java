@@ -88,10 +88,10 @@ public class GamingConsoleScreen extends Screen {
     @Override
     public void render(@NotNull GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
         renderBackground(graphics, pMouseX, pMouseY, pPartialTick);
-        renderGameScreen(graphics, getConsoleX() + SCREEN_X, getConsoleY() + SCREEN_Y);
-
-        renderButtons(graphics);
         super.render(graphics, pMouseX, pMouseY, pPartialTick);
+
+        renderGameScreen(graphics, getConsoleX() + SCREEN_X, getConsoleY() + SCREEN_Y);
+        renderButtons(graphics);
     }
 
     @Override
