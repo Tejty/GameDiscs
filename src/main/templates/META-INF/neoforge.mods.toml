@@ -16,7 +16,7 @@ authors="${mod_authors}"
 description='''${mod_description}'''
 
 #[[mixins]]
-#config="qstorage.mixins.json"
+#config="gamediscs.mixins.json"
 
 [[dependencies.gamediscs]]
 modId="neoforge"
