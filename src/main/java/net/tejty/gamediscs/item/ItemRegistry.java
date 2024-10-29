@@ -8,6 +8,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.tejty.gamediscs.GameDiscsMod;
+import net.tejty.gamediscs.component.BestScoreComponent;
+import net.tejty.gamediscs.component.DataComponentRegistry;
 import net.tejty.gamediscs.games.gamediscs.*;
 import net.tejty.gamediscs.item.custom.GameDiscItem;
 import net.tejty.gamediscs.item.custom.GamingConsoleItem;

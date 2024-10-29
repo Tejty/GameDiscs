@@ -9,9 +9,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.tejty.gamediscs.client.screen.GamingConsoleScreen;
+import net.tejty.gamediscs.component.BestScoreComponent;
+import net.tejty.gamediscs.component.DataComponentRegistry;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -23,7 +23,6 @@ public class GamingConsoleItem extends Item {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (level.isClientSide()) {
             Minecraft.getInstance().setScreen(new GamingConsoleScreen(Component.translatable("gui.gamingconsole.title")));
@@ -33,22 +32,15 @@ public class GamingConsoleItem extends Item {
     }
 
     public void setBestScore(ItemStack stack, String game, int score, Player player) {
-        if (!stack.hasTag()){
-            stack.setTag(new CompoundTag());
-        }
-        CompoundTag nbtData = stack.getTag();
-        nbtData.putInt("gamediscs:" + game + ";" + player.getStringUUID(), score);
-        stack.setTag(nbtData);
-
-        // TODO bestScore
+        stack.set(DataComponentRegistry.BEST_SCORE, new BestScoreComponent(game, player.getStringUUID(), score));
     }
 
     public static int getBestScore(ItemStack stack, String game, Player player) {
-        if (!stack.hasTag()){
-            return 0;
+        BestScoreComponent component = stack.get(DataComponentRegistry.BEST_SCORE);
+        if (component == null) return 0;
+        if (component.game().equals(game) && component.stringUUID().equals(player.getStringUUID())) {
+            return component.score();
         }
-        else {
-            return stack.getTag().getInt("gamediscs:" + game + ";" + player.getStringUUID());
-        }
+        return 0;
     }
 }

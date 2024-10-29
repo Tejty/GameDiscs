@@ -22,7 +22,6 @@ import net.tejty.gamediscs.games.graphics.Renderer;
 import net.tejty.gamediscs.item.ItemRegistry;
 import net.tejty.gamediscs.item.custom.GamingConsoleItem;
 import net.tejty.gamediscs.sounds.SoundRegistry;
-import net.tejty.gamediscs.networking.ModMessages;
 import net.tejty.gamediscs.networking.packet.SetBestScorePacket;
 
 import java.util.ArrayList;

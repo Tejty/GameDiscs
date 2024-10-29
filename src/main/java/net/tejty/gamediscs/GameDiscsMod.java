@@ -10,11 +10,11 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.tejty.gamediscs.component.DataComponentRegistry;
 import net.tejty.gamediscs.sounds.SoundRegistry;
 import net.tejty.gamediscs.util.loot.LootModifiers;
 import net.tejty.gamediscs.util.creativetab.CreativeTabs;
 import net.tejty.gamediscs.item.ItemRegistry;
-import net.tejty.gamediscs.networking.ModMessages;
 import org.slf4j.Logger;
 
 @Mod(GameDiscsMod.MOD_ID)
@@ -26,6 +26,7 @@ public class GameDiscsMod {
         CreativeTabs.register(eventBus);
         LootModifiers.register(eventBus);
         SoundRegistry.register(eventBus);
+        DataComponentRegistry.register(eventBus);
 
         eventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.register(this);
