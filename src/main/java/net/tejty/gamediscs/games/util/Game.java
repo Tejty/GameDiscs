@@ -82,7 +82,7 @@ public class Game {
      * Stops the game, shows die screen, and sets the best score
      */
     @OnlyIn(Dist.CLIENT)
-    public synchronized  void die() {
+    public synchronized void die() {
         if (getConsole().getItem() instanceof GamingConsoleItem) {
             // Tries to set the best score
             String gameName = this.getClass().getName().substring(this.getClass().getPackageName().length() + 1);
@@ -119,7 +119,7 @@ public class Game {
      * Stops the game, shows win screen, and sets the best score
      */
     @OnlyIn(Dist.CLIENT)
-    public synchronized  void win() {
+    public synchronized void win() {
         soundPlayer.playNewBest();
         spawnConfetti();
         if (getConsole().getItem() instanceof GamingConsoleItem) {

@@ -8,7 +8,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.tejty.gamediscs.GameDiscsMod;
 
 public class DataComponentRegistry {
-    // The specialized DeferredRegister.DataComponents simplifies data component registration and avoids some generic inference issues with the `DataComponentType.Builder` within a `Supplier`
     public static final DeferredRegister.DataComponents REGISTRAR = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, GameDiscsMod.MOD_ID);
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<BestScoreComponent>> BEST_SCORE = REGISTRAR.registerComponentType(
