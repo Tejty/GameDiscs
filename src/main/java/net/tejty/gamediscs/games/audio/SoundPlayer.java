@@ -10,7 +10,6 @@ import net.tejty.gamediscs.sounds.SoundRegistry;
 
 import java.util.Random;
 
-@Environment(EnvType.CLIENT)
 public class SoundPlayer {
     private final SoundManager manager;
     private final Random random;

@@ -67,7 +67,6 @@ public class Game {
     /**
      * Resets all variables and prepares for start
      */
-    @Environment(EnvType.CLIENT)
     public synchronized void prepare() {
         score = 0;
         lives = maxLives();
@@ -77,7 +76,6 @@ public class Game {
     /**
      * Starts the game
      */
-    @Environment(EnvType.CLIENT)
     public synchronized void start() {
         stage = GameStage.PLAYING;
         ticks = 1;
@@ -86,7 +84,6 @@ public class Game {
     /**
      * Stops the game, shows die screen, and sets the best score
      */
-    @Environment(EnvType.CLIENT)
     public synchronized void die() {
         if (getConsole().getItem() instanceof GamingConsoleItem) {
             // Tries to set the best score
@@ -124,7 +121,6 @@ public class Game {
     /**
      * Stops the game, shows win screen, and sets the best score
      */
-    @Environment(EnvType.CLIENT)
     public synchronized void win() {
         soundPlayer.playNewBest();
         spawnConfetti();
@@ -145,7 +141,6 @@ public class Game {
     /**
      * @return Game Console this game is running at
      */
-    @Environment(EnvType.CLIENT)
     private ItemStack getConsole() {
         // Gets player of this client
         PlayerEntity player = MinecraftClient.getInstance().player;
@@ -169,7 +164,6 @@ public class Game {
     /**
      * Updates everything by one tick
      */
-    @Environment(EnvType.CLIENT)
     public synchronized void tick() {
         // Calls gameTick depending on game stage and game tick duration
         if (stage == GameStage.PLAYING && ticks % gameTickDuration() == 0) {
@@ -193,7 +187,6 @@ public class Game {
     /**
      * Updates everything in game by one tick
      */
-    @Environment(EnvType.CLIENT)
     public synchronized void gameTick() {
     }
 
@@ -203,7 +196,6 @@ public class Game {
      * @param posX X position of the game area
      * @param posY Y position of the game area
      */
-    @Environment(EnvType.CLIENT)
     public synchronized void render(DrawContext graphics, int posX, int posY) {
         // Renders background
         if (getBackground() != null) {
@@ -219,7 +211,6 @@ public class Game {
      * @param posX X position
      * @param posY Y position
      */
-    @Environment(EnvType.CLIENT)
     public synchronized void renderOverlay(DrawContext graphics, int posX, int posY) {
         // saving font
         TextRenderer font = MinecraftClient.getInstance().textRenderer;
@@ -358,7 +349,6 @@ public class Game {
         }
     }
 
-    @Environment(EnvType.CLIENT)
     public synchronized void renderParticles(DrawContext graphics, int posX, int posY) {
         for (Particle particle : particles) {
             particle.render(graphics, posX, posY, stage);
@@ -369,7 +359,6 @@ public class Game {
      * On button down
      * @param button The button that was pressed
      */
-    @Environment(EnvType.CLIENT)
     public synchronized void buttonDown(Button button) {
         soundPlayer.playClick(true);
         // Starts the game
@@ -419,7 +408,6 @@ public class Game {
      * On button up
      * @param button The button that was released
      */
-    @Environment(EnvType.CLIENT)
     public synchronized void buttonUp(Button button) {
         soundPlayer.playClick(false);
     }
@@ -427,7 +415,6 @@ public class Game {
     /**
      * @return Game tickt duration
      */
-    @Environment(EnvType.CLIENT)
     public int gameTickDuration() {
         return 1; // Determines how often the game ticks (1 game tick duration = 20 game ticks per second, 2 game tick duration = 10 game ticks per second)
     }
@@ -435,7 +422,6 @@ public class Game {
     /**
      * @return Resource location of background image
      */
-    @Environment(EnvType.CLIENT)
     public Identifier getBackground() {
         return null;
     }
@@ -443,7 +429,6 @@ public class Game {
     /**
      * @return Determines if this game shows score box
      */
-    @Environment(EnvType.CLIENT)
     public boolean showScoreBox() {
         return true;
     }
@@ -459,7 +444,6 @@ public class Game {
     /**
      * @return Color of score
      */
-    @Environment(EnvType.CLIENT)
     public int scoreColor() {
         return 0xFFFFFF; // Default is white
     }
@@ -467,7 +451,6 @@ public class Game {
     /**
      * @return Determines if score will be rendered with "Score:" before the number
      */
-    @Environment(EnvType.CLIENT)
     public boolean scoreText() {
         return true; // Default is true
     }
@@ -475,25 +458,21 @@ public class Game {
     /**
      * @return Display name of the game
      */
-    @Environment(EnvType.CLIENT)
     public Text getName() {return Text.empty();}
 
     /**
      * @return Resource location to icon of the game
      */
-    @Environment(EnvType.CLIENT)
     public Identifier getIcon() {return null;}
 
     /**
      * @return Display color of the game
      */
-    @Environment(EnvType.CLIENT)
     public Formatting getColor() {return Formatting.YELLOW;}
 
     /**
      * @return True if the game is an empty game (default Game, not its child), false otherwise
      */
-    @Environment(EnvType.CLIENT)
     public boolean isEmpty() {
         return this.getClass().equals(Game.class);
     }

@@ -19,7 +19,6 @@ public class GamingConsoleItem extends Item {
         super(properties.maxCount(1));
     }
 
-    @Environment(EnvType.CLIENT)
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (world.isClient()) {
             MinecraftClient.getInstance().setScreen(new GamingConsoleScreen(Text.translatable("gui.gamingconsole.title")));
