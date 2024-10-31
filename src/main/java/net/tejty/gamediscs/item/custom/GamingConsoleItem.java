@@ -14,6 +14,7 @@ import net.tejty.gamediscs.component.DataComponentRegistry;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
 
 @ParametersAreNonnullByDefault
 public class GamingConsoleItem extends Item {
@@ -30,16 +31,23 @@ public class GamingConsoleItem extends Item {
         return super.use(level, player, hand);
     }
 
-    public void setBestScore(ItemStack stack, String game, int score, Player player) {
-        stack.set(DataComponentRegistry.BEST_SCORE, new BestScoreComponent(game, player.getStringUUID(), score));
-    }
-
     public static int getBestScore(ItemStack stack, String game, Player player) {
         BestScoreComponent component = stack.get(DataComponentRegistry.BEST_SCORE);
         if (component == null) return 0;
-        if (component.game().equals(game) && component.stringUUID().equals(player.getStringUUID())) {
-            return component.score();
+        if (component.stringUUID().equals(player.getStringUUID())) {
+            return component.gameScores().getOrDefault(game, 0);
         }
         return 0;
+    }
+
+    public void setBestScore(ItemStack stack, String game, int score, Player player) {
+        BestScoreComponent component = stack.get(DataComponentRegistry.BEST_SCORE);
+        if (component == null) {
+            component = new BestScoreComponent(new HashMap<>(), player.getStringUUID());
+        } else if (!component.stringUUID().equals(player.getStringUUID())) {
+            return;
+        }
+        component.gameScores().put(game, score);
+        stack.set(DataComponentRegistry.BEST_SCORE, component);
     }
 }
