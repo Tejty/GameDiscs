@@ -61,23 +61,23 @@ public class DiscLootTablesModifiers {
 
     private static @NotNull Map<String, Float> getLootTableWithChance() {
         Map<String, Float> lootTables = new HashMap<>();
-        lootTables.put("chests/simple_dungeon", 0.05f);
-        lootTables.put("chests/stronghold_corridor", 0.05f);
-        lootTables.put("chests/stronghold_crossing", 0.05f);
-        lootTables.put("chests/stronghold_library", 0.05f);
-        lootTables.put("chests/end_city_treasure", 0.05f);
-        lootTables.put("chests/woodland_mansion", 0.05f);
-        lootTables.put("chests/buried_treasure", 0.05f);
-        lootTables.put("chests/ruined_portal", 0.05f);
-        lootTables.put("chests/ancient_city", 0.05f);
-        lootTables.put("chests/ancient_city_ice_box", 0.05f);
-        lootTables.put("chests/abandoned_mineshaft", 0.05f);
-        lootTables.put("chests/jungle_temple", 0.05f);
-        lootTables.put("chests/desert_pyramid", 0.05f);
-        lootTables.put("chests/bastion_bridge", 0.05f);
-        lootTables.put("chests/bastion_hoglin_stable", 0.05f);
-        lootTables.put("chests/bastion_other", 0.05f);
-        lootTables.put("chests/bastion_treasure", 0.05f);
+        lootTables.put("chests/simple_dungeon", 0.1f);
+        lootTables.put("chests/stronghold_corridor", 0.1f);
+        lootTables.put("chests/stronghold_crossing", 0.1f);
+        lootTables.put("chests/stronghold_library", 0.1f);
+        lootTables.put("chests/end_city_treasure", 0.1f);
+        lootTables.put("chests/woodland_mansion", 0.1f);
+        lootTables.put("chests/buried_treasure", 0.1f);
+        lootTables.put("chests/ruined_portal", 0.1f);
+        lootTables.put("chests/ancient_city", 0.1f);
+        lootTables.put("chests/ancient_city_ice_box", 0.1f);
+        lootTables.put("chests/abandoned_mineshaft", 0.1f);
+        lootTables.put("chests/jungle_temple", 0.1f);
+        lootTables.put("chests/desert_pyramid", 0.1f);
+        lootTables.put("chests/bastion_bridge", 0.1f);
+        lootTables.put("chests/bastion_hoglin_stable", 0.1f);
+        lootTables.put("chests/bastion_other", 0.1f);
+        lootTables.put("chests/bastion_treasure", 0.1f);
         return lootTables;
     }
 }
