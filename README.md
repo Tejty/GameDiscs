@@ -19,7 +19,7 @@ Join our official [Discord](https://discord.gg/523uCvEdaG) server and share your
 **Theshadow_lp "Shadowbeast_lp"** - Programmer <br>
 **Cebularz** - Thinker of Ideas <br>
 **A Wanderer** - Thinker of Ideas <br>
-**CrownSheep** - Porting to Fabric
+**CrownSheep** - Porting to Fabric <br>
 **Wolfieboy09** - Porting to NeoForge
 
 This Mod was created by **TejtyCraft-Mods-Team** under control of Tejty for **"CurseForge ModJam - Minecraft Modding Madness 2024"** \
