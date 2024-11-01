@@ -35,7 +35,7 @@ public class DiscLootTablesModifiers {
                 String lootTable = lootTableEntry.getKey();
                 float chance = lootTableEntry.getValue();
 
-                if(new Identifier(lootTable).equals(id)) {
+                if(Identifier.of(lootTable).equals(id)) {
                     LootPool.Builder poolBuilder = LootPool.builder()
                             .with(TagEntry.expandBuilder(TagRegistry.Items.GAME_DISCS))
                             .conditionally(RandomChanceLootCondition.builder(chance));
@@ -48,7 +48,7 @@ public class DiscLootTablesModifiers {
                 String mobName = mobDiscEntry.getKey();
                 Object gameDisc = mobDiscEntry.getValue();
 
-                if(new Identifier("entities/" + mobName).equals(id)) {
+                if(Identifier.of("entities/" + mobName).equals(id)) {
                     LootPool.Builder poolBuilder = LootPool.builder()
                             .with(ItemEntry.builder((Item) gameDisc))
                             .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.KILLER, EntityPredicate.Builder.create().type(EntityTypeTags.SKELETONS)));

@@ -239,7 +239,7 @@ public class Game {
             // Renders died / won screen
             if (stage == GameStage.DIED || stage == GameStage.WON) {
                 // Renders score board
-                graphics.drawTexture(new Identifier(GameDiscsMod.MOD_ID, "textures/gui/score_board.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
+                graphics.drawTexture(Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/score_board.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
 
                 // Text based on won or died
                 Text component = stage == GameStage.DIED ? Text.translatable("gui.gamingconsole.died").formatted(Formatting.BOLD, Formatting.DARK_RED) : Text.translatable("gui.gamingconsole.won").formatted(Formatting.BOLD, Formatting.DARK_GREEN);
@@ -318,7 +318,7 @@ public class Game {
         else {
             // If current game has score box, it renders it
             if (showScoreBox() && showScore()) {
-                graphics.drawTexture(new Identifier(GameDiscsMod.MOD_ID, "textures/gui/score_box.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
+                graphics.drawTexture(Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/score_box.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
             }
 
             if (showScore()) {

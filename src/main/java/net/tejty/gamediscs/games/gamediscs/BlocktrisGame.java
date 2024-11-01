@@ -33,7 +33,7 @@ public class BlocktrisGame extends Game {
                 23,
                 5,
                 new MultiImage(
-                        new Identifier(GameDiscsMod.MOD_ID, "textures/games/sprite/cubes.png"),
+                        Identifier.of(GameDiscsMod.MOD_ID, "textures/games/sprite/cubes.png"),
                         5, 40, 8));
 
         int type = random.nextInt(7);
@@ -54,7 +54,7 @@ public class BlocktrisGame extends Game {
                 23,
                 5,
                 new MultiImage(
-                        new Identifier(GameDiscsMod.MOD_ID, "textures/games/sprite/cubes.png"),
+                        Identifier.of(GameDiscsMod.MOD_ID, "textures/games/sprite/cubes.png"),
                         5, 40, 8));
 
         int type = random.nextInt(0, 7);
@@ -276,7 +276,7 @@ public class BlocktrisGame extends Game {
 
     @Override
     public Identifier getBackground() {
-        return new Identifier(GameDiscsMod.MOD_ID, "textures/games/background/blocktris_bakground.png");
+        return Identifier.of(GameDiscsMod.MOD_ID, "textures/games/background/blocktris_bakground.png");
     }
 
     @Override
@@ -296,6 +296,6 @@ public class BlocktrisGame extends Game {
 
     @Override
     public Identifier getIcon() {
-        return new Identifier(GameDiscsMod.MOD_ID, "textures/item/game_disc_blocktris.png");
+        return Identifier.of(GameDiscsMod.MOD_ID, "textures/item/game_disc_blocktris.png");
     }
 }

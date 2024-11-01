@@ -11,7 +11,7 @@ public class TagRegistry {
     public static class Blocks {
 
         private static TagKey<Block> createTag(String name) {
-            return TagKey.of(RegistryKeys.BLOCK, new Identifier(GameDiscsMod.MOD_ID, name));
+            return TagKey.of(RegistryKeys.BLOCK, Identifier.of(GameDiscsMod.MOD_ID, name));
         }
     }
 
@@ -20,7 +20,7 @@ public class TagRegistry {
                 createTag("game_discs");
 
         private static TagKey<Item> createTag(String name) {
-            return TagKey.of(RegistryKeys.ITEM, new Identifier(GameDiscsMod.MOD_ID, name));
+            return TagKey.of(RegistryKeys.ITEM, Identifier.of(GameDiscsMod.MOD_ID, name));
         }
     }
 }

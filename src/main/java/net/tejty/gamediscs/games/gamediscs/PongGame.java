@@ -15,23 +15,23 @@ public class PongGame extends Game {
     private Sprite player = new Sprite(
             new Vec2f(10, HEIGHT / 2 - 10),
             new Vec2f(5, 20),
-            new Identifier("minecraft:textures/block/white_concrete.png")
+            Identifier.of("minecraft:textures/block/white_concrete.png")
     );
     private Sprite oponent = new Sprite(
             new Vec2f(WIDTH - 15, HEIGHT / 2 - 10),
             new Vec2f(5, 20),
-            new Identifier("textures/block/white_concrete.png")
+            Identifier.of("textures/block/white_concrete.png")
     );
     private Sprite ball = new Sprite(
             new Vec2f(WIDTH / 2 - 2, HEIGHT / 2 - 2),
             new Vec2f(4, 4),
-            new Identifier("textures/block/white_concrete.png")
+            Identifier.of("textures/block/white_concrete.png")
     );
     private Sprite numberRenderer = new Sprite(
             new Vec2f(0, 0),
             new Vec2f(8, 12),
             new MultiImage(
-                    new Identifier(GameDiscsMod.MOD_ID, "textures/games/sprite/numbers.png"),
+                    Identifier.of(GameDiscsMod.MOD_ID, "textures/games/sprite/numbers.png"),
                     8,
                     120,
                     10
@@ -56,18 +56,18 @@ public class PongGame extends Game {
         player = new Sprite(
                 new Vec2f(10, HEIGHT / 2 - 10),
                 new Vec2f(5, 20),
-                new Identifier("minecraft:textures/block/white_concrete.png")
+                Identifier.of("minecraft:textures/block/white_concrete.png")
         );
         oponent = new Sprite(
                 new Vec2f(WIDTH - 15, HEIGHT / 2 - 10),
                 new Vec2f(5, 20),
-                new Identifier("minecraft:textures/block/white_concrete.png")
+                Identifier.of("minecraft:textures/block/white_concrete.png")
         );
         ballSpeed = 4;
         ball = new Sprite(
                 new Vec2f(WIDTH / 2 - 2, HEIGHT / 2 - 2),
                 new Vec2f(4, 4),
-                new Identifier("minecraft:textures/block/white_concrete.png")
+                Identifier.of("minecraft:textures/block/white_concrete.png")
         ).setVelocity(new Vec2f((random.nextInt(2) * 2 - 1) * 2, (random.nextInt(2) * 2 - 1) * 2));
         oponentScore = 0;
     }
@@ -237,7 +237,7 @@ public class PongGame extends Game {
     }
     @Override
     public Identifier getBackground() {
-        return new Identifier(GameDiscsMod.MOD_ID, "textures/games/background/pong_background.png");
+        return Identifier.of(GameDiscsMod.MOD_ID, "textures/games/background/pong_background.png");
     }
     @Override
     public boolean showScore() {
@@ -251,6 +251,6 @@ public class PongGame extends Game {
     @Override
     public Identifier getIcon() {
         // Change icon here:
-        return new Identifier(GameDiscsMod.MOD_ID, "textures/item/game_disc_pong_no_anim.png");
+        return Identifier.of(GameDiscsMod.MOD_ID, "textures/item/game_disc_pong_no_anim.png");
     }
 }

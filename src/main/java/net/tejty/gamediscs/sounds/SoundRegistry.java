@@ -21,7 +21,7 @@ public class SoundRegistry {
 
 
     private static SoundEvent registerSoundEvent(String name) {
-        Identifier id = new Identifier(GameDiscsMod.MOD_ID, name);
+        Identifier id = Identifier.of(GameDiscsMod.MOD_ID, name);
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     }
 

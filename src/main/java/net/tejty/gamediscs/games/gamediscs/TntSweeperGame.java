@@ -18,8 +18,8 @@ import java.util.List;
 
 public class TntSweeperGame extends Game {
     private final MultiImage TILE = new MultiImage(
-            new Identifier(GameDiscsMod.MOD_ID, "textures/games/sprite/tnt_sweeper.png"), 6, 84, 14);
-    private static final Identifier SELECT = new Identifier(GameDiscsMod.MOD_ID, "textures/games/sprite/select.png");
+            Identifier.of(GameDiscsMod.MOD_ID, "textures/games/sprite/tnt_sweeper.png"), 6, 84, 14);
+    private static final Identifier SELECT = Identifier.of(GameDiscsMod.MOD_ID, "textures/games/sprite/select.png");
 
     // Start position of the actual game field
     private static final Vec2f GAME_POS = new Vec2f(1, 9);
@@ -286,7 +286,7 @@ public class TntSweeperGame extends Game {
 
     @Override
     public Identifier getBackground() {
-        return new Identifier(GameDiscsMod.MOD_ID, "textures/games/background/tnt_sweeper_background.png");
+        return Identifier.of(GameDiscsMod.MOD_ID, "textures/games/background/tnt_sweeper_background.png");
     }
     @Override
     public Text getName() {
@@ -294,6 +294,6 @@ public class TntSweeperGame extends Game {
     }
     @Override
     public Identifier getIcon() {
-        return new Identifier(GameDiscsMod.MOD_ID, "textures/item/game_disc_tnt_sweeper.png");
+        return Identifier.of(GameDiscsMod.MOD_ID, "textures/item/game_disc_tnt_sweeper.png");
     }
 }

@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 public class SlimeGame extends Game {
     private final DirectionalImage HEAD = new DirectionalImage(
-            new Identifier(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_head.png"), 8, 32);
+            Identifier.of(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_head.png"), 8, 32);
     private final DirectionalImage TAIL = new DirectionalImage(
-            new Identifier(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_tail.png"), 8, 32);
+            Identifier.of(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_tail.png"), 8, 32);
     private final DirectionalImage CONNECTION = new DirectionalImage(
-            new Identifier(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_connection.png"), 8, 32);
-    private static final Identifier BODY = new Identifier(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_body.png");
-    private static final Identifier APPLE = new Identifier(GameDiscsMod.MOD_ID, "textures/games/sprite/apple.png");
+            Identifier.of(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_connection.png"), 8, 32);
+    private static final Identifier BODY = Identifier.of(GameDiscsMod.MOD_ID, "textures/games/sprite/slime_body.png");
+    private static final Identifier APPLE = Identifier.of(GameDiscsMod.MOD_ID, "textures/games/sprite/apple.png");
 
     // Start position of the actual game field
     private static final Vec2f GAME_POS = new Vec2f(6, 2);
@@ -243,7 +243,7 @@ public class SlimeGame extends Game {
     }
     @Override
     public Identifier getBackground() {
-        return new Identifier(GameDiscsMod.MOD_ID, "textures/games/background/slime_background.png");
+        return Identifier.of(GameDiscsMod.MOD_ID, "textures/games/background/slime_background.png");
     }
     @Override
     public Text getName() {
@@ -251,6 +251,6 @@ public class SlimeGame extends Game {
     }
     @Override
     public Identifier getIcon() {
-        return new Identifier(GameDiscsMod.MOD_ID, "textures/item/game_disc_slime.png");
+        return Identifier.of(GameDiscsMod.MOD_ID, "textures/item/game_disc_slime.png");
     }
 }

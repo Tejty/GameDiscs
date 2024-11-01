@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class GamingConsoleScreen extends Screen {
-    private static final Identifier BACKGROUD = new Identifier(GameDiscsMod.MOD_ID, "textures/gui/gaming_console.png");
+    private static final Identifier BACKGROUD = Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/gaming_console.png");
     private static final int CONSOLE_WIDTH = 160;
     private static final int CONSOLE_HEIGHT = 198;
 
@@ -87,7 +87,7 @@ public class GamingConsoleScreen extends Screen {
     // Main rendering method
     @Override
     public void render(@NotNull DrawContext graphics, int pMouseX, int pMouseY, float pPartialTick) {
-        renderBackground(graphics);
+        renderBackground(graphics, pMouseX, pMouseY, pPartialTick);
         renderGameScreen(graphics, getConsoleX() + SCREEN_X, getConsoleY() + SCREEN_Y);
 
         renderButtons(graphics);
@@ -95,12 +95,9 @@ public class GamingConsoleScreen extends Screen {
     }
 
     @Override
-    public void renderBackground(DrawContext graphics) {
-        // Renders dark semitransparent background
-        super.renderBackground(graphics);
-
-        // Renders console image
-        graphics.drawTexture(BACKGROUD, getConsoleX(), getConsoleY(), 0, 0, 0, CONSOLE_WIDTH, CONSOLE_HEIGHT, 256, 256);
+    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
+        super.renderBackground(context, mouseX, mouseY, delta);
+        context.drawTexture(BACKGROUD, getConsoleX(), getConsoleY(), 0, 0, 0, CONSOLE_WIDTH, CONSOLE_HEIGHT, 256, 256);
     }
 
     /**
@@ -136,7 +133,7 @@ public class GamingConsoleScreen extends Screen {
         // If there are some available games, it renders a selection marking on corresponding Y position
         if (!availableGames.isEmpty()) {
             graphics.drawTexture(
-                    new Identifier(GameDiscsMod.MOD_ID, "textures/gui/selected.png"),
+                    Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/selected.png"),
                     x,
                     y + 3 + textRenderer.fontHeight + 18 * selected - (Math.max(0, selected - 3) * 18),
                     0, 0, 0, 140, 18, 140, 18

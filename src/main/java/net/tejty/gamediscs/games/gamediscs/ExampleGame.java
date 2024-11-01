@@ -87,7 +87,7 @@ public class ExampleGame extends Game {
     @Override
     public Identifier getBackground() {
         // Change here:
-        return new Identifier(GameDiscsMod.MOD_ID, "textures/games/background/your_background.png");
+        return Identifier.of(GameDiscsMod.MOD_ID, "textures/games/background/your_background.png");
     }
     @Override
     public boolean showScoreBox() {
@@ -107,6 +107,6 @@ public class ExampleGame extends Game {
     @Override
     public Identifier getIcon() {
         // Change icon here:
-        return new Identifier(GameDiscsMod.MOD_ID, "textures/item/your_icon.png");
+        return Identifier.of(GameDiscsMod.MOD_ID, "textures/item/your_icon.png");
     }
 }

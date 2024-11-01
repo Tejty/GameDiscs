@@ -13,7 +13,7 @@ import net.tejty.gamediscs.item.ItemRegistry;
 
 public class CreativeTabs {
     public static final ItemGroup GAME_DISCS_TAB = Registry.register(Registries.ITEM_GROUP,
-            new Identifier(GameDiscsMod.MOD_ID, "game_discs_tab"),
+            Identifier.of(GameDiscsMod.MOD_ID, "game_discs_tab"),
             FabricItemGroup.builder().displayName(Text.translatable("creativetab.game_discs_tab"))
                     .icon(() -> new ItemStack(ItemRegistry.GAMING_CONSOLE)).entries((displayContext, entries) -> {
                         entries.add(ItemRegistry.GAMING_CONSOLE);
