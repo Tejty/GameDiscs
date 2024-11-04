@@ -3,22 +3,16 @@
   "category": "misc",
   "group": "gaming",
   "key": {
-    "R": {
-      "item": "minecraft:redstone"
-    },
     "C": {
       "item": "minecraft:comparator"
-    },
-    "T": {
-      "item": "minecraft:redstone_torch"
     }
   },
   "pattern": [
-    "TRT",
-    "RCR",
-    "TRT"
+    "CCC",
+    "CCC",
+    "CCC"
   ],
   "result": {
-    "item": "gamediscs:redstone_circuit"
+    "id": "gamediscs:processor"
   }
 }

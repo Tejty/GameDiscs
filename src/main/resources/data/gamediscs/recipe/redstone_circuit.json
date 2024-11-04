@@ -7,18 +7,18 @@
       "item": "minecraft:redstone"
     },
     "C": {
-      "item": "minecraft:copper_ingot"
+      "item": "minecraft:comparator"
     },
-    "Q": {
-      "item": "minecraft:quartz"
+    "T": {
+      "item": "minecraft:redstone_torch"
     }
   },
   "pattern": [
-    "Q",
-    "R",
-    "C"
+    "TRT",
+    "RCR",
+    "TRT"
   ],
   "result": {
-    "item": "gamediscs:battery"
+    "id": "gamediscs:redstone_circuit"
   }
 }
