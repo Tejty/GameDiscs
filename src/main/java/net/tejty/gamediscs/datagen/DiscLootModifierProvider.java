@@ -33,15 +33,6 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider {
         // Define all loot tables and their drop chances using a HashMap
         Map<String, Float> lootTables = getLootTableWithChance();
 
-        // List of game discs with their corresponding item registrations
-        Map<String, Object> gameDiscs = new HashMap<>();
-        gameDiscs.put("flappy_bird", ItemRegistry.GAME_DISC_FLAPPY_BIRD.get());
-        gameDiscs.put("slime", ItemRegistry.GAME_DISC_SLIME.get());
-        gameDiscs.put("blocktris", ItemRegistry.GAME_DISC_BLOCKTRIS.get());
-        gameDiscs.put("tnt_sweeper", ItemRegistry.GAME_DISC_TNT_SWEEPER.get());
-        gameDiscs.put("pong", ItemRegistry.GAME_DISC_PONG.get());
-        gameDiscs.put("froggie", ItemRegistry.GAME_DISC_FROGGIE.get());
-
         // List of mobs that drop a disc when killed by a skeleton with their corresponding item registrations
         Map<String, Object> mobDiscs = new HashMap<>();
         mobDiscs.put("bee", ItemRegistry.GAME_DISC_FLAPPY_BIRD.get());
