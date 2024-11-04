@@ -14,7 +14,9 @@ import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
 import net.neoforged.neoforge.common.loot.LootTableIdCondition;
 import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.item.ItemRegistry;
+import net.tejty.gamediscs.util.TagRegistry;
 import net.tejty.gamediscs.util.loot.ItemModifier;
+import net.tejty.gamediscs.util.loot.ItemTagModifier;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -50,24 +52,19 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider {
         for (Map.Entry<String, Float> lootTableEntry : lootTables.entrySet()) {
             String lootTable = lootTableEntry.getKey();
             float chance = lootTableEntry.getValue();
-
-            for (Map.Entry<String, Object> gameDiscEntry : gameDiscs.entrySet()) {
-                String gameName = gameDiscEntry.getKey();
-                Object gameDisc = gameDiscEntry.getValue();
-
-                add(gameName + "_disc_from_" + lootTable, new ItemModifier(new LootItemCondition[] {
-                        new LootTableIdCondition.Builder(ResourceLocation.fromNamespaceAndPath("minecraft", lootTable)).build(),
-                        LootItemRandomChanceCondition.randomChance(chance).build()
-                }, (Item) gameDisc));
-            }
+            
+            add("disc_from_" + lootTable, new ItemTagModifier(new LootItemCondition[]{
+                    new LootTableIdCondition.Builder(ResourceLocation.fromNamespaceAndPath("minecraft", lootTable)).build(),
+                    LootItemRandomChanceCondition.randomChance(chance).build()
+            }, TagRegistry.Items.GAME_DISCS));
         }
 
         for (Map.Entry<String, Object> mobDiscEntry : mobDiscs.entrySet()) {
             String mobName = mobDiscEntry.getKey();
             Object gameDisc = mobDiscEntry.getValue();
 
-            add("mob_drops/" + mobName + "_drops_game_disc",  new ItemModifier(new LootItemCondition[]{
-                    new LootTableIdCondition.Builder(ResourceLocation.fromNamespaceAndPath("minecraft","entities/" + mobName)).build(),
+            add("mob_drops/" + mobName + "_drops_game_disc", new ItemModifier(new LootItemCondition[]{
+                    new LootTableIdCondition.Builder(ResourceLocation.fromNamespaceAndPath("minecraft", "entities/" + mobName)).build(),
                     LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.ATTACKER, EntityPredicate.Builder.entity().of(EntityTypeTags.SKELETONS).build()).build()
             }, (Item) gameDisc));
         }
@@ -75,23 +72,23 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider {
 
     private static @NotNull Map<String, Float> getLootTableWithChance() {
         Map<String, Float> lootTables = new HashMap<>();
-        lootTables.put("chests/simple_dungeon", 0.2F);
-        lootTables.put("chests/stronghold_corridor", 0.2F);
-        lootTables.put("chests/stronghold_crossing", 0.2F);
-        lootTables.put("chests/stronghold_library", 0.2F);
-        lootTables.put("chests/end_city_treasure", 0.2F);
-        lootTables.put("chests/woodland_mansion", 0.2F);
-        lootTables.put("chests/buried_treasure", 0.2F);
-        lootTables.put("chests/ruined_portal", 0.2F);
-        lootTables.put("chests/ancient_city", 0.2F);
-        lootTables.put("chests/ancient_city_ice_box", 0.2F);
-        lootTables.put("chests/abandoned_mineshaft", 0.2F);
-        lootTables.put("chests/jungle_temple", 0.2F);
-        lootTables.put("chests/desert_pyramid", 0.2F);
-        lootTables.put("chests/bastion_bridge", 0.2F);
-        lootTables.put("chests/bastion_hoglin_stable", 0.2F);
-        lootTables.put("chests/bastion_other", 0.2F);
-        lootTables.put("chests/bastion_treasure", 0.2F);
+        lootTables.put("chests/simple_dungeon", 0.1f);
+        lootTables.put("chests/stronghold_corridor", 0.1f);
+        lootTables.put("chests/stronghold_crossing", 0.1f);
+        lootTables.put("chests/stronghold_library", 0.1f);
+        lootTables.put("chests/end_city_treasure", 0.1f);
+        lootTables.put("chests/woodland_mansion", 0.1f);
+        lootTables.put("chests/buried_treasure", 0.1f);
+        lootTables.put("chests/ruined_portal", 0.1f);
+        lootTables.put("chests/ancient_city", 0.1f);
+        lootTables.put("chests/ancient_city_ice_box", 0.1f);
+        lootTables.put("chests/abandoned_mineshaft", 0.1f);
+        lootTables.put("chests/jungle_temple", 0.1f);
+        lootTables.put("chests/desert_pyramid", 0.1f);
+        lootTables.put("chests/bastion_bridge", 0.1f);
+        lootTables.put("chests/bastion_hoglin_stable", 0.1f);
+        lootTables.put("chests/bastion_other", 0.1f);
+        lootTables.put("chests/bastion_treasure", 0.1f);
         return lootTables;
     }
 }

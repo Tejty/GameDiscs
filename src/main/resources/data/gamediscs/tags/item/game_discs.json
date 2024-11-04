@@ -1,0 +1,10 @@
+{
+  "values": [
+    "gamediscs:game_disc_flappy_bird",
+    "gamediscs:game_disc_slime",
+    "gamediscs:game_disc_blocktris",
+    "gamediscs:game_disc_tnt_sweeper",
+    "gamediscs:game_disc_pong",
+    "gamediscs:game_disc_froggie"
+  ]
+}
