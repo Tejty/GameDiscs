@@ -15,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
+import java.util.Map;
 
 @ParametersAreNonnullByDefault
 public class GamingConsoleItem extends Item {
@@ -42,12 +43,13 @@ public class GamingConsoleItem extends Item {
 
     public void setBestScore(ItemStack stack, String game, int score, Player player) {
         BestScoreComponent component = stack.get(DataComponentRegistry.BEST_SCORE);
-        if (component == null) {
-            component = new BestScoreComponent(new HashMap<>(), player.getStringUUID());
-        } else if (!component.stringUUID().equals(player.getStringUUID())) {
+        // The component can be null if not present
+        if (component == null || !component.stringUUID().equals(player.getStringUUID())) {
             return;
         }
-        component.gameScores().put(game, score);
+        Map<String, Integer> scores = new HashMap<>(component.gameScores());
+        scores.put(game, score);
+        component = new BestScoreComponent(Map.copyOf(scores), component.stringUUID());
         stack.set(DataComponentRegistry.BEST_SCORE, component);
     }
 }
