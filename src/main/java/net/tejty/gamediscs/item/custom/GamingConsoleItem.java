@@ -8,6 +8,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.tejty.gamediscs.client.ClientUtils;
 import net.tejty.gamediscs.client.screen.GamingConsoleScreen;
 import net.tejty.gamediscs.component.BestScoreComponent;
 import net.tejty.gamediscs.component.DataComponentRegistry;
@@ -25,8 +28,10 @@ public class GamingConsoleItem extends Item {
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        if (level.isClientSide()) {
-            Minecraft.getInstance().setScreen(new GamingConsoleScreen(Component.translatable("gui.gamingconsole.title")));
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            if (level.isClientSide()) {
+                ClientUtils.openConsoleScreen();
+            }
         }
 
         return super.use(level, player, hand);

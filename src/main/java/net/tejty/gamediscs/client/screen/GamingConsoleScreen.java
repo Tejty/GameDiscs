@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.tejty.gamediscs.GameDiscsMod;
+import net.tejty.gamediscs.client.ClientUtils;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.games.util.Game;
 import net.tejty.gamediscs.item.custom.GameDiscItem;
@@ -15,7 +16,9 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class GamingConsoleScreen extends Screen {
@@ -191,18 +194,17 @@ public class GamingConsoleScreen extends Screen {
      */
     public List<Game> scanForGames() {
         // Creating the list of the games
-        List<Game> games = new ArrayList<>();
-        Player player = Minecraft.getInstance().player;
+        Map<GameDiscItem, Game> games = new IdentityHashMap<>();
+        Player player = Objects.requireNonNull(Minecraft.getInstance().player);
 
         // Going through each slot of player's inventory
-        for (int i = 0; i < Objects.requireNonNull(player).getInventory().getContainerSize(); i++) {
+        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
             // If the item is GameDisc, it adds it to the list
             if (player.getInventory().getItem(i).getItem() instanceof GameDiscItem disc) {
-                games.removeIf((game) -> game.getClass().equals(disc.getGame().getClass()));
-                games.add(disc.getGame());
+                games.computeIfAbsent(disc, ClientUtils::newGameFor);
             }
         }
-        return games;
+        return new ArrayList<>(games.values());
     }
 
     // Main method for pressed keys

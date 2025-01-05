@@ -8,7 +8,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.tejty.gamediscs.GameDiscsMod;
-import net.tejty.gamediscs.games.gamediscs.*;
 import net.tejty.gamediscs.item.custom.GameDiscItem;
 import net.tejty.gamediscs.item.custom.GamingConsoleItem;
 
@@ -18,19 +17,19 @@ public class ItemRegistry {
     public static final DeferredItem<Item> GAMING_CONSOLE = ITEMS.register("gaming_console",
             () -> new GamingConsoleItem(new Item.Properties().rarity(Rarity.UNCOMMON)));
     public static final DeferredItem<Item> GAME_DISC_FLAPPY_BIRD = ITEMS.register("game_disc_flappy_bird",
-            () -> new GameDiscItem(new Item.Properties().rarity(Rarity.RARE), FlappyBirdGame::new, Component.translatable("gamediscs.flappy_bird").withStyle(ChatFormatting.YELLOW)));
+            () -> new GameDiscItem(new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.flappy_bird").withStyle(ChatFormatting.YELLOW)));
     public static final DeferredItem<Item> GAME_DISC_SLIME = ITEMS.register("game_disc_slime", () -> new GameDiscItem(
-                    new Item.Properties().rarity(Rarity.RARE), SlimeGame::new, Component.translatable("gamediscs.slime").withStyle(ChatFormatting.DARK_GREEN)));
+                    new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.slime").withStyle(ChatFormatting.DARK_GREEN)));
     public static final DeferredItem<Item> GAME_DISC_BLOCKTRIS = ITEMS.register("game_disc_blocktris", () -> new GameDiscItem(
-                    new Item.Properties().rarity(Rarity.RARE), BlocktrisGame::new, Component.translatable("gamediscs.blocktris").withStyle(ChatFormatting.BLUE)));
+                    new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.blocktris").withStyle(ChatFormatting.BLUE)));
     public static final DeferredItem<Item> GAME_DISC_TNT_SWEEPER = ITEMS.register("game_disc_tnt_sweeper", () -> new GameDiscItem(
-                    new Item.Properties().rarity(Rarity.RARE), TntSweeperGame::new, Component.translatable("gamediscs.tnt_sweeper").withStyle(ChatFormatting.RED)));
+                    new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.tnt_sweeper").withStyle(ChatFormatting.RED)));
     public static final DeferredItem<Item> GAME_DISC_PONG = ITEMS.register("game_disc_pong", () -> new GameDiscItem(
-                    new Item.Properties().rarity(Rarity.RARE), PongGame::new, Component.translatable("gamediscs.pong_game").withStyle(ChatFormatting.WHITE)));
+                    new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.pong_game").withStyle(ChatFormatting.WHITE)));
     public static final DeferredItem<Item> GAME_DISC_FROGGIE = ITEMS.register("game_disc_froggie", () -> new GameDiscItem(
-                    new Item.Properties().rarity(Rarity.RARE), FroggieGame::new, Component.translatable("gamediscs.froggie").withStyle(ChatFormatting.GREEN)));
+                    new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.froggie").withStyle(ChatFormatting.GREEN)));
     // public static final DeferredItem<Item> GAME_DISC_RABBIT = ITEMS.register("game_disc_rabbit", () -> new GameDiscItem(
-    //                new Item.Properties().rarity(Rarity.RARE), RabbitGame::new, Component.translatable("gamediscs.rabbit").withStyle(ChatFormatting.GOLD))); //TODO translation missing
+    //                new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.rabbit").withStyle(ChatFormatting.GOLD))); //TODO translation missing
 
 
 
