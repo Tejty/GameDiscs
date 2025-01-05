@@ -61,7 +61,7 @@ public class Game {
      * Resets all variables and prepares for start
      */
     
-    public synchronized void prepare() {
+    public void prepare() {
         score = 0;
         lives = maxLives();
         respawn();
@@ -71,7 +71,7 @@ public class Game {
      * Starts the game
      */
     
-    public synchronized void start() {
+    public void start() {
         stage = GameStage.PLAYING;
         ticks = 1;
     }
@@ -80,7 +80,7 @@ public class Game {
      * Stops the game, shows die screen, and sets the best score
      */
     
-    public synchronized void die() {
+    public void die() {
         if (getConsole().getItem() instanceof GamingConsoleItem) {
             // Tries to set the best score
             String gameName = this.getClass().getName().substring(this.getClass().getPackageName().length() + 1);
@@ -98,7 +98,7 @@ public class Game {
         ticks = 1;
     }
 
-    public synchronized void lostLife() {
+    public void lostLife() {
         lives--;
         soundPlayer.play(SoundRegistry.EXPLOSION.get());
         respawn();
@@ -107,7 +107,7 @@ public class Game {
         }
     }
 
-    public synchronized void respawn() {
+    public void respawn() {
         stage = GameStage.START;
         ticks = 1;
         particles.clear();
@@ -117,7 +117,7 @@ public class Game {
      * Stops the game, shows win screen, and sets the best score
      */
     
-    public synchronized void win() {
+    public void win() {
         soundPlayer.playNewBest();
         spawnConfetti();
         if (getConsole().getItem() instanceof GamingConsoleItem) {
@@ -161,7 +161,7 @@ public class Game {
      * Updates everything by one tick
      */
     
-    public synchronized void tick() {
+    public void tick() {
         // Calls gameTick depending on game stage and game tick duration
         if (stage == GameStage.PLAYING && ticks % gameTickDuration() == 0) {
             gameTick();
@@ -185,7 +185,7 @@ public class Game {
      * Updates everything in game by one tick
      */
     
-    public synchronized void gameTick() {
+    public void gameTick() {
     }
 
     /**
@@ -195,7 +195,7 @@ public class Game {
      * @param posY Y position of the game area
      */
     
-    public synchronized void render(GuiGraphics graphics, int posX, int posY) {
+    public void render(GuiGraphics graphics, int posX, int posY) {
         // Renders background
         if (getBackground() != null) {
             graphics.blit(getBackground(), posX, posY, 0, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
@@ -211,7 +211,7 @@ public class Game {
      * @param posY Y position
      */
     
-    public synchronized void renderOverlay(GuiGraphics graphics, int posX, int posY) {
+    public void renderOverlay(GuiGraphics graphics, int posX, int posY) {
         // saving font
         Font font = Minecraft.getInstance().font;
 
@@ -350,7 +350,7 @@ public class Game {
     }
 
     
-    public synchronized void renderParticles(GuiGraphics graphics, int posX, int posY) {
+    public void renderParticles(GuiGraphics graphics, int posX, int posY) {
         for (Particle particle : particles) {
             particle.render(graphics, posX, posY, stage);
         }
@@ -361,7 +361,7 @@ public class Game {
      * @param button The button that was pressed
      */
     
-    public synchronized void buttonDown(Button button) {
+    public void buttonDown(Button button) {
         soundPlayer.playClick(true);
         // Starts the game
         if ((stage == GameStage.START || stage == GameStage.RETRY) && ticks > 8) {
@@ -411,7 +411,7 @@ public class Game {
      * @param button The button that was released
      */
     
-    public synchronized void buttonUp(Button button) {
+    public void buttonUp(Button button) {
         soundPlayer.playClick(false);
     }
 

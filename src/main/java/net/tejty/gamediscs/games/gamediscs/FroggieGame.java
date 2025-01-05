@@ -63,7 +63,7 @@ public class FroggieGame extends Game {
     }
 
     @Override
-    public synchronized void prepare() {
+    public void prepare() {
         isHoleFull = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             isHoleFull.add(false);
@@ -320,7 +320,7 @@ public class FroggieGame extends Game {
     }
 
     @Override
-    public synchronized void respawn() {
+    public void respawn() {
         super.respawn();
 
         frog.setPos(new Vec2((float) WIDTH / 2 - (float) TILE_SIZE / 2, 13 * TILE_SIZE));
@@ -333,7 +333,7 @@ public class FroggieGame extends Game {
     }
 
     @Override
-    public synchronized void start() {
+    public void start() {
 
         // Calls start of super
         super.start();
@@ -342,7 +342,7 @@ public class FroggieGame extends Game {
         // here
     }
     @Override
-    public synchronized void tick() {
+    public void tick() {
         // Calls tick of super
         super.tick();
 
@@ -350,7 +350,7 @@ public class FroggieGame extends Game {
         // here
     }
     @Override
-    public synchronized void gameTick() {
+    public void gameTick() {
         // Calls game tick of super
         super.gameTick();
 
@@ -476,7 +476,7 @@ public class FroggieGame extends Game {
     }
 
     @Override
-    public synchronized void die() {
+    public void die() {
         // Calling die of super
         super.die();
 
@@ -491,7 +491,7 @@ public class FroggieGame extends Game {
     }
 
     @Override
-    public synchronized void render(GuiGraphics graphics, int posX, int posY) {
+    public void render(GuiGraphics graphics, int posX, int posY) {
         // Calls render of super
         super.render(graphics, posX, posY);
 
@@ -535,7 +535,7 @@ public class FroggieGame extends Game {
         renderOverlay(graphics, posX, posY);
     }
     @Override
-    public synchronized void buttonDown(Button button) {
+    public void buttonDown(Button button) {
         // Calls buttonDown of super
         super.buttonDown(button);
 

@@ -14,7 +14,6 @@ import net.tejty.gamediscs.games.util.Game;
 import net.tejty.gamediscs.item.custom.GameDiscItem;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -69,16 +68,14 @@ public class GamingConsoleScreen extends Screen {
 
         // Scans for games in player's inventory
         availableGames = scanForGames();
+    }
 
-        // Creates timer that calls tick() in Game every 50ms (20 times per second)
-        Timer timer = new Timer(50, e -> {
-            if (game != null) {
-                game.tick();
-            }
-        });
-
-        // Starts the timer
-        timer.start();
+    @Override
+    public void tick() {
+        // Calls tick() in Game every 50ms (20 times per second)
+        if (game != null) {
+            game.tick();
+        }
     }
 
     // This screen doesn't pause the game when opened

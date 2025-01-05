@@ -59,7 +59,7 @@ public class SlimeGame extends Game {
         super();
     }
     @Override
-    public synchronized void prepare() {
+    public void prepare() {
         // Calls prepare of super
         super.prepare();
 
@@ -73,7 +73,7 @@ public class SlimeGame extends Game {
         respawnApple();
     }
     @Override
-    public synchronized void start() {
+    public void start() {
         // Calls start of super
         super.start();
 
@@ -81,7 +81,7 @@ public class SlimeGame extends Game {
         direction = VecUtil.VEC_RIGHT;
     }
     @Override
-    public synchronized void gameTick() {
+    public void gameTick() {
         // Calls game tick of super
         super.gameTick();
 
@@ -128,7 +128,7 @@ public class SlimeGame extends Game {
         addParticle(new Particle(calcPos(slime.getFirst().add(VecUtil.randomFloat(Vec2.ZERO, new Vec2(1, 1), random))), new BreakParticleRenderer(BODY, 8, 8), random.nextInt(20, 50), ParticleLevel.RUNNING_GAME));
     }
     @Override
-    public synchronized void render(GuiGraphics graphics, int posX, int posY) {
+    public void render(GuiGraphics graphics, int posX, int posY) {
         // Calls render of super
         super.render(graphics, posX, posY);
 
@@ -219,7 +219,7 @@ public class SlimeGame extends Game {
         return tile.scale(TILE_SIZE).add(GAME_POS);
     }
     @Override
-    public synchronized void buttonDown(Button button) {
+    public void buttonDown(Button button) {
         // Calls button down of super
         super.buttonDown(button);
 

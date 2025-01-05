@@ -15,7 +15,7 @@ public class ExampleGame extends Game {
     }
 
     @Override
-    public synchronized void prepare() {
+    public void prepare() {
         // Calls prepare of super
         super.prepare();
 
@@ -24,7 +24,7 @@ public class ExampleGame extends Game {
     }
 
     @Override
-    public synchronized void start() {
+    public void start() {
         // Calls start of super
         super.start();
 
@@ -32,7 +32,7 @@ public class ExampleGame extends Game {
         // here
     }
     @Override
-    public synchronized void tick() {
+    public void tick() {
         // Calls tick of super
         super.tick();
 
@@ -40,7 +40,7 @@ public class ExampleGame extends Game {
         // here
     }
     @Override
-    public synchronized void gameTick() {
+    public void gameTick() {
         // Calls game tick of super
         super.gameTick();
 
@@ -50,7 +50,7 @@ public class ExampleGame extends Game {
     }
 
     @Override
-    public synchronized void die() {
+    public void die() {
         // Calling die of super
         super.die();
 
@@ -60,7 +60,7 @@ public class ExampleGame extends Game {
     }
 
     @Override
-    public synchronized void render(GuiGraphics graphics, int posX, int posY) {
+    public void render(GuiGraphics graphics, int posX, int posY) {
         // Calls render of super
         super.render(graphics, posX, posY);
 
@@ -75,7 +75,7 @@ public class ExampleGame extends Game {
         renderOverlay(graphics, posX, posY);
     }
     @Override
-    public synchronized void buttonDown(Button button) {
+    public void buttonDown(Button button) {
         // Calls buttonDown of super
         super.buttonDown(button);
 
