@@ -45,7 +45,7 @@ public class BlocktrisGame extends Game {
     }
 
     @Override
-    public synchronized void prepare() {
+    public void prepare() {
         super.prepare();
 
         grid = new Grid(
@@ -68,7 +68,7 @@ public class BlocktrisGame extends Game {
     }
 
     @Override
-    public synchronized void start() {
+    public void start() {
         super.start();
         for (int i = 0; i < 3; i++) {
             int type = random.nextInt(0, 7);
@@ -86,7 +86,7 @@ public class BlocktrisGame extends Game {
     }
 
     @Override
-    public synchronized void gameTick() {
+    public void gameTick() {
         if (piece.move(0, 1)) {
             placePiece();
         }
@@ -98,7 +98,7 @@ public class BlocktrisGame extends Game {
     }
 
     @Override
-    public synchronized void render(GuiGraphics graphics, int posX, int posY) {
+    public void render(GuiGraphics graphics, int posX, int posY) {
         super.render(graphics, posX, posY);
 
         grid.render(graphics, posX + 45, posY - 15);
@@ -129,7 +129,7 @@ public class BlocktrisGame extends Game {
     }
 
     @Override
-    public synchronized void buttonDown(Button button) {
+    public void buttonDown(Button button) {
         super.buttonDown(button);
         if (stage == GameStage.PLAYING && ticks > 5) {
             if (button == Button.UP) {
@@ -179,7 +179,7 @@ public class BlocktrisGame extends Game {
     }
 
     @Override
-    public synchronized void tick() {
+    public void tick() {
         super.tick();
         if (stage == GameStage.PLAYING && ticks % 2 == 0) {
             if (controls.isButtonDown(Button.LEFT) && controls.wasButtonDown(Button.LEFT)) {

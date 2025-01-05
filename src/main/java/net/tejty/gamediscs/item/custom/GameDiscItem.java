@@ -8,21 +8,14 @@ import net.tejty.gamediscs.games.util.Game;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
-import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
 public class GameDiscItem extends Item {
-    private final Supplier<Game> gameSupplier;
     private final Component name;
 
-    public GameDiscItem(Properties pProperties, Supplier<Game> gameSupplier, Component name) {
+    public GameDiscItem(Properties pProperties, Component name) {
         super(pProperties.stacksTo(1));
-        this.gameSupplier = gameSupplier;
         this.name = name;
-    }
-
-    public Game getGame() {
-        return gameSupplier.get();
     }
 
     @Override

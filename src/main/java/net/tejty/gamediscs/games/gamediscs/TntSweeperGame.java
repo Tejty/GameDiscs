@@ -87,7 +87,7 @@ public class TntSweeperGame extends Game {
         super();
     }
     @Override
-    public synchronized void prepare() {
+    public void prepare() {
         // Calls prepare of super
         super.prepare();
 
@@ -97,7 +97,7 @@ public class TntSweeperGame extends Game {
     }
 
     @Override
-    public synchronized void start() {
+    public void start() {
         // Calls start of super
         super.start();
 
@@ -116,13 +116,13 @@ public class TntSweeperGame extends Game {
         }
     }
     @Override
-    public synchronized void gameTick() {
+    public void gameTick() {
         // Calls game tick of super
         super.gameTick();
     }
 
     @Override
-    public synchronized void tick() {
+    public void tick() {
         super.tick();
 
         if ((stage == GameStage.PLAYING || stage == GameStage.START) && ticks % 2 == 0) {
@@ -144,7 +144,7 @@ public class TntSweeperGame extends Game {
     }
 
     @Override
-    public synchronized void render(GuiGraphics graphics, int posX, int posY) {
+    public void render(GuiGraphics graphics, int posX, int posY) {
         // Calls render of super
         super.render(graphics, posX, posY);
 
@@ -187,7 +187,7 @@ public class TntSweeperGame extends Game {
     }
 
     @Override
-    public synchronized void buttonDown(Button button) {
+    public void buttonDown(Button button) {
         soundPlayer.playClick(true);
 
         // Prepares the game
@@ -263,7 +263,7 @@ public class TntSweeperGame extends Game {
     }
 
     @Override
-    public synchronized void die() {
+    public void die() {
         super.die();
 
         for (Vec2 bomb : bombs) {
