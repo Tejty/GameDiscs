@@ -1,0 +1,51 @@
+{
+  "creativetab.game_discs_tab": "Cartouche de Jeux",
+
+
+  "gamediscs.flappy_bird": "Flappy bee",
+  "gamediscs.slime": "Slime",
+  "gamediscs.blocktris": "Bloctris",
+  "gamediscs.tnt_sweeper": "Tnt Sweeper",
+  "gamediscs.pong": "Pong",
+  "gamediscs.froggie": "Froggie",
+  "gamediscs.pong_game": "Pong",
+
+
+  "item.gamediscs.gaming_console": "Console de jeux",
+  "item.gamediscs.redstone_circuit": "Circuit de Redstone",
+  "item.gamediscs.processor": "Processeur",
+  "item.gamediscs.battery": "Batterie",
+  "item.gamediscs.display": "Écran",
+  "item.gamediscs.control_pad": "Control Pad",
+  "item.gamediscs.game_disc_flappy_bird": "Disque de jeu",
+  "item.gamediscs.game_disc_slime": "Disque de jeu",
+  "item.gamediscs.game_disc_blocktris": "Disque de jeu",
+  "item.gamediscs.game_disc_tnt_sweeper": "Disque de jeu",
+  "item.gamediscs.game_disc_pong": "Disque de jeu",
+  "item.gamediscs.game_disc_froggie": "Disque de jeu",
+
+
+  "gui.gamingconsole.title": "Console de jeux",
+  "gui.gamingconsole.press_any_key": "Toucher n'importe quelle touch",
+  "gui.gamingconsole.select_game": "choisir un jeu",
+  "gui.gamingconsole.score": "Score",
+  "gui.gamingconsole.best_score": "Meilleur",
+  "gui.gamingconsole.new_best_score": "Nouveaux meilleur",
+  "gui.gamingconsole.won": "Vous avez gagné!",
+  "gui.gamingconsole.died": "Vous avez Perdue!",
+  "gui.gamingconsole.hold": "Maintenir",
+  "gui.gamingconsole.next": "Suivant",
+
+
+  "sounds.gamediscs.jump": "Console de jeux - Sauter",
+  "sounds.gamediscs.click": "Console de jeux - Boutton Cliquer",
+  "sounds.gamediscs.point": "Console de jeux - Point",
+  "sounds.gamediscs.new_best": "Console de jeux - Nouveaux meilleur",
+  "sounds.gamediscs.game_over": "Console de jeux - Game Over",
+  "sounds.gamediscs.select": "Console de jeux - Select",
+  "sounds.gamediscs.confirm": "Console de jeux - Confirmer",
+  "sounds.gamediscs.explosion": "Console de jeux - Explosion",
+  "sounds.gamediscs.shoot": "Console de jeux - Tirer",
+  "sounds.gamediscs.swing": "Console de jeux - balayer",
+  "sounds.gamediscs.switch": "Console de jeux - Changer"
+}
