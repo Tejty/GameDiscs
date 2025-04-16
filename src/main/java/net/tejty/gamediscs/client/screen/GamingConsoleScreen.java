@@ -7,6 +7,8 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.games.util.Game;
 import net.tejty.gamediscs.games.controls.Button;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@OnlyIn(Dist.CLIENT)
 public class GamingConsoleScreen extends Screen {
     private static final ResourceLocation BACKGROUD = new ResourceLocation(GameDiscsMod.MOD_ID, "textures/gui/gaming_console.png");
     private static final int CONSOLE_WIDTH = 160;
