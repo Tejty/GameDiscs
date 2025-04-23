@@ -1,6 +1,5 @@
 package net.tejty.gamediscs.item.custom;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -9,7 +8,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.tejty.gamediscs.client.screen.GamingConsoleScreen;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
+
+import java.util.function.Supplier;
 
 public class GamingConsoleItem extends Item {
     public GamingConsoleItem(Properties properties) {
@@ -19,10 +21,28 @@ public class GamingConsoleItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (level.isClientSide()) {
-            Minecraft.getInstance().setScreen(new GamingConsoleScreen(Component.translatable("gui.gamingconsole.title")));
+            DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> () -> {
+                // 使用 Supplier 延迟加载 GamingConsoleScreen
+                getScreenSetter().get().run(Component.translatable("gui.gamingconsole.title"));
+            });
         }
-
         return super.use(level, player, hand);
+    }
+
+    private static Supplier<ScreenSetter> screenSetter;
+
+    private static Supplier<ScreenSetter> getScreenSetter() {
+        if (screenSetter == null) {
+            screenSetter = () -> (title) -> net.minecraft.client.Minecraft.getInstance().setScreen(
+                    new net.tejty.gamediscs.client.screen.GamingConsoleScreen(title)
+            );
+        }
+        return screenSetter;
+    }
+
+    @FunctionalInterface
+    private interface ScreenSetter {
+        void run(Component title);
     }
 
     public void setBestScore(ItemStack stack, String game, int score, Player player) {
