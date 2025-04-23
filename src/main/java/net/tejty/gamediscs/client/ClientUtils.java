@@ -28,8 +28,7 @@ public class ClientUtils {
         GAMES.put(ItemRegistry.GAME_DISC_TNT_SWEEPER.get(), TntSweeperGame::new);
         GAMES.put(ItemRegistry.GAME_DISC_PONG.get(), PongGame::new);
         GAMES.put(ItemRegistry.GAME_DISC_FROGGIE.get(), FroggieGame::new);
-        // TODO
-        //GAMES.put(ItemRegistry.GAME_DISC_RABBIT.get(), RabbitGame::new);
+        GAMES.put(ItemRegistry.GAME_DISC_RABBIT.get(), RabbitGame::new);
     }
 
     public static Game newGameFor(GameDiscItem item) {
