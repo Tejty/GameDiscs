@@ -6,6 +6,7 @@ import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.sounds.SoundEvent;
 import net.tejty.gamediscs.sounds.SoundRegistry;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class SoundPlayer {
@@ -13,7 +14,7 @@ public class SoundPlayer {
     private final Random random;
 
     public SoundPlayer() {
-        manager = Minecraft.getInstance().getSoundManager();
+        manager = Objects.requireNonNull(Minecraft.getInstance().getSoundManager());
         random = new Random();
     }
 

@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.tejty.gamediscs.GameDiscsMod;
+import net.tejty.gamediscs.client.ClientUtils;
 import net.tejty.gamediscs.games.util.Game;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.item.custom.GameDiscItem;
@@ -201,18 +202,18 @@ public class GamingConsoleScreen extends Screen {
     public List<Game> scanForGames() {
         // Creating the list of the games
         List<Game> games = new ArrayList<>();
-        Player player = Minecraft.getInstance().player;
+        Player player = Objects.requireNonNull(Minecraft.getInstance().player);
 
         // Going through each slot of player's inventory
-        for (int i = 0; i < Objects.requireNonNull(player).getInventory().getContainerSize(); i++) {
-            // If the item is GameDisc, it adds it to the list
+        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+            // If the item is GameDisc, it creates the Game and adds it to the list
             if (player.getInventory().getItem(i).getItem() instanceof GameDiscItem disc) {
-                games.removeIf((game) -> game.getClass().equals(disc.getGame().getClass()));
-                games.add(disc.getGame());
+                games.add(ClientUtils.newGameFor(disc));
             }
         }
         return games;
     }
+
 
     // Main method for pressed keys
     @Override

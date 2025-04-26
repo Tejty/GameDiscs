@@ -5,6 +5,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec2;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.games.graphics.AnimatedImage;
 import net.tejty.gamediscs.games.graphics.BreakParticleRenderer;
@@ -14,6 +16,7 @@ import net.tejty.gamediscs.games.controls.Button;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class FlappyBirdGame extends Game {
     // The main player Sprite
     private Sprite bird = new Sprite(new Vec2(20, 30), new Vec2(10, 8),

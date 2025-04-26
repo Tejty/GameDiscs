@@ -9,7 +9,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.tejty.gamediscs.client.ClientUtils;
 
 import java.util.function.Supplier;
 
@@ -20,24 +21,12 @@ public class GamingConsoleItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        if (level.isClientSide()) {
-            DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> () -> {
-                // Using Supplier to lazy load GamingConsoleScreen
-                getScreenSetter().get().run(Component.translatable("gui.gamingconsole.title"));
-            });
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            if (level.isClientSide()) {
+                ClientUtils.openConsoleScreen();
+            }
         }
         return super.use(level, player, hand);
-    }
-
-    private static Supplier<ScreenSetter> screenSetter;
-
-    private static Supplier<ScreenSetter> getScreenSetter() {
-        if (screenSetter == null) {
-            screenSetter = () -> (title) -> net.minecraft.client.Minecraft.getInstance().setScreen(
-                    new net.tejty.gamediscs.client.screen.GamingConsoleScreen(title)
-            );
-        }
-        return screenSetter;
     }
 
     @FunctionalInterface
