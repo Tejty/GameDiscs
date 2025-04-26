@@ -28,6 +28,7 @@ public class DiscLootTablesModifiers {
         mobDiscs.put("bee", ItemRegistry.GAME_DISC_FLAPPY_BIRD);
         mobDiscs.put("slime", ItemRegistry.GAME_DISC_SLIME);
         mobDiscs.put("frog", ItemRegistry.GAME_DISC_FROGGIE);
+        mobDiscs.put("rabbit", ItemRegistry.GAME_DISC_RABBIT);
 
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
             // Loop over each loot table and game disc, generating the necessary modifiers
@@ -59,25 +60,27 @@ public class DiscLootTablesModifiers {
         });
     }
 
+    private static float chance = 0.3f;
+
     private static @NotNull Map<String, Float> getLootTableWithChance() {
         Map<String, Float> lootTables = new HashMap<>();
-        lootTables.put("chests/simple_dungeon", 0.1f);
-        lootTables.put("chests/stronghold_corridor", 0.1f);
-        lootTables.put("chests/stronghold_crossing", 0.1f);
-        lootTables.put("chests/stronghold_library", 0.1f);
-        lootTables.put("chests/end_city_treasure", 0.1f);
-        lootTables.put("chests/woodland_mansion", 0.1f);
-        lootTables.put("chests/buried_treasure", 0.1f);
-        lootTables.put("chests/ruined_portal", 0.1f);
-        lootTables.put("chests/ancient_city", 0.1f);
-        lootTables.put("chests/ancient_city_ice_box", 0.1f);
-        lootTables.put("chests/abandoned_mineshaft", 0.1f);
-        lootTables.put("chests/jungle_temple", 0.1f);
-        lootTables.put("chests/desert_pyramid", 0.1f);
-        lootTables.put("chests/bastion_bridge", 0.1f);
-        lootTables.put("chests/bastion_hoglin_stable", 0.1f);
-        lootTables.put("chests/bastion_other", 0.1f);
-        lootTables.put("chests/bastion_treasure", 0.1f);
+        lootTables.put("chests/simple_dungeon", chance);
+        lootTables.put("chests/stronghold_corridor", chance);
+        lootTables.put("chests/stronghold_crossing", chance);
+        lootTables.put("chests/stronghold_library", chance);
+        lootTables.put("chests/end_city_treasure", chance);
+        lootTables.put("chests/woodland_mansion", chance);
+        lootTables.put("chests/buried_treasure", chance);
+        lootTables.put("chests/ruined_portal", chance);
+        lootTables.put("chests/ancient_city", chance);
+        lootTables.put("chests/ancient_city_ice_box", chance);
+        lootTables.put("chests/abandoned_mineshaft", chance);
+        lootTables.put("chests/jungle_temple", chance);
+        lootTables.put("chests/desert_pyramid", chance);
+        lootTables.put("chests/bastion_bridge", chance);
+        lootTables.put("chests/bastion_hoglin_stable", chance);
+        lootTables.put("chests/bastion_other", chance);
+        lootTables.put("chests/bastion_treasure", chance);
         return lootTables;
     }
 }

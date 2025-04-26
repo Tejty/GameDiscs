@@ -1,18 +1,14 @@
 package net.tejty.gamediscs.item.custom;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import net.tejty.gamediscs.GameDiscsMod;
-import net.tejty.gamediscs.client.screen.GamingConsoleScreen;
+import net.tejty.gamediscs.client.ClientUtils;
 
 public class GamingConsoleItem extends Item {
     public GamingConsoleItem(Settings properties) {
@@ -21,7 +17,7 @@ public class GamingConsoleItem extends Item {
 
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (world.isClient()) {
-            MinecraftClient.getInstance().setScreen(new GamingConsoleScreen(Text.translatable("gui.gamingconsole.title")));
+            ClientUtils.openConsoleScreen();
         }
 
         return super.use(world, user, hand);
