@@ -2,6 +2,7 @@
   "entries": [
     "gamediscs:disc_from_chests/woodland_mansion",
     "gamediscs:disc_from_chests/buried_treasure",
+    "gamediscs:mob_drops/rabbit_drops_game_disc",
     "gamediscs:mob_drops/bee_drops_game_disc",
     "gamediscs:mob_drops/slime_drops_game_disc",
     "gamediscs:disc_from_chests/stronghold_crossing",
