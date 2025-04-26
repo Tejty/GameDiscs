@@ -6,9 +6,9 @@
   "gamediscs.slime": "Slime",
   "gamediscs.blocktris": "Blocktris",
   "gamediscs.tnt_sweeper": "Tnt Sweeper",
-  "gamediscs.pong": "Pong",
-  "gamediscs.froggie": "Froggie",
   "gamediscs.pong_game": "Pong",
+  "gamediscs.froggie": "Froggie",
+  "gamediscs.rabbit": "Rabbit",
 
 
   "item.gamediscs.gaming_console": "Gaming Console",
@@ -23,6 +23,7 @@
   "item.gamediscs.game_disc_tnt_sweeper": "Game Disc",
   "item.gamediscs.game_disc_pong": "Game Disc",
   "item.gamediscs.game_disc_froggie": "Game Disc",
+  "item.gamediscs.game_disc_rabbit": "Game Disc",
 
 
   "gui.gamingconsole.title": "Gaming Console",

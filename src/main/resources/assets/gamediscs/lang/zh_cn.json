@@ -1,0 +1,52 @@
+{
+  "creativetab.game_discs_tab": "游戏光碟",
+
+
+  "gamediscs.flappy_bird": "飞翔的蜜蜂",
+  "gamediscs.slime": "贪吃史莱姆",
+  "gamediscs.blocktris": "俄罗斯“方”块",
+  "gamediscs.tnt_sweeper": "TNT扫雷",
+  "gamediscs.pong_game": "方块乒乓球",
+  "gamediscs.froggie": "青蛙过水沟",
+  "gamediscs.rabbit": "兔子漫步者",
+
+
+  "item.gamediscs.gaming_console": "游戏掌机",
+  "item.gamediscs.redstone_circuit": "红石电路板",
+  "item.gamediscs.processor": "处理器",
+  "item.gamediscs.battery": "电池",
+  "item.gamediscs.display": "屏幕",
+  "item.gamediscs.control_pad": "控制器",
+  "item.gamediscs.game_disc_flappy_bird": "游戏光碟",
+  "item.gamediscs.game_disc_slime": "游戏光碟",
+  "item.gamediscs.game_disc_blocktris": "游戏光碟",
+  "item.gamediscs.game_disc_tnt_sweeper": "游戏光碟",
+  "item.gamediscs.game_disc_pong": "游戏光碟",
+  "item.gamediscs.game_disc_froggie": "游戏光碟",
+  "item.gamediscs.game_disc_rabbit": "游戏光碟",
+
+
+  "gui.gamingconsole.title": "游戏掌机",
+  "gui.gamingconsole.press_any_key": "请按下任意键",
+  "gui.gamingconsole.select_game": "游戏选择",
+  "gui.gamingconsole.score": "得分",
+  "gui.gamingconsole.best_score": "最佳",
+  "gui.gamingconsole.new_best_score": "新纪录",
+  "gui.gamingconsole.won": "你赢了！",
+  "gui.gamingconsole.died": "你输了！",
+  "gui.gamingconsole.hold": "暂存",
+  "gui.gamingconsole.next": "下一个",
+
+
+  "sounds.gamediscs.jump": "游戏掌机 - 跳跃",
+  "sounds.gamediscs.click": "游戏掌机 - 按下按钮",
+  "sounds.gamediscs.point": "游戏掌机 - 得分",
+  "sounds.gamediscs.new_best": "游戏掌机 - 新记录",
+  "sounds.gamediscs.game_over": "游戏掌机 - 游戏结束",
+  "sounds.gamediscs.select": "游戏掌机 - 选择",
+  "sounds.gamediscs.confirm": "游戏掌机 - 确认",
+  "sounds.gamediscs.explosion": "游戏掌机 - 爆炸",
+  "sounds.gamediscs.shoot": "游戏掌机 - 咻",
+  "sounds.gamediscs.swing": "游戏掌机 - 旋转",
+  "sounds.gamediscs.switch": "游戏掌机 - 切换"
+}

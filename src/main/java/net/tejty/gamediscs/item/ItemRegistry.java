@@ -28,10 +28,8 @@ public class ItemRegistry {
                     new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.pong_game").withStyle(ChatFormatting.WHITE)));
     public static final DeferredItem<Item> GAME_DISC_FROGGIE = ITEMS.register("game_disc_froggie", () -> new GameDiscItem(
                     new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.froggie").withStyle(ChatFormatting.GREEN)));
-    // public static final DeferredItem<Item> GAME_DISC_RABBIT = ITEMS.register("game_disc_rabbit", () -> new GameDiscItem(
-    //                new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.rabbit").withStyle(ChatFormatting.GOLD))); //TODO translation missing
-
-
+    public static final DeferredItem<Item> GAME_DISC_RABBIT = ITEMS.register("game_disc_rabbit", () -> new GameDiscItem(
+                    new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.rabbit").withStyle(ChatFormatting.GOLD)));
 
     public static final DeferredItem<Item> REDSTONE_CIRCUIT = ITEMS.register("redstone_circuit",
             () -> new Item(new Item.Properties()));
@@ -43,7 +41,6 @@ public class ItemRegistry {
             () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> CONTROL_PAD = ITEMS.register("control_pad",
             () -> new Item(new Item.Properties()));
-
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
