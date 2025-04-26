@@ -22,7 +22,7 @@ public class GamingConsoleItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (level.isClientSide()) {
             DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> () -> {
-                // 使用 Supplier 延迟加载 GamingConsoleScreen
+                // Using Supplier to lazy load GamingConsoleScreen
                 getScreenSetter().get().run(Component.translatable("gui.gamingconsole.title"));
             });
         }
