@@ -17,28 +17,20 @@ public class ItemRegistry {
             new GamingConsoleItem(new Item.Settings().rarity(Rarity.UNCOMMON)));
 
     public static final Item GAME_DISC_FLAPPY_BIRD = registerItem("game_disc_flappy_bird",
-            new GameDiscItem(new Item.Settings().rarity(Rarity.RARE), FlappyBirdGame::new,
-                    Text.translatable("gamediscs.flappy_bird").formatted(Formatting.YELLOW)));
-
+            new GameDiscItem(new Item.Settings().rarity(Rarity.RARE), Text.translatable("gamediscs.flappy_bird").formatted(Formatting.YELLOW)));
     public static final Item GAME_DISC_SLIME = registerItem("game_disc_slime",
-            new GameDiscItem(new Item.Settings().rarity(Rarity.RARE), SlimeGame::new,
-                    Text.translatable("gamediscs.slime").formatted(Formatting.DARK_GREEN)));
-
+            new GameDiscItem(new Item.Settings().rarity(Rarity.RARE), Text.translatable("gamediscs.slime").formatted(Formatting.DARK_GREEN)));
     public static final Item GAME_DISC_BLOCKTRIS = registerItem("game_disc_blocktris",
-            new GameDiscItem(new Item.Settings().rarity(Rarity.RARE), BlocktrisGame::new,
-                    Text.translatable("gamediscs.blocktris").formatted(Formatting.BLUE)));
-
+            new GameDiscItem(new Item.Settings().rarity(Rarity.RARE), Text.translatable("gamediscs.blocktris").formatted(Formatting.BLUE)));
     public static final Item GAME_DISC_TNT_SWEEPER = registerItem("game_disc_tnt_sweeper",
-            new GameDiscItem(new Item.Settings().rarity(Rarity.RARE), TntSweeperGame::new,
-                    Text.translatable("gamediscs.tnt_sweeper").formatted(Formatting.RED)));
-
+            new GameDiscItem(new Item.Settings().rarity(Rarity.RARE), Text.translatable("gamediscs.tnt_sweeper").formatted(Formatting.RED)));
     public static final Item GAME_DISC_PONG = registerItem("game_disc_pong",
-            new GameDiscItem(new Item.Settings().rarity(Rarity.RARE), PongGame::new,
-                    Text.translatable("gamediscs.pong_game").formatted(Formatting.WHITE)));
-
+            new GameDiscItem(new Item.Settings().rarity(Rarity.RARE), Text.translatable("gamediscs.pong_game").formatted(Formatting.WHITE)));
     public static final Item GAME_DISC_FROGGIE = registerItem("game_disc_froggie",
-            new GameDiscItem(new Item.Settings().rarity(Rarity.RARE), FroggieGame::new,
-                    Text.translatable("gamediscs.froggie").formatted(Formatting.GREEN)));
+            new GameDiscItem(new Item.Settings().rarity(Rarity.RARE), Text.translatable("gamediscs.froggie").formatted(Formatting.GREEN)));
+    public static final Item GAME_DISC_RABBIT = registerItem("game_disc_rabbit",
+            new GameDiscItem(new Item.Settings().rarity(Rarity.RARE), Text.translatable("gamediscs.rabbit").formatted(Formatting.GOLD)));
+
 
 
     public static final Item REDSTONE_CIRCUIT = registerItem("redstone_circuit",

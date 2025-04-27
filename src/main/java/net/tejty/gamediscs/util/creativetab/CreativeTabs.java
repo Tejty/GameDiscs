@@ -28,6 +28,7 @@ public class CreativeTabs {
                         entries.add(ItemRegistry.GAME_DISC_TNT_SWEEPER);
                         entries.add(ItemRegistry.GAME_DISC_PONG);
                         entries.add(ItemRegistry.GAME_DISC_FROGGIE);
+                        entries.add(ItemRegistry.GAME_DISC_RABBIT);
                     }).build());
 
 
