@@ -25,7 +25,7 @@ public class ItemRegistry {
     public static final DeferredItem<Item> GAME_DISC_TNT_SWEEPER = ITEMS.register("game_disc_tnt_sweeper", () -> new GameDiscItem(
                     new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.tnt_sweeper").withStyle(ChatFormatting.RED)));
     public static final DeferredItem<Item> GAME_DISC_PONG = ITEMS.register("game_disc_pong", () -> new GameDiscItem(
-                    new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.pong_game").withStyle(ChatFormatting.WHITE)));
+                    new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.pong").withStyle(ChatFormatting.WHITE)));
     public static final DeferredItem<Item> GAME_DISC_FROGGIE = ITEMS.register("game_disc_froggie", () -> new GameDiscItem(
                     new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.froggie").withStyle(ChatFormatting.GREEN)));
     public static final DeferredItem<Item> GAME_DISC_RABBIT = ITEMS.register("game_disc_rabbit", () -> new GameDiscItem(
