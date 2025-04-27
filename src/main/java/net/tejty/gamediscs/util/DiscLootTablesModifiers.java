@@ -60,7 +60,7 @@ public class DiscLootTablesModifiers {
         });
     }
 
-    private static float chance = 0.3f;
+    private static float chance = 0.1f;
 
     private static @NotNull Map<String, Float> getLootTableWithChance() {
         Map<String, Float> lootTables = new HashMap<>();
