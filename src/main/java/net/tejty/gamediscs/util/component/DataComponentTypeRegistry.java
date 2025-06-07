@@ -10,7 +10,7 @@ import net.tejty.gamediscs.GameDiscsMod;
 import java.util.function.UnaryOperator;
 
 public class DataComponentTypeRegistry {
-    public static final ComponentType<NbtCompound> NBT = register("nbt_compond",
+    public static final ComponentType<NbtCompound> NBT = register("nbt_compound",
             builder -> builder.codec(NbtCompound.CODEC));
 
     private static <T>ComponentType<T> register(String name,
