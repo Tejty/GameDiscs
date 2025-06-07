@@ -9,7 +9,6 @@ import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.TagEntry;
 import net.minecraft.predicate.entity.EntityPredicate;
-import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.util.Identifier;

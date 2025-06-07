@@ -3,7 +3,6 @@ package net.tejty.gamediscs.client.screen;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
-import net.tejty.gamediscs.GameDiscsMod;
 
 public record VisualButton(
         Identifier image,
