@@ -136,7 +136,7 @@ public class GamingConsoleScreen extends Screen {
                     RenderLayer::getGuiTextured,
                     Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/selected.png"),
                     x, y + 3 + textRenderer.fontHeight + 18 * selected - (Math.max(0, selected - 3) * 18),
-                    0, 0, 0, 140, 18, 140, 18
+                    0, 0, 140, 18, 140, 18
             );
         }
         // Rendering "Select game" title, on top of the screen
@@ -167,7 +167,7 @@ public class GamingConsoleScreen extends Screen {
                     availableGames.get(i).getIcon(),
                     x + 3,
                     y + 4 + textRenderer.fontHeight + 18 * i - (Math.max(0, selected - 3) * 18),
-                    0, 0, 0, 16, 16, 16, 16
+                    0, 0, 16, 16, 16, 16
             );
         }
     }
