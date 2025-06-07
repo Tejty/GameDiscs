@@ -33,6 +33,6 @@ public class GamingConsoleItem extends Item {
     }
 
     public static int getBestScore(ItemStack stack, String game, PlayerEntity player) {
-        return stack.get(DataComponentTypeRegistry.NBT).getInt(GameDiscsMod.MOD_ID + ":" + game + ";" + player.getDisplayName().getString());
+        return stack.getOrDefault(DataComponentTypeRegistry.NBT, new NbtCompound()).getInt(GameDiscsMod.MOD_ID + ":" + game + ";" + player.getDisplayName().getString());
     }
 }
