@@ -93,6 +93,7 @@ public class Game {
             String gameName = this.getClass().getName().substring(this.getClass().getPackageName().length() + 1);
             if (GamingConsoleItem.getBestScore(getConsole(), gameName, MinecraftClient.getInstance().player) < score) {
                 ClientPlayNetworking.send(new SetBestScoreC2SPayload(gameName, score));
+                GamingConsoleItem.setBestScore(getConsole(), gameName, score, MinecraftClient.getInstance().player);
                 soundPlayer.playNewBest();
                 spawnConfetti();
             } else {
@@ -305,7 +306,7 @@ public class Game {
 
                 // Renders best score text
                 int bestScore = GamingConsoleItem.getBestScore(getConsole(), this.getClass().getName().substring(this.getClass().getPackageName().length() + 1), MinecraftClient.getInstance().player);
-                component = Text.translatable(score >= bestScore ? "gui.gamingconsole.new_best_score" : "gui.gamingconsole.best_score").append(": ").append(String.valueOf(Math.max(score, bestScore))).formatted(score >= bestScore ? Formatting.GREEN : Formatting.YELLOW);
+                component = Text.translatable(score >= bestScore ? "gui.gamingconsole.new_best_score" : "gui.gamingconsole.best_score").append(": ").append(String.valueOf(bestScore)).formatted(score >= bestScore ? Formatting.GREEN : Formatting.YELLOW);
                 graphics.drawText(
                         font,
                         component,

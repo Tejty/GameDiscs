@@ -24,7 +24,7 @@ public class GamingConsoleItem extends Item {
         return super.use(world, user, hand);
     }
 
-    public void setBestScore(ItemStack stack, String game, int score, PlayerEntity player) {
+    public static void setBestScore(ItemStack stack, String game, int score, PlayerEntity player) {
         NbtCompound nbtData = stack.getOrDefault(DataComponentTypeRegistry.NBT, new NbtCompound());
         nbtData.putInt(GameDiscsMod.MOD_ID + ":" + game + ";" + player.getDisplayName().getString(), score);
         stack.set(DataComponentTypeRegistry.NBT, nbtData);
