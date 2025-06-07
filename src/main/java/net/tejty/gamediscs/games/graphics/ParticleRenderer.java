@@ -26,6 +26,6 @@ public class ParticleRenderer extends Renderer {
 
     @Override
     public void render(DrawContext graphics, int posX, int posY) {
-        graphics.drawTexture(RenderLayer::getGuiTextured, file, posX - (int)(0.5 * width), posY - (int)(0.5 * height), 0, x, y, width, height, fileWidth, fileHeight);
+        graphics.drawTexture(RenderLayer::getGuiTextured, file, posX - (int)(0.5 * width), posY - (int)(0.5 * height), x, y, width, height, fileWidth, fileHeight);
     }
 }

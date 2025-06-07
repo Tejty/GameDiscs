@@ -24,6 +24,6 @@ public class BreakParticleRenderer extends Renderer {
 
     @Override
     public void render(DrawContext graphics, int posX, int posY) {
-        graphics.drawTexture(RenderLayer::getGuiTextured, file, posX - SIZE / 2, posY - SIZE / 2, 0, x, y, SIZE, SIZE, fileWidth, fileHeight);
+        graphics.drawTexture(RenderLayer::getGuiTextured, file, posX - SIZE / 2, posY - SIZE / 2, x, y, SIZE, SIZE, fileWidth, fileHeight);
     }
 }
