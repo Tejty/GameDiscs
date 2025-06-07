@@ -13,7 +13,6 @@ import net.tejty.gamediscs.client.ClientUtils;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.games.util.Game;
 import net.tejty.gamediscs.item.custom.GameDiscItem;
-import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -88,12 +87,11 @@ public class GamingConsoleScreen extends Screen {
 
     // Main rendering method
     @Override
-    public void render(@NotNull DrawContext graphics, int pMouseX, int pMouseY, float pPartialTick) {
-        renderBackground(graphics, pMouseX, pMouseY, pPartialTick);
+    public void render(DrawContext graphics, int pMouseX, int pMouseY, float pPartialTick) {
+        super.render(graphics, pMouseX, pMouseY, pPartialTick);
         renderGameScreen(graphics, getConsoleX() + SCREEN_X, getConsoleY() + SCREEN_Y);
 
         renderButtons(graphics);
-        super.render(graphics, pMouseX, pMouseY, pPartialTick);
     }
 
     @Override
