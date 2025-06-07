@@ -15,6 +15,9 @@
     ],
     "main": [
       "net.tejty.gamediscs.GameDiscsMod"
+    ],
+    "fabric-datagen": [
+      "net.tejty.gamediscs.util.datagen.DataGenerator"
     ]
   },
   "depends": {

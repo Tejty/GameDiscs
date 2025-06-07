@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 import net.tejty.gamediscs.item.ItemRegistry;
 import net.tejty.gamediscs.util.DiscLootTablesModifiers;
 import net.tejty.gamediscs.sounds.SoundRegistry;
+import net.tejty.gamediscs.util.component.DataComponentTypeRegistry;
 import net.tejty.gamediscs.util.creativetab.CreativeTabs;
 import net.tejty.gamediscs.util.networking.ModMessages;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ public class GameDiscsMod implements ModInitializer {
     public void onInitialize() {
         ItemRegistry.registerModItems();
         CreativeTabs.registerItemGroups();
+        DataComponentTypeRegistry.registerDataComponentType();
         DiscLootTablesModifiers.modifyLootTables();
         SoundRegistry.registerSounds();
         ModMessages.registerC2SPackets();
