@@ -1,6 +1,7 @@
 package net.tejty.gamediscs.games.graphics;
 
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
 
 import java.util.Random;
@@ -23,6 +24,6 @@ public class BreakParticleRenderer extends Renderer {
 
     @Override
     public void render(DrawContext graphics, int posX, int posY) {
-        graphics.drawTexture(file, posX - SIZE / 2, posY - SIZE / 2, 0, x, y, SIZE, SIZE, fileWidth, fileHeight);
+        graphics.drawTexture(RenderLayer::getGuiTextured, file, posX - SIZE / 2, posY - SIZE / 2, 0, x, y, SIZE, SIZE, fileWidth, fileHeight);
     }
 }

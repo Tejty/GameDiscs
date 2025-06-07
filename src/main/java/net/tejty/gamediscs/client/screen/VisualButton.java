@@ -1,7 +1,9 @@
 package net.tejty.gamediscs.client.screen;
 
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
+import net.tejty.gamediscs.GameDiscsMod;
 
 public record VisualButton(
         Identifier image,
@@ -16,7 +18,9 @@ public record VisualButton(
         int shift
 ) {
     public void render(DrawContext graphics, int x, int y, boolean pressed) {
-        graphics.drawTexture(image, x + this.x, y + this.y, 0, sourceX, pressed ? this.shift + sourceY : sourceY, width, height, imageWidth, imageHeight);
+        graphics.drawTexture(RenderLayer::getGuiTextured, image, x + this.x,
+                y + this.y, sourceX, pressed ? this.shift + sourceY : sourceY,
+                width, height, imageWidth, imageHeight);
     }
 }
 

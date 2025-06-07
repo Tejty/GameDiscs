@@ -8,9 +8,11 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -28,6 +30,7 @@ import net.tejty.gamediscs.item.custom.GamingConsoleItem;
 import net.tejty.gamediscs.sounds.SoundRegistry;
 import net.tejty.gamediscs.util.networking.ModMessages;
 import net.tejty.gamediscs.util.networking.packet.SetBestScoreC2SPacket;
+import net.tejty.gamediscs.util.networking.packet.SetBestScoreC2SPayload;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,8 +92,7 @@ public class Game {
             // Tries to set the best score
             String gameName = this.getClass().getName().substring(this.getClass().getPackageName().length() + 1);
             if (GamingConsoleItem.getBestScore(getConsole(), gameName, MinecraftClient.getInstance().player) < score) {
-                ClientPlayNetworking.send(ModMessages.SET_BEST_SCORE_ID, PacketByteBufs.create()
-                        .writeString(gameName).writeVarInt(score));
+                ClientPlayNetworking.send(new SetBestScoreC2SPayload(gameName, score));
                 soundPlayer.playNewBest();
                 spawnConfetti();
             } else {
@@ -128,8 +130,7 @@ public class Game {
             // Tries to set the best score
             String gameName = this.getClass().getName().substring(this.getClass().getPackageName().length() + 1);
             if (GamingConsoleItem.getBestScore(getConsole(), gameName, MinecraftClient.getInstance().player) < score) {
-                ClientPlayNetworking.send(ModMessages.SET_BEST_SCORE_ID, PacketByteBufs.create()
-                        .writeString(gameName).writeVarInt(score));
+                ClientPlayNetworking.send(new SetBestScoreC2SPayload(gameName, score));
             }
         }
 
@@ -199,7 +200,7 @@ public class Game {
     public synchronized void render(DrawContext graphics, int posX, int posY) {
         // Renders background
         if (getBackground() != null) {
-            graphics.drawTexture(getBackground(), posX, posY, 0, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
+            graphics.drawTexture(RenderLayer::getGuiTextured, getBackground(), posX, posY, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
         }
         // Renders overlay
         renderOverlay(graphics, posX, posY);
@@ -239,7 +240,7 @@ public class Game {
             // Renders died / won screen
             if (stage == GameStage.DIED || stage == GameStage.WON) {
                 // Renders score board
-                graphics.drawTexture(Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/score_board.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
+                graphics.drawTexture(RenderLayer::getGuiTextured, Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/score_board.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
 
                 // Text based on won or died
                 Text component = stage == GameStage.DIED ? Text.translatable("gui.gamingconsole.died").formatted(Formatting.BOLD, Formatting.DARK_RED) : Text.translatable("gui.gamingconsole.won").formatted(Formatting.BOLD, Formatting.DARK_GREEN);
@@ -318,7 +319,7 @@ public class Game {
         else {
             // If current game has score box, it renders it
             if (showScoreBox() && showScore()) {
-                graphics.drawTexture(Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/score_box.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
+                graphics.drawTexture(RenderLayer::getGuiTextured, Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/score_box.png"), posX, posY, 0, 0, 0, 140, 100, 140, 100);
             }
 
             if (showScore()) {
@@ -383,7 +384,7 @@ public class Game {
         }
     }
     public void spawnParticleExplosion(Vec2f pos, int count, int speed, int lifetime, ParticleLevel level) {
-        soundPlayer.play(SoundEvents.ENTITY_GENERIC_EXPLODE, 1.5f, 0.1f);
+        soundPlayer.play(SoundEvents.ENTITY_GENERIC_EXPLODE.value(), 1.5f, 0.1f);
         for (int i = 0; i < count; i++) {
             Particle particle = new ExplosionParticle(pos, random.nextInt(lifetime / 2, lifetime), level);
             particle.setVelocity(new Vec2f(random.nextFloat(-speed, speed), random.nextFloat(-speed, speed)));
