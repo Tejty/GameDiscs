@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "gaming",
+  "key": {
+    "G": "minecraft:glowstone_dust",
+    "L": "#gamediscs:glass_panes",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    "RGR",
+    "GLG",
+    "RGR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "gamediscs:display"
+  }
+}

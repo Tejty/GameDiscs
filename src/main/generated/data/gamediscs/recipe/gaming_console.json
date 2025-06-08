@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "gaming",
+  "key": {
+    "B": "gamediscs:battery",
+    "C": "gamediscs:control_pad",
+    "D": "gamediscs:display",
+    "I": "minecraft:iron_ingot",
+    "P": "gamediscs:processor",
+    "R": "gamediscs:redstone_circuit"
+  },
+  "pattern": [
+    "IDI",
+    "RPR",
+    "BCB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "gamediscs:gaming_console"
+  }
+}
