@@ -1,6 +1,7 @@
 package net.tejty.gamediscs.games.graphics;
 
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
 
 public class Image extends Renderer {
@@ -22,6 +23,6 @@ public class Image extends Renderer {
 
     @Override
     public void render(DrawContext graphics, int posX, int posY) {
-        graphics.drawTexture(file, posX, posY, 0, x, y, width, height, fileWidth, fileHeight);
+        graphics.drawTexture(RenderLayer::getGuiTextured, file, posX, posY, x, y, width, height, fileWidth, fileHeight);
     }
 }

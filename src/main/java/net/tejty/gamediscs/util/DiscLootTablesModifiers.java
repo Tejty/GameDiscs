@@ -1,6 +1,6 @@
 package net.tejty.gamediscs.util;
 
-import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.item.Item;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.condition.EntityPropertiesLootCondition;
@@ -9,8 +9,8 @@ import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.TagEntry;
 import net.minecraft.predicate.entity.EntityPredicate;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.EntityTypeTags;
-import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 import net.tejty.gamediscs.item.ItemRegistry;
 import org.jetbrains.annotations.NotNull;
@@ -30,13 +30,13 @@ public class DiscLootTablesModifiers {
         mobDiscs.put("frog", ItemRegistry.GAME_DISC_FROGGIE);
         mobDiscs.put("rabbit", ItemRegistry.GAME_DISC_RABBIT);
 
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+        LootTableEvents.MODIFY.register((key, tableBuilder, sources, registries) -> {
             // Loop over each loot table and game disc, generating the necessary modifiers
             for (Map.Entry<String, Float> lootTableEntry : lootTables.entrySet()) {
                 String lootTable = lootTableEntry.getKey();
                 float chance = lootTableEntry.getValue();
 
-                if(Identifier.of(lootTable).equals(id)) {
+                if(Identifier.of(lootTable).equals(key.getValue())) {
                     LootPool.Builder poolBuilder = LootPool.builder()
                             .with(TagEntry.expandBuilder(TagRegistry.Items.GAME_DISCS))
                             .conditionally(RandomChanceLootCondition.builder(chance));
@@ -49,10 +49,13 @@ public class DiscLootTablesModifiers {
                 String mobName = mobDiscEntry.getKey();
                 Object gameDisc = mobDiscEntry.getValue();
 
-                if(Identifier.of("entities/" + mobName).equals(id)) {
+                if(Identifier.of("entities/" + mobName).equals(key.getValue())) {
                     LootPool.Builder poolBuilder = LootPool.builder()
                             .with(ItemEntry.builder((Item) gameDisc))
-                            .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.KILLER, EntityPredicate.Builder.create().type(EntityTypeTags.SKELETONS)));
+                            .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.ATTACKER,
+                                    EntityPredicate.Builder.create()
+                                            .type(registries.getOrThrow(RegistryKeys.ENTITY_TYPE),
+                                                    EntityTypeTags.SKELETONS)));
 
                     tableBuilder.pool(poolBuilder.build());
                 }
@@ -60,7 +63,7 @@ public class DiscLootTablesModifiers {
         });
     }
 
-    private static float chance = 0.3f;
+    private static final float chance = 0.3f;
 
     private static @NotNull Map<String, Float> getLootTableWithChance() {
         Map<String, Float> lootTables = new HashMap<>();
