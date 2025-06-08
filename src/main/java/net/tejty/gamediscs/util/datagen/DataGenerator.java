@@ -9,5 +9,6 @@ public class DataGenerator implements DataGeneratorEntrypoint {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
         pack.addProvider(GameDiscsModelProvider::new);
+        pack.addProvider(GameDiscsRecipeProvider::new);
     }
 }
