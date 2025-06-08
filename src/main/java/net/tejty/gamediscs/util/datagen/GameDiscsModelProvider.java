@@ -35,4 +35,9 @@ public class GameDiscsModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ItemRegistry.DISPLAY, Models.GENERATED);
         itemModelGenerator.register(ItemRegistry.CONTROL_PAD, Models.GENERATED);
     }
+
+    @Override
+    public String getName() {
+        return "GameDiscs - Models";
+    }
 }

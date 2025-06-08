@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "gaming",
   "key": {
-    "C": {
-      "item": "minecraft:comparator"
-    }
+    "C": "minecraft:comparator"
   },
   "pattern": [
     "CCC",
@@ -13,6 +11,7 @@
     "CCC"
   ],
   "result": {
-    "item": "gamediscs:processor"
+    "count": 1,
+    "id": "gamediscs:processor"
   }
 }

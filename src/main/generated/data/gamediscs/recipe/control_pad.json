@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "gaming",
   "key": {
-    "Q": {
-      "item": "minecraft:quartz"
-    },
-    "B": {
-      "tag": "minecraft:buttons"
-    }
+    "B": "#minecraft:buttons",
+    "Q": "minecraft:quartz"
   },
   "pattern": [
     "BBB",
@@ -16,6 +12,7 @@
     "BBB"
   ],
   "result": {
-    "item": "gamediscs:control_pad"
+    "count": 1,
+    "id": "gamediscs:control_pad"
   }
 }
