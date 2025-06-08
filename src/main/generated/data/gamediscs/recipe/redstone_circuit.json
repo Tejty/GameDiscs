@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "gaming",
+  "key": {
+    "C": "minecraft:comparator",
+    "R": "minecraft:redstone",
+    "T": "minecraft:redstone_torch"
+  },
+  "pattern": [
+    "TRT",
+    "RCR",
+    "TRT"
+  ],
+  "result": {
+    "count": 1,
+    "id": "gamediscs:redstone_circuit"
+  }
+}
