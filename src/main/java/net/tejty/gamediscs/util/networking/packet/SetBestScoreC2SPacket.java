@@ -13,7 +13,7 @@ public class SetBestScoreC2SPacket {
         int score = payload.score();
         ItemStack stack = player.getMainHandStack();
         if (stack.getItem() instanceof GamingConsoleItem console) {
-            console.setBestScore(stack, game, score, player);
+            GamingConsoleItem.setBestScore(stack, game, score, player);
         }
     }
 }

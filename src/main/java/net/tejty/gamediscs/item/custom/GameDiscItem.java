@@ -1,15 +1,12 @@
 package net.tejty.gamediscs.item.custom;
 
+import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.Text;
-import net.minecraft.world.World;
-import net.tejty.gamediscs.games.util.Game;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.function.Supplier;
+import java.util.function.Consumer;
 
 public class GameDiscItem extends Item {
     private final Text name;
@@ -19,9 +16,10 @@ public class GameDiscItem extends Item {
         this.name = name;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        tooltip.add(name);
-        super.appendTooltip(stack, context, tooltip, type);
+    public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
+        textConsumer.accept(name);
+        super.appendTooltip(stack, context, displayComponent, textConsumer, type);
     }
 }
