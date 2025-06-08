@@ -17,12 +17,12 @@ public class TagRegistry {
 
     public static class Items {
         public static final TagKey<Item> GAME_DISCS =
-                createTag("game_discs");
+                createTag(GameDiscsMod.MOD_ID, "game_discs");
         public static final TagKey<Item> GLASS_PANES =
-                createTag("glass_panes");
+                createTag("c", "glass_panes");
 
-        private static TagKey<Item> createTag(String name) {
-            return TagKey.of(RegistryKeys.ITEM, Identifier.of(GameDiscsMod.MOD_ID, name));
+        private static TagKey<Item> createTag(String namespace, String name) {
+            return TagKey.of(RegistryKeys.ITEM, Identifier.of(namespace, name));
         }
     }
 }
