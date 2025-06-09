@@ -49,5 +49,12 @@
   "sounds.gamediscs.explosion": "Gaming Console - Explosion",
   "sounds.gamediscs.shoot": "Gaming Console - Shoot",
   "sounds.gamediscs.swing": "Gaming Console - Swing",
-  "sounds.gamediscs.switch": "Gaming Console - Switch"
+  "sounds.gamediscs.switch": "Gaming Console - Switch",
+
+  "tag.item.gamediscs.glass_panes": "Glass Panes",
+  "tag.item.gamediscs.game_discs": "Game Discs",
+  "tag.item.gamediscs.bee_drop_game_disc": "Game Disc that Bee drops",
+  "tag.item.gamediscs.frog_drop_game_disc": "Game Disc that Frog drops",
+  "tag.item.gamediscs.rabbit_drop_game_disc": "Game Disc that Rabbit drops",
+  "tag.item.gamediscs.slime_drop_game_disc": "Game Disc that Slime drops"
 }

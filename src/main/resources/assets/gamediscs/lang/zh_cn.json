@@ -6,7 +6,7 @@
   "gamediscs.slime": "贪吃史莱姆",
   "gamediscs.blocktris": "俄罗斯“方”块",
   "gamediscs.tnt_sweeper": "TNT扫雷",
-  "gamediscs.pong_game": "方块乒乓球",
+  "gamediscs.pong": "方块乒乓球",
   "gamediscs.froggie": "青蛙过水沟",
   "gamediscs.rabbit": "兔子漫步者",
 
@@ -48,5 +48,12 @@
   "sounds.gamediscs.explosion": "游戏掌机 - 爆炸",
   "sounds.gamediscs.shoot": "游戏掌机 - 咻",
   "sounds.gamediscs.swing": "游戏掌机 - 旋转",
-  "sounds.gamediscs.switch": "游戏掌机 - 切换"
+  "sounds.gamediscs.switch": "游戏掌机 - 切换",
+
+  "tag.item.gamediscs.glass_panes": "玻璃片",
+  "tag.item.gamediscs.game_discs": "游戏光碟",
+  "tag.item.gamediscs.bee_drop_game_disc": "蜜蜂会掉落的游戏光碟",
+  "tag.item.gamediscs.frog_drop_game_disc": "青蛙会掉落的游戏光碟",
+  "tag.item.gamediscs.rabbit_drop_game_disc": "兔子会掉落的游戏光碟",
+  "tag.item.gamediscs.slime_drop_game_disc": "史萊姆会掉落的游戏光碟"
 }
