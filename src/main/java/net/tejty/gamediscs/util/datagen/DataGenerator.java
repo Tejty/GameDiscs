@@ -10,5 +10,6 @@ public class DataGenerator implements DataGeneratorEntrypoint {
 
         pack.addProvider(GameDiscsModelProvider::new);
         pack.addProvider(GameDiscsRecipeProvider::new);
+        pack.addProvider(GameDiscsItemTagsProvider::new);
     }
 }

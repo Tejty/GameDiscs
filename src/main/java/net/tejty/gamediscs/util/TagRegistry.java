@@ -20,7 +20,17 @@ public class TagRegistry {
                 createTag(GameDiscsMod.MOD_ID, "game_discs");
         public static final TagKey<Item> GLASS_PANES =
                 createTag("c", "glass_panes");
-
+        public static final TagKey<Item> BEE_DROPS_GAME_DISC =
+                createTag("bee_drops_game_disc");
+        public static final TagKey<Item> FROG_DROPS_GAME_DISC =
+                createTag("frog_drops_game_disc");
+        public static final TagKey<Item> RABBIT_DROPS_GAME_DISC =
+                createTag("rabbit_drops_game_disc");
+        public static final TagKey<Item> SLIME_DROPS_GAME_DISC =
+                createTag("slime_drops_game_disc");
+        private static TagKey<Item> createTag(String name) {
+            return createTag(GameDiscsMod.MOD_ID, name);
+        }
         private static TagKey<Item> createTag(String namespace, String name) {
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(namespace, name));
         }
