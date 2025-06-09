@@ -35,15 +35,10 @@ public class DiscLootTablesModifiers {
         LootTableEvents.MODIFY.register((key, tableBuilder, sources, registries) -> {
             // Loop over each loot table and game disc, generating the necessary modifiers
             for (Map.Entry<String, Float> lootTableEntry : lootTables.entrySet()) {
-                if (key.getValue().getPath().startsWith("chests")) {
-                    GameDiscsMod.LOGGER.info("key: {}", key.getValue());
-                    GameDiscsMod.LOGGER.info("lootTable Name: {}", lootTableEntry.getKey());
-                }
                 String lootTable = lootTableEntry.getKey();
                 float chance = lootTableEntry.getValue();
 
                 if(Identifier.ofVanilla(lootTable).equals(key.getValue())) {
-                    GameDiscsMod.LOGGER.info("Equal!");
                     LootPool.Builder poolBuilder = LootPool.builder()
                             .rolls(ConstantLootNumberProvider.create(1.0f))
                             .with(TagEntry.expandBuilder(TagRegistry.Items.GAME_DISCS))
