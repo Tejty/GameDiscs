@@ -20,6 +20,14 @@ public class TagRegistry {
                 createTag("game_discs");
         public static final TagKey<Item> GLASS_PANES =
                 createTag("glass_panes");
+        public static final TagKey<Item> BEE_DROPS_GAME_DISC =
+                createTag("bee_drops_game_disc");
+        public static final TagKey<Item> FROG_DROPS_GAME_DISC =
+                createTag("frog_drops_game_disc");
+        public static final TagKey<Item> RABBIT_DROPS_GAME_DISC =
+                createTag("rabbit_drops_game_disc");
+        public static final TagKey<Item> SLIME_DROPS_GAME_DISC =
+                createTag("slime_drops_game_disc");
 
         private static TagKey<Item> createTag(String name) {
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(GameDiscsMod.MOD_ID, name));
