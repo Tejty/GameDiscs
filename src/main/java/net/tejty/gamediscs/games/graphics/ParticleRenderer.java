@@ -1,7 +1,7 @@
 package net.tejty.gamediscs.games.graphics;
 
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
 
 public class ParticleRenderer extends Renderer {
@@ -26,6 +26,6 @@ public class ParticleRenderer extends Renderer {
 
     @Override
     public void render(DrawContext graphics, int posX, int posY) {
-        graphics.drawTexture(RenderLayer::getGuiTextured, file, posX - (int)(0.5 * width), posY - (int)(0.5 * height), x, y, width, height, fileWidth, fileHeight);
+        graphics.drawTexture(RenderPipelines.GUI_TEXTURED, file, posX - (int)(0.5 * width), posY - (int)(0.5 * height), x, y, width, height, fileWidth, fileHeight);
     }
 }

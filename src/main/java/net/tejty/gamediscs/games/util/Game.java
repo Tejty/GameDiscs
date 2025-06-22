@@ -1,19 +1,12 @@
 package net.tejty.gamediscs.games.util;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.packet.CustomPayload;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -28,8 +21,6 @@ import net.tejty.gamediscs.games.graphics.Renderer;
 import net.tejty.gamediscs.item.ItemRegistry;
 import net.tejty.gamediscs.item.custom.GamingConsoleItem;
 import net.tejty.gamediscs.sounds.SoundRegistry;
-import net.tejty.gamediscs.util.networking.ModMessages;
-import net.tejty.gamediscs.util.networking.packet.SetBestScoreC2SPacket;
 import net.tejty.gamediscs.util.networking.packet.SetBestScoreC2SPayload;
 
 import java.util.ArrayList;
@@ -201,7 +192,7 @@ public class Game {
     public synchronized void render(DrawContext graphics, int posX, int posY) {
         // Renders background
         if (getBackground() != null) {
-            graphics.drawTexture(RenderLayer::getGuiTextured, getBackground(), posX, posY, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
+            graphics.drawTexture(RenderPipelines.GUI_TEXTURED, getBackground(), posX, posY, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
         }
         // Renders overlay
         renderOverlay(graphics, posX, posY);
@@ -241,7 +232,7 @@ public class Game {
             // Renders died / won screen
             if (stage == GameStage.DIED || stage == GameStage.WON) {
                 // Renders score board
-                graphics.drawTexture(RenderLayer::getGuiTextured, Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/score_board.png"), posX, posY, 0, 0, 140, 100, 140, 100);
+                graphics.drawTexture(RenderPipelines.GUI_TEXTURED, Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/score_board.png"), posX, posY, 0, 0, 140, 100, 140, 100);
 
                 // Text based on won or died
                 Text component = stage == GameStage.DIED ? Text.translatable("gui.gamingconsole.died").formatted(Formatting.BOLD, Formatting.DARK_RED) : Text.translatable("gui.gamingconsole.won").formatted(Formatting.BOLD, Formatting.DARK_GREEN);
@@ -320,7 +311,7 @@ public class Game {
         else {
             // If current game has score box, it renders it
             if (showScoreBox() && showScore()) {
-                graphics.drawTexture(RenderLayer::getGuiTextured, Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/score_box.png"), posX, posY, 0, 0, 140, 100, 140, 100);
+                graphics.drawTexture(RenderPipelines.GUI_TEXTURED, Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/score_box.png"), posX, posY, 0, 0, 140, 100, 140, 100);
             }
 
             if (showScore()) {

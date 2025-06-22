@@ -1,9 +1,9 @@
 package net.tejty.gamediscs.client.screen;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -97,7 +97,7 @@ public class GamingConsoleScreen extends Screen {
     @Override
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
         super.renderBackground(context, mouseX, mouseY, delta);
-        context.drawTexture(RenderLayer::getGuiTextured, BACKGROUD, getConsoleX(), getConsoleY(), 0, 0, CONSOLE_WIDTH, CONSOLE_HEIGHT, 256, 256);
+        context.drawTexture(RenderPipelines.GUI_TEXTURED, BACKGROUD, getConsoleX(), getConsoleY(), 0, 0, CONSOLE_WIDTH, CONSOLE_HEIGHT, 256, 256);
     }
 
     /**
@@ -133,7 +133,7 @@ public class GamingConsoleScreen extends Screen {
         // If there are some available games, it renders a selection marking on corresponding Y position
         if (!availableGames.isEmpty()) {
             graphics.drawTexture(
-                    RenderLayer::getGuiTextured,
+                    RenderPipelines.GUI_TEXTURED,
                     Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/selected.png"),
                     x, y + 3 + textRenderer.fontHeight + 18 * selected - (Math.max(0, selected - 3) * 18),
                     0, 0, 140, 18, 140, 18
@@ -163,7 +163,7 @@ public class GamingConsoleScreen extends Screen {
             );
             // Rendering icon of the game
             graphics.drawTexture(
-                    RenderLayer::getGuiTextured,
+                    RenderPipelines.GUI_TEXTURED,
                     availableGames.get(i).getIcon(),
                     x + 3,
                     y + 4 + textRenderer.fontHeight + 18 * i - (Math.max(0, selected - 3) * 18),
