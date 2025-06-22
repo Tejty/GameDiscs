@@ -2,7 +2,6 @@ package net.tejty.gamediscs.games.gamediscs;
 
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.games.controls.Button;
@@ -97,7 +96,8 @@ public class ExampleGame extends Game {
     @Override
     public int scoreColor() {
         // Color for score text
-        return Formatting.YELLOW.getColorValue();
+        // Remember to add "FF" before the hex code
+        return 0xFF123456;
     }
     @Override
     public Text getName() {

@@ -145,7 +145,7 @@ public class GamingConsoleScreen extends Screen {
                 Text.translatable("gui.gamingconsole.select_game").formatted(Formatting.BOLD),
                 x + (Game.WIDTH - textRenderer.getWidth(Text.translatable("gui.gamingconsole.select_game").formatted(Formatting.BOLD).asOrderedText())) / 2,
                 y + 3 - (Math.max(0, selected - 3) * 18),
-                0xace53b,
+                0xFFACE53B, // need to add "FF" in front of the color code
                 false
         );
 
@@ -155,10 +155,10 @@ public class GamingConsoleScreen extends Screen {
             graphics.drawText(
                     textRenderer,
                     // If the game is currently selected, the title renders bold
-                    Text.literal(availableGames.get(i).getName().getString()).formatted(availableGames.get(i).getColor(), i == selected ? Formatting.BOLD : Formatting.ITALIC),
+                    Text.literal(availableGames.get(i).getName().getString()).withColor(availableGames.get(i).getColor()).formatted(i == selected ? Formatting.BOLD : Formatting.ITALIC),
                     x + 22,
                     y + 4 + textRenderer.fontHeight + 18 * i + (18 - textRenderer.fontHeight) / 2 - (Math.max(0, selected - 3) * 18),
-                    availableGames.get(i).getColor().getColorValue(),
+                    availableGames.get(i).getColor(),
                     false
             );
             // Rendering icon of the game

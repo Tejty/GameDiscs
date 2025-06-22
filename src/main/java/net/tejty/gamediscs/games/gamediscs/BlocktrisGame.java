@@ -1,7 +1,6 @@
 package net.tejty.gamediscs.games.gamediscs;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.Font;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.text.Text;
@@ -17,6 +16,7 @@ import net.tejty.gamediscs.sounds.SoundRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BlocktrisGame extends Game {
     public Grid grid;
@@ -120,9 +120,9 @@ public class BlocktrisGame extends Game {
 
         TextRenderer font = MinecraftClient.getInstance().textRenderer;
         Text text = Text.translatable("gui.gamingconsole.hold");
-        graphics.drawText(font, text, 22 + posX - font.getWidth(text.asOrderedText()) / 2, 16 + posY, 0x555555, false);
+        graphics.drawText(font, text, 22 + posX - font.getWidth(text.asOrderedText()) / 2, 16 + posY, 0xFF555555, false);
         text = Text.translatable("gui.gamingconsole.next");
-        graphics.drawText(font, text, 118 + posX - font.getWidth(text.asOrderedText()) / 2, 6 + posY, 0x555555, false);
+        graphics.drawText(font, text, 118 + posX - font.getWidth(text.asOrderedText()) / 2, 6 + posY, 0xFF555555, false);
 
         renderParticles(graphics, posX, posY);
 
@@ -167,11 +167,7 @@ public class BlocktrisGame extends Game {
                     soundPlayer.play(SoundRegistry.SWITCH, 0.6f, 0.5f);
                     BlocktrisPiece oldHold = hold;
                     hold = piece;
-                    if (oldHold != null) {
-                        piece = oldHold;
-                    } else {
-                        piece = getNext();
-                    }
+                    piece = Objects.requireNonNullElseGet(oldHold, this::getNext);
                     piece.setPos(4, 1);
                     switched = true;
                 }
