@@ -1,5 +1,6 @@
 package net.tejty.gamediscs.item;
 
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -10,7 +11,6 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.tejty.gamediscs.GameDiscsMod;
-import net.tejty.gamediscs.games.gamediscs.*;
 import net.tejty.gamediscs.item.custom.GameDiscItem;
 import net.tejty.gamediscs.item.custom.GamingConsoleItem;
 
@@ -55,5 +55,16 @@ public class ItemRegistry {
 
     public static void registerModItems() {
         GameDiscsMod.LOGGER.info("Registering Mod Items for " + GameDiscsMod.MOD_ID);
+        registerTooltips();
+    }
+
+    public static void registerTooltips() {
+        ItemTooltipCallback.EVENT.register((itemStack, tooltipContext, tooltipType, list) ->{
+            if (!(itemStack.getItem() instanceof GameDiscItem)) {
+                return;
+            }
+            ((GameDiscItem) itemStack.getItem())
+                    .renderTooltip(itemStack, tooltipContext, tooltipType, list);
+        });
     }
 }

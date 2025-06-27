@@ -16,7 +16,7 @@ public class GameDiscsItemTagsProvider extends FabricTagProvider.ItemTagProvider
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        getOrCreateTagBuilder(TagRegistry.Items.GAME_DISCS)
+        valueLookupBuilder(TagRegistry.Items.GAME_DISCS)
                 .add(ItemRegistry.GAME_DISC_BLOCKTRIS)
                 .add(ItemRegistry.GAME_DISC_FLAPPY_BIRD)
                 .add(ItemRegistry.GAME_DISC_FROGGIE)
@@ -25,7 +25,7 @@ public class GameDiscsItemTagsProvider extends FabricTagProvider.ItemTagProvider
                 .add(ItemRegistry.GAME_DISC_SLIME)
                 .add(ItemRegistry.GAME_DISC_TNT_SWEEPER);
 
-        getOrCreateTagBuilder(TagRegistry.Items.GLASS_PANES)
+        valueLookupBuilder(TagRegistry.Items.GLASS_PANES)
                 .add(Items.GLASS_PANE)
                 .add(Items.WHITE_STAINED_GLASS_PANE)
                 .add(Items.LIGHT_GRAY_STAINED_GLASS_PANE)
@@ -44,13 +44,13 @@ public class GameDiscsItemTagsProvider extends FabricTagProvider.ItemTagProvider
                 .add(Items.MAGENTA_STAINED_GLASS_PANE)
                 .add(Items.PINK_STAINED_GLASS_PANE);
 
-        getOrCreateTagBuilder(TagRegistry.Items.BEE_DROPS_GAME_DISC)
+        valueLookupBuilder(TagRegistry.Items.BEE_DROPS_GAME_DISC)
                 .add(ItemRegistry.GAME_DISC_FLAPPY_BIRD);
-        getOrCreateTagBuilder(TagRegistry.Items.FROG_DROPS_GAME_DISC)
+        valueLookupBuilder(TagRegistry.Items.FROG_DROPS_GAME_DISC)
                 .add(ItemRegistry.GAME_DISC_FROGGIE);
-        getOrCreateTagBuilder(TagRegistry.Items.RABBIT_DROPS_GAME_DISC)
+        valueLookupBuilder(TagRegistry.Items.RABBIT_DROPS_GAME_DISC)
                 .add(ItemRegistry.GAME_DISC_RABBIT);
-        getOrCreateTagBuilder(TagRegistry.Items.SLIME_DROPS_GAME_DISC)
+        valueLookupBuilder(TagRegistry.Items.SLIME_DROPS_GAME_DISC)
                 .add(ItemRegistry.GAME_DISC_SLIME);
     }
 

@@ -1,19 +1,12 @@
 package net.tejty.gamediscs.games.util;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.packet.CustomPayload;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -28,13 +21,10 @@ import net.tejty.gamediscs.games.graphics.Renderer;
 import net.tejty.gamediscs.item.ItemRegistry;
 import net.tejty.gamediscs.item.custom.GamingConsoleItem;
 import net.tejty.gamediscs.sounds.SoundRegistry;
-import net.tejty.gamediscs.util.networking.ModMessages;
-import net.tejty.gamediscs.util.networking.packet.SetBestScoreC2SPacket;
 import net.tejty.gamediscs.util.networking.packet.SetBestScoreC2SPayload;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -201,7 +191,7 @@ public class Game {
     public synchronized void render(DrawContext graphics, int posX, int posY) {
         // Renders background
         if (getBackground() != null) {
-            graphics.drawTexture(RenderLayer::getGuiTextured, getBackground(), posX, posY, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
+            graphics.drawTexture(RenderPipelines.GUI_TEXTURED, getBackground(), posX, posY, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
         }
         // Renders overlay
         renderOverlay(graphics, posX, posY);
@@ -226,7 +216,7 @@ public class Game {
                         Text.translatable("gui.gamingconsole.press_any_key"),
                         posX + (WIDTH - font.getWidth(Text.translatable("gui.gamingconsole.press_any_key").asOrderedText())) / 2 + 1,
                         posY + HEIGHT - 1 - font.fontHeight - 1 + (ticks % 40 <= 20 ? 0 : 1),
-                        0x373737,
+                        0xFF373737,
                         false
                 );
                 graphics.drawText(
@@ -234,17 +224,17 @@ public class Game {
                         Text.translatable("gui.gamingconsole.press_any_key"),
                         posX + (WIDTH - font.getWidth(Text.translatable("gui.gamingconsole.press_any_key").asOrderedText())) / 2,
                         posY + HEIGHT - 1 - font.fontHeight - 2 + (ticks % 40 <= 20 ? 0 : 1),
-                        0xFFFFFF,
+                        0xFFFFFFFF,
                         false
                 );
             }
             // Renders died / won screen
             if (stage == GameStage.DIED || stage == GameStage.WON) {
                 // Renders score board
-                graphics.drawTexture(RenderLayer::getGuiTextured, Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/score_board.png"), posX, posY, 0, 0, 140, 100, 140, 100);
+                graphics.drawTexture(RenderPipelines.GUI_TEXTURED, Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/score_board.png"), posX, posY, 0, 0, 140, 100, 140, 100);
 
                 // Text based on won or died
-                Text component = stage == GameStage.DIED ? Text.translatable("gui.gamingconsole.died").formatted(Formatting.BOLD, Formatting.DARK_RED) : Text.translatable("gui.gamingconsole.won").formatted(Formatting.BOLD, Formatting.DARK_GREEN);
+                Text component = stage == GameStage.DIED ? Text.translatable("gui.gamingconsole.died").formatted(Formatting.BOLD) : Text.translatable("gui.gamingconsole.won").formatted(Formatting.BOLD);
 
                 // Renders the outline of the text (four times renders the same text pushed by 1px to all directions)
                 graphics.drawText(
@@ -252,7 +242,7 @@ public class Game {
                         component,
                         posX + (WIDTH - font.getWidth(component.asOrderedText())) / 2,
                         posY + 29,
-                        Objects.requireNonNull(component.getStyle().getColor()).getRgb(),
+                        stage == GameStage.DIED ? 0xFFAA0000 : 0xFF00AA00,
                         false
                 );
                 graphics.drawText(
@@ -260,7 +250,7 @@ public class Game {
                         component,
                         posX + (WIDTH - font.getWidth(component.asOrderedText())) / 2,
                         posY + 31,
-                        component.getStyle().getColor().getRgb(),
+                        stage == GameStage.DIED ? 0xFFAA0000 : 0xFF00AA00,
                         false
                 );
                 graphics.drawText(
@@ -268,7 +258,7 @@ public class Game {
                         component,
                         posX + (WIDTH - font.getWidth(component.asOrderedText())) / 2 + 1,
                         posY + 30,
-                        component.getStyle().getColor().getRgb(),
+                        stage == GameStage.DIED ? 0xFFAA0000 : 0xFF00AA00,
                         false
                 );
                 graphics.drawText(
@@ -276,7 +266,7 @@ public class Game {
                         component,
                         posX + (WIDTH - font.getWidth(component.asOrderedText())) / 2 - 1,
                         posY + 30,
-                        component.getStyle().getColor().getRgb(),
+                        stage == GameStage.DIED ? 0xFFAA0000 : 0xFF00AA00,
                         false
                 );
 
@@ -289,7 +279,7 @@ public class Game {
                         component,
                         posX + (WIDTH - font.getWidth(component.asOrderedText())) / 2,
                         posY + 30,
-                        Objects.requireNonNull(component.getStyle().getColor()).getRgb(),
+                        stage == GameStage.DIED ? 0xFFAA0000 : 0xFF00AA00,
                         false
                 );
 
@@ -300,19 +290,19 @@ public class Game {
                         component,
                         posX + (WIDTH - font.getWidth(component.asOrderedText())) / 2,
                         posY + 35 + font.fontHeight,
-                        Objects.requireNonNull(component.getStyle().getColor()).getRgb(),
+                        stage == GameStage.DIED ? 0xFFAA0000 : 0xFF00AA00,
                         false
                 );
 
                 // Renders best score text
                 int bestScore = GamingConsoleItem.getBestScore(getConsole(), this.getClass().getName().substring(this.getClass().getPackageName().length() + 1), MinecraftClient.getInstance().player);
-                component = Text.translatable(score >= bestScore ? "gui.gamingconsole.new_best_score" : "gui.gamingconsole.best_score").append(": ").append(String.valueOf(bestScore)).formatted(score >= bestScore ? Formatting.GREEN : Formatting.YELLOW);
+                component = Text.translatable(score >= bestScore ? "gui.gamingconsole.new_best_score" : "gui.gamingconsole.best_score").append(": ").append(String.valueOf(bestScore));
                 graphics.drawText(
                         font,
                         component,
                         posX + (WIDTH - font.getWidth(component.asOrderedText())) / 2,
                         posY + 50 + font.fontHeight,
-                        Objects.requireNonNull(component.getStyle().getColor()).getRgb(),
+                        score >= bestScore ? 0xFF55FF55 : 0xFFFFFF55,
                         false
                 );
             }
@@ -320,7 +310,7 @@ public class Game {
         else {
             // If current game has score box, it renders it
             if (showScoreBox() && showScore()) {
-                graphics.drawTexture(RenderLayer::getGuiTextured, Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/score_box.png"), posX, posY, 0, 0, 140, 100, 140, 100);
+                graphics.drawTexture(RenderPipelines.GUI_TEXTURED, Identifier.of(GameDiscsMod.MOD_ID, "textures/gui/score_box.png"), posX, posY, 0, 0, 140, 100, 140, 100);
             }
 
             if (showScore()) {
@@ -330,7 +320,7 @@ public class Game {
                         (scoreText() ? Text.translatable("gui.gamingconsole.score").append(": ") : Text.empty()).append(String.valueOf(score)),
                         posX + 2,
                         posY + 2,
-                        0x373737,
+                        0xFF373737,
                         false
                 );
                 graphics.drawText(
@@ -447,7 +437,7 @@ public class Game {
      * @return Color of score
      */
     public int scoreColor() {
-        return 0xFFFFFF; // Default is white
+        return 0xFFFFFFFF; // Default is white
     }
 
     /**
@@ -470,7 +460,9 @@ public class Game {
     /**
      * @return Display color of the game
      */
-    public Formatting getColor() {return Formatting.YELLOW;}
+    public int getColor() {
+        return 0xFFFFFF55;
+    }
 
     /**
      * @return True if the game is an empty game (default Game, not its child), false otherwise
