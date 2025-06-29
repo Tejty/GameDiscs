@@ -3,24 +3,12 @@
   "category": "misc",
   "group": "gaming",
   "key": {
-    "I": {
-      "item": "minecraft:iron_ingot"
-    },
-    "D": {
-      "item": "gamediscs:display"
-    },
-    "P": {
-      "item": "gamediscs:processor"
-    },
-    "R": {
-      "item": "gamediscs:redstone_circuit"
-    },
-    "B": {
-      "item": "gamediscs:battery"
-    },
-    "C": {
-      "item": "gamediscs:control_pad"
-    }
+    "I": "minecraft:iron_ingot",
+    "D": "gamediscs:display",
+    "P": "gamediscs:processor",
+    "R": "gamediscs:redstone_circuit",
+    "B": "gamediscs:battery",
+    "C": "gamediscs:control_pad"
   },
   "pattern": [
     "IDI",

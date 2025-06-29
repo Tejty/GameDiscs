@@ -121,7 +121,7 @@ public class SlimeGame extends Game {
                 spawnParticleExplosion(() -> new BreakParticleRenderer(APPLE, 8, 8), apple.getCenterPos(), 15, 3, 5, ParticleLevel.GAME);
                 respawnApple();
                 score++;
-                soundPlayer.play(SoundEvents.GENERIC_EAT);
+                soundPlayer.play(SoundEvents.GENERIC_EAT.value());
             }
         }
 

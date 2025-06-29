@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '1.0.21'
+    id 'net.neoforged.moddev' version '2.0.88'
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -43,7 +43,7 @@ neoForge {
         }
 
         data {
-            data()
+            clientData()
             programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
         }
 
@@ -82,7 +82,8 @@ repositories {
 }
 
 dependencies {
-    runtimeOnly "curse.maven:jei-238222:5846880"
+    // bruh who install jei
+    //runtimeOnly "curse.maven:jei-238222:5846880"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
@@ -124,9 +125,9 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
-idea {
+/*idea {
     module {
         downloadSources = true
         downloadJavadoc = true
     }
-}
+}*/

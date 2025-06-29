@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "gaming",
   "key": {
-    "R": {
-      "item": "minecraft:redstone"
-    },
-    "C": {
-      "item": "minecraft:comparator"
-    },
-    "T": {
-      "item": "minecraft:redstone_torch"
-    }
+    "R": "minecraft:redstone",
+    "C": "minecraft:comparator",
+    "T": "minecraft:redstone_torch"
   },
   "pattern": [
     "TRT",

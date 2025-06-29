@@ -1,6 +1,7 @@
 package net.tejty.gamediscs.games.graphics;
 
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 
 public class ParticleRenderer extends Renderer {
@@ -25,6 +26,6 @@ public class ParticleRenderer extends Renderer {
 
     @Override
     public void render(GuiGraphics graphics, int posX, int posY) {
-        graphics.blit(file, posX - (int)(0.5 * width), posY - (int)(0.5 * height), 0, x, y, width, height, fileWidth, fileHeight);
+        graphics.blit(RenderType::guiTextured, file, posX - (int)(0.5 * width), posY - (int)(0.5 * height), x, y, width, height, fileWidth, fileHeight);
     }
 }
