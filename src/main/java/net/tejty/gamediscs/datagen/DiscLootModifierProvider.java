@@ -1,10 +1,13 @@
 package net.tejty.gamediscs.datagen;
 
 import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -46,7 +49,7 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider {
             float chance = lootTableEntry.getValue();
             
             add("disc_from_" + lootTable, new ItemTagModifier(new LootItemCondition[]{
-                    new LootTableIdCondition.Builder(ResourceLocation.fromNamespaceAndPath("minecraft", lootTable)).build(),
+                    new LootTableIdCondition.Builder(ResourceLocation.withDefaultNamespace(lootTable)).build(),
                     LootItemRandomChanceCondition.randomChance(chance).build()
             }, TagRegistry.Items.GAME_DISCS));
         }
@@ -54,10 +57,16 @@ public class DiscLootModifierProvider extends GlobalLootModifierProvider {
         for (Map.Entry<String, Object> mobDiscEntry : mobDiscs.entrySet()) {
             String mobName = mobDiscEntry.getKey();
             Object gameDisc = mobDiscEntry.getValue();
+            HolderGetter<EntityType<?>> getter = registries.lookupOrThrow(Registries.ENTITY_TYPE);
 
-            add("mob_drops/" + mobName + "_drops_game_disc", new ItemModifier(new LootItemCondition[]{
-                    new LootTableIdCondition.Builder(ResourceLocation.fromNamespaceAndPath("minecraft", "entities/" + mobName)).build(),
-                    LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.ATTACKER, EntityPredicate.Builder.entity().of(EntityTypeTags.SKELETONS).build()).build()
+            add("mob_drops/" + mobName + "_drops_game_disc",
+                    new ItemModifier(
+                            new LootItemCondition[]{
+                                    new LootTableIdCondition.Builder(
+                                            ResourceLocation.withDefaultNamespace("entities/" + mobName))
+                                            .build(),
+                                    LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.ATTACKER,
+                                            EntityPredicate.Builder.entity().of(getter, EntityTypeTags.SKELETONS).build()).build()
             }, (Item) gameDisc));
         }
     }

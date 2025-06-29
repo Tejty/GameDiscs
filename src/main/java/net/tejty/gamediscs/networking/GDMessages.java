@@ -8,7 +8,7 @@ import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.networking.packet.SetBestScorePacket;
 import org.jetbrains.annotations.NotNull;
 
-@EventBusSubscriber(modid = GameDiscsMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = GameDiscsMod.MOD_ID)
 public class GDMessages {
 
     @SubscribeEvent

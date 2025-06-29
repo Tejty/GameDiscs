@@ -14,33 +14,29 @@ import net.tejty.gamediscs.item.custom.GamingConsoleItem;
 public class ItemRegistry {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(GameDiscsMod.MOD_ID);
 
-    public static final DeferredItem<Item> GAMING_CONSOLE = ITEMS.register("gaming_console",
-            () -> new GamingConsoleItem(new Item.Properties().rarity(Rarity.UNCOMMON)));
-    public static final DeferredItem<Item> GAME_DISC_FLAPPY_BIRD = ITEMS.register("game_disc_flappy_bird",
-            () -> new GameDiscItem(new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.flappy_bird").withStyle(ChatFormatting.YELLOW)));
-    public static final DeferredItem<Item> GAME_DISC_SLIME = ITEMS.register("game_disc_slime", () -> new GameDiscItem(
-                    new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.slime").withStyle(ChatFormatting.DARK_GREEN)));
-    public static final DeferredItem<Item> GAME_DISC_BLOCKTRIS = ITEMS.register("game_disc_blocktris", () -> new GameDiscItem(
-                    new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.blocktris").withStyle(ChatFormatting.BLUE)));
-    public static final DeferredItem<Item> GAME_DISC_TNT_SWEEPER = ITEMS.register("game_disc_tnt_sweeper", () -> new GameDiscItem(
-                    new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.tnt_sweeper").withStyle(ChatFormatting.RED)));
-    public static final DeferredItem<Item> GAME_DISC_PONG = ITEMS.register("game_disc_pong", () -> new GameDiscItem(
-                    new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.pong").withStyle(ChatFormatting.WHITE)));
-    public static final DeferredItem<Item> GAME_DISC_FROGGIE = ITEMS.register("game_disc_froggie", () -> new GameDiscItem(
-                    new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.froggie").withStyle(ChatFormatting.GREEN)));
-    public static final DeferredItem<Item> GAME_DISC_RABBIT = ITEMS.register("game_disc_rabbit", () -> new GameDiscItem(
-                    new Item.Properties().rarity(Rarity.RARE), Component.translatable("gamediscs.rabbit").withStyle(ChatFormatting.GOLD)));
+    public static final DeferredItem<Item> GAMING_CONSOLE = ITEMS.registerItem("gaming_console",
+            GamingConsoleItem::new, new Item.Properties().rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<Item> GAME_DISC_FLAPPY_BIRD = ITEMS.registerItem("game_disc_flappy_bird",
+            prop -> new GameDiscItem(prop, Component.translatable("gamediscs.flappy_bird").withStyle(ChatFormatting.YELLOW)),
+            new Item.Properties().rarity(Rarity.RARE));
+    public static final DeferredItem<Item> GAME_DISC_SLIME = ITEMS.registerItem("game_disc_slime", prop -> new GameDiscItem(
+                    prop, Component.translatable("gamediscs.slime").withStyle(ChatFormatting.DARK_GREEN)), new Item.Properties().rarity(Rarity.RARE));
+    public static final DeferredItem<Item> GAME_DISC_BLOCKTRIS = ITEMS.registerItem("game_disc_blocktris", prop -> new GameDiscItem(
+                    prop, Component.translatable("gamediscs.blocktris").withStyle(ChatFormatting.BLUE)), new Item.Properties().rarity(Rarity.RARE));
+    public static final DeferredItem<Item> GAME_DISC_TNT_SWEEPER = ITEMS.registerItem("game_disc_tnt_sweeper", prop -> new GameDiscItem(
+                    prop, Component.translatable("gamediscs.tnt_sweeper").withStyle(ChatFormatting.RED)), new Item.Properties().rarity(Rarity.RARE));
+    public static final DeferredItem<Item> GAME_DISC_PONG = ITEMS.registerItem("game_disc_pong", prop -> new GameDiscItem(
+                    prop, Component.translatable("gamediscs.pong").withStyle(ChatFormatting.WHITE)), new Item.Properties().rarity(Rarity.RARE));
+    public static final DeferredItem<Item> GAME_DISC_FROGGIE = ITEMS.registerItem("game_disc_froggie", prop -> new GameDiscItem(
+                    prop, Component.translatable("gamediscs.froggie").withStyle(ChatFormatting.GREEN)), new Item.Properties().rarity(Rarity.RARE));
+    public static final DeferredItem<Item> GAME_DISC_RABBIT = ITEMS.registerItem("game_disc_rabbit", prop -> new GameDiscItem(
+                    prop, Component.translatable("gamediscs.rabbit").withStyle(ChatFormatting.GOLD)), new Item.Properties().rarity(Rarity.RARE));
 
-    public static final DeferredItem<Item> REDSTONE_CIRCUIT = ITEMS.register("redstone_circuit",
-            () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> PROCESSOR = ITEMS.register("processor",
-            () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> BATTERY = ITEMS.register("battery",
-            () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> DISPLAY = ITEMS.register("display",
-            () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> CONTROL_PAD = ITEMS.register("control_pad",
-            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> REDSTONE_CIRCUIT = ITEMS.registerItem("redstone_circuit", Item::new);
+    public static final DeferredItem<Item> PROCESSOR = ITEMS.registerItem("processor", Item::new);
+    public static final DeferredItem<Item> BATTERY = ITEMS.registerItem("battery", Item::new);
+    public static final DeferredItem<Item> DISPLAY = ITEMS.registerItem("display", Item::new);
+    public static final DeferredItem<Item> CONTROL_PAD = ITEMS.registerItem("control_pad", Item::new);
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
