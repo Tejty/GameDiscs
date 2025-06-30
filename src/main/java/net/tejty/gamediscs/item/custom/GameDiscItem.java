@@ -1,11 +1,12 @@
 package net.tejty.gamediscs.item.custom;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.tejty.gamediscs.games.util.Game;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
@@ -18,9 +19,8 @@ public class GameDiscItem extends Item {
         this.name = name;
     }
 
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(name);
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    public void renderTooltips(ItemStack stack, TooltipContext context,
+                               @Nullable Player player, TooltipFlag flag, List<Component> tooltips) {
+        tooltips.add(name);
     }
 }

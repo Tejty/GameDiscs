@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "gaming",
   "key": {
-    "C": {
-      "item": "minecraft:comparator"
-    }
+    "C": "minecraft:comparator"
   },
   "pattern": [
     "CCC",

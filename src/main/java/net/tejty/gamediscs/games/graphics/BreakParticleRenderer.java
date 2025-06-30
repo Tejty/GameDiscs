@@ -1,6 +1,7 @@
 package net.tejty.gamediscs.games.graphics;
 
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Random;
@@ -23,6 +24,6 @@ public class BreakParticleRenderer extends Renderer {
 
     @Override
     public void render(GuiGraphics graphics, int posX, int posY) {
-        graphics.blit(file, posX - SIZE / 2, posY - SIZE / 2, 0, x, y, SIZE, SIZE, fileWidth, fileHeight);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, file, posX - SIZE / 2, posY - SIZE / 2, x, y, SIZE, SIZE, fileWidth, fileHeight);
     }
 }

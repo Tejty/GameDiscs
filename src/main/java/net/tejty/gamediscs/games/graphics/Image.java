@@ -1,6 +1,7 @@
 package net.tejty.gamediscs.games.graphics;
 
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 
 public class Image extends Renderer {
@@ -22,6 +23,6 @@ public class Image extends Renderer {
 
     @Override
     public void render(GuiGraphics graphics, int posX, int posY) {
-        graphics.blit(file, posX, posY, 0, x, y, width, height, fileWidth, fileHeight);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, file, posX, posY, x, y, width, height, fileWidth, fileHeight);
     }
 }
