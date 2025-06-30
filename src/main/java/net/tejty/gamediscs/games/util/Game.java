@@ -4,6 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -199,7 +200,7 @@ public class Game {
     public void render(GuiGraphics graphics, int posX, int posY) {
         // Renders background
         if (getBackground() != null) {
-            graphics.blit(RenderType::guiTextured, getBackground(), posX, posY, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
+            graphics.blit(RenderPipelines.GUI_TEXTURED, getBackground(), posX, posY, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
         }
         // Renders overlay
         renderOverlay(graphics, posX, posY);
@@ -225,7 +226,7 @@ public class Game {
                         Component.translatable("gui.gamingconsole.press_any_key"),
                         posX + (WIDTH - font.width(Component.translatable("gui.gamingconsole.press_any_key").getVisualOrderText())) / 2 + 1,
                         posY + HEIGHT - font.lineHeight - 1 - (ticks % 40 <= 20 ? 0 : 1),
-                        0x373737,
+                        0xFF373737,
                         false
                 );
                 graphics.drawString(
@@ -233,17 +234,17 @@ public class Game {
                         Component.translatable("gui.gamingconsole.press_any_key"),
                         posX + (WIDTH - font.width(Component.translatable("gui.gamingconsole.press_any_key").getVisualOrderText())) / 2,
                         posY + HEIGHT - font.lineHeight - 2 - (ticks % 40 <= 20 ? 0 : 1),
-                        0xFFFFFF,
+                        Color.WHITE.getColor(),
                         false
                 );
             }
             // Renders died / won screen
             if (stage == GameStage.DIED || stage == GameStage.WON) {
                 // Renders score board
-                graphics.blit(RenderType::guiTextured, ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/gui/score_board.png"), posX, posY, 0, 0, 140, 100, 140, 100);
+                graphics.blit(RenderPipelines.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/gui/score_board.png"), posX, posY, 0, 0, 140, 100, 140, 100);
 
                 // Text based on won or died
-                Component component = stage == GameStage.DIED ? Component.translatable("gui.gamingconsole.died").withStyle(ChatFormatting.BOLD, ChatFormatting.DARK_RED) : Component.translatable("gui.gamingconsole.won").withStyle(ChatFormatting.BOLD, ChatFormatting.DARK_GREEN);
+                Component component = stage == GameStage.DIED ? Component.translatable("gui.gamingconsole.died").withStyle(ChatFormatting.BOLD) : Component.translatable("gui.gamingconsole.won").withStyle(ChatFormatting.BOLD);
 
                 // Renders the outline of the text (four times renders the same text pushed by 1px to all directions)
                 graphics.drawString(
@@ -251,7 +252,7 @@ public class Game {
                         component,
                         posX + (WIDTH - font.width(component.getVisualOrderText())) / 2,
                         posY + 29,
-                        Objects.requireNonNull(component.getStyle().getColor()).getValue(),
+                        stage == GameStage.DIED ? Color.DARK_RED.getColor() : Color.DARK_GREEN.getColor(),
                         false
                 );
                 graphics.drawString(
@@ -259,7 +260,7 @@ public class Game {
                         component,
                         posX + (WIDTH - font.width(component.getVisualOrderText())) / 2,
                         posY + 31,
-                        component.getStyle().getColor().getValue(),
+                        stage == GameStage.DIED ? Color.DARK_RED.getColor() : Color.DARK_GREEN.getColor(),
                         false
                 );
                 graphics.drawString(
@@ -267,7 +268,7 @@ public class Game {
                         component,
                         posX + (WIDTH - font.width(component.getVisualOrderText())) / 2 + 1,
                         posY + 30,
-                        component.getStyle().getColor().getValue(),
+                        stage == GameStage.DIED ? Color.DARK_RED.getColor() : Color.DARK_GREEN.getColor(),
                         false
                 );
                 graphics.drawString(
@@ -275,12 +276,12 @@ public class Game {
                         component,
                         posX + (WIDTH - font.width(component.getVisualOrderText())) / 2 - 1,
                         posY + 30,
-                        component.getStyle().getColor().getValue(),
+                        stage == GameStage.DIED ? Color.DARK_RED.getColor() : Color.DARK_GREEN.getColor(),
                         false
                 );
 
                 // Sets the text to be with lighter color
-                component = stage == GameStage.DIED ? Component.translatable("gui.gamingconsole.died").withStyle(ChatFormatting.BOLD, ChatFormatting.RED) : Component.translatable("gui.gamingconsole.won").withStyle(ChatFormatting.BOLD, ChatFormatting.GREEN);
+                component = stage == GameStage.DIED ? Component.translatable("gui.gamingconsole.died").withStyle(ChatFormatting.BOLD) : Component.translatable("gui.gamingconsole.won").withStyle(ChatFormatting.BOLD);
 
                 // Renders the text
                 graphics.drawString(
@@ -288,7 +289,7 @@ public class Game {
                         component,
                         posX + (WIDTH - font.width(component.getVisualOrderText())) / 2,
                         posY + 30,
-                        Objects.requireNonNull(component.getStyle().getColor()).getValue(),
+                        stage == GameStage.DIED ? Color.RED.getColor() : Color.GREEN.getColor(),
                         false
                 );
 
@@ -299,19 +300,19 @@ public class Game {
                         component,
                         posX + (WIDTH - font.width(component.getVisualOrderText())) / 2,
                         posY + 35 + font.lineHeight,
-                        Objects.requireNonNull(component.getStyle().getColor()).getValue(),
+                        stage == GameStage.DIED ? Color.RED.getColor() : Color.GREEN.getColor(),
                         false
                 );
 
                 // Renders best score text
                 int bestScore = GamingConsoleItem.getBestScore(getConsole(), this.getClass().getName().substring(this.getClass().getPackageName().length() + 1), Minecraft.getInstance().player);
-                component = Component.translatable(score >= bestScore ? "gui.gamingconsole.new_best_score" : "gui.gamingconsole.best_score").append(": ").append(String.valueOf(bestScore)).withStyle(score >= bestScore ? ChatFormatting.GREEN : ChatFormatting.YELLOW);
+                component = Component.translatable(score >= bestScore ? "gui.gamingconsole.new_best_score" : "gui.gamingconsole.best_score").append(": ").append(String.valueOf(bestScore));
                 graphics.drawString(
                         font,
                         component,
                         posX + (WIDTH - font.width(component.getVisualOrderText())) / 2,
                         posY + 50 + font.lineHeight,
-                        Objects.requireNonNull(component.getStyle().getColor()).getValue(),
+                        score >= bestScore ? Color.GREEN.getColor() : Color.YELLOW.getColor(),
                         false
                 );
             }
@@ -319,7 +320,7 @@ public class Game {
         else {
             // If current game has score box, it renders it
             if (showScoreBox() && showScore()) {
-                graphics.blit(RenderType::guiTextured, ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/gui/score_box.png"), posX, posY, 0, 0, 140, 100, 140, 100);
+                graphics.blit(RenderPipelines.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/gui/score_box.png"), posX, posY, 0, 0, 140, 100, 140, 100);
             }
 
             if (showScore()) {
@@ -329,7 +330,7 @@ public class Game {
                         (scoreText() ? Component.translatable("gui.gamingconsole.score").append(": ") : Component.empty()).append(String.valueOf(score)),
                         posX + 2,
                         posY + 2,
-                        0x373737,
+                        0xFF373737,
                         false
                 );
                 graphics.drawString(
@@ -453,7 +454,7 @@ public class Game {
      */
     
     public int scoreColor() {
-        return 0xFFFFFF; // Default is white
+        return Color.WHITE.getColor(); // Default is white
     }
 
     /**
@@ -477,10 +478,10 @@ public class Game {
     public ResourceLocation getIcon() {return null;}
 
     /**
-     * @return Display color of the game
+     * @return Display color's hex code of the game
      */
     
-    public ChatFormatting getColor() {return ChatFormatting.YELLOW;}
+    public int getColor() {return Color.YELLOW.getColor();}
 
     /**
      * @return True if the game is an empty game (default Game, not its child), false otherwise

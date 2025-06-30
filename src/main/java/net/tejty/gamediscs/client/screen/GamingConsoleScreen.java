@@ -4,7 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -99,7 +99,7 @@ public class GamingConsoleScreen extends Screen {
     @Override
     public void renderBackground(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         super.renderBackground(graphics, mouseX, mouseY, partialTick);
-        graphics.blit(RenderType::guiTextured, BACKGROUD, getConsoleX(), getConsoleY(), 0, 0, CONSOLE_WIDTH, CONSOLE_HEIGHT, 256, 256);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, BACKGROUD, getConsoleX(), getConsoleY(), 0, 0, CONSOLE_WIDTH, CONSOLE_HEIGHT, 256, 256);
     }
 
     /**
@@ -135,7 +135,7 @@ public class GamingConsoleScreen extends Screen {
         // If there are some available games, it renders a selection marking on corresponding Y position
         if (!availableGames.isEmpty()) {
             graphics.blit(
-                    RenderType::guiTextured,
+                    RenderPipelines.GUI_TEXTURED,
                     ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/gui/selected.png"),
                     x,
                     y + 3 + font.lineHeight + 18 * selected - (Math.max(0, selected - 3) * 18),
@@ -149,7 +149,7 @@ public class GamingConsoleScreen extends Screen {
                 Component.translatable("gui.gamingconsole.select_game").withStyle(ChatFormatting.BOLD),
                 x + (Game.WIDTH - font.width(Component.translatable("gui.gamingconsole.select_game").withStyle(ChatFormatting.BOLD).getVisualOrderText())) / 2,
                 y + 3 - (Math.max(0, selected - 3) * 18),
-                0xace53b,
+                0xFFACE53B,
                 false
         );
 
@@ -159,15 +159,15 @@ public class GamingConsoleScreen extends Screen {
             graphics.drawString(
                     font,
                     // If the game is currently selected, the title renders bold
-                    Component.literal(availableGames.get(i).getName().getString()).withStyle(availableGames.get(i).getColor(), i == selected ? ChatFormatting.BOLD : ChatFormatting.ITALIC),
+                    Component.literal(availableGames.get(i).getName().getString()).withStyle(i == selected ? ChatFormatting.BOLD : ChatFormatting.ITALIC),
                     x + 22,
                     y + 4 + font.lineHeight + 18 * i + (18 - font.lineHeight) / 2 - (Math.max(0, selected - 3) * 18),
-                    availableGames.get(i).getColor().getColor(),
+                    availableGames.get(i).getColor(),
                     false
             );
             // Rendering icon of the game
             graphics.blit(
-                    RenderType::guiTextured,
+                    RenderPipelines.GUI_TEXTURED,
                     availableGames.get(i).getIcon(),
                     x + 3,
                     y + 4 + font.lineHeight + 18 * i - (Math.max(0, selected - 3) * 18),
