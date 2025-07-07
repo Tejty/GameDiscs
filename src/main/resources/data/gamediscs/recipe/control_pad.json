@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "gaming",
   "key": {
-    "Q": {
-      "item": "minecraft:quartz"
-    },
-    "B": {
-      "tag": "minecraft:buttons"
-    }
+    "Q": "minecraft:quartz",
+    "B": "#minecraft:buttons"
   },
   "pattern": [
     "BBB",

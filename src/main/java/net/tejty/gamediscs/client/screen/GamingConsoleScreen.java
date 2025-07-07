@@ -4,6 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -17,9 +18,7 @@ import net.tejty.gamediscs.item.custom.GameDiscItem;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.IdentityHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 @OnlyIn(Dist.CLIENT)
@@ -100,7 +99,7 @@ public class GamingConsoleScreen extends Screen {
     @Override
     public void renderBackground(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         super.renderBackground(graphics, mouseX, mouseY, partialTick);
-        graphics.blit(BACKGROUD, getConsoleX(), getConsoleY(), 0, 0, 0, CONSOLE_WIDTH, CONSOLE_HEIGHT, 256, 256);
+        graphics.blit(RenderType::guiTextured, BACKGROUD, getConsoleX(), getConsoleY(), 0, 0, CONSOLE_WIDTH, CONSOLE_HEIGHT, 256, 256);
     }
 
     /**
@@ -136,10 +135,11 @@ public class GamingConsoleScreen extends Screen {
         // If there are some available games, it renders a selection marking on corresponding Y position
         if (!availableGames.isEmpty()) {
             graphics.blit(
+                    RenderType::guiTextured,
                     ResourceLocation.fromNamespaceAndPath(GameDiscsMod.MOD_ID, "textures/gui/selected.png"),
                     x,
                     y + 3 + font.lineHeight + 18 * selected - (Math.max(0, selected - 3) * 18),
-                    0, 0, 0, 140, 18, 140, 18
+                    0, 0, 140, 18, 140, 18
             );
         }
 
@@ -167,10 +167,11 @@ public class GamingConsoleScreen extends Screen {
             );
             // Rendering icon of the game
             graphics.blit(
+                    RenderType::guiTextured,
                     availableGames.get(i).getIcon(),
                     x + 3,
                     y + 4 + font.lineHeight + 18 * i - (Math.max(0, selected - 3) * 18),
-                    0, 0, 0, 16, 16, 16, 16
+                    0, 0, 16, 16, 16, 16
             );
         }
     }

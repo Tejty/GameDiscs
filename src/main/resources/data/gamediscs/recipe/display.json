@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "gaming",
   "key": {
-    "R": {
-      "item": "minecraft:redstone"
-    },
-    "G": {
-      "item": "minecraft:glowstone_dust"
-    },
-    "L": {
-      "tag": "gamediscs:glass_panes"
-    }
+    "R": "minecraft:redstone",
+    "G": "minecraft:glowstone_dust",
+    "L": "#gamediscs:glass_panes"
   },
   "pattern": [
     "RGR",

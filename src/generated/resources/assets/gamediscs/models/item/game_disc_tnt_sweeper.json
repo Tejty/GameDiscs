@@ -1,6 +1,6 @@
 {
-  "parent": "item/generated",
-  "textures":{
+  "parent": "minecraft:item/generated",
+  "textures": {
     "layer0": "gamediscs:item/game_disc_tnt_sweeper"
   }
 }
