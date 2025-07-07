@@ -1,13 +1,14 @@
 package net.tejty.gamediscs.item.custom;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.function.Consumer;
+import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class GameDiscItem extends Item {
@@ -18,10 +19,8 @@ public class GameDiscItem extends Item {
         this.name = name;
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        tooltipAdder.accept(name);
-        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
+    public void renderTooltips(ItemStack stack, TooltipContext context,
+                               @Nullable Player player, TooltipFlag flag, List<Component> tooltips) {
+        tooltips.add(name);
     }
 }

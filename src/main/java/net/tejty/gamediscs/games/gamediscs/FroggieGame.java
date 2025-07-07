@@ -10,10 +10,7 @@ import net.tejty.gamediscs.GameDiscsMod;
 import net.tejty.gamediscs.games.controls.Button;
 import net.tejty.gamediscs.games.graphics.DirectionalImage;
 import net.tejty.gamediscs.games.graphics.Image;
-import net.tejty.gamediscs.games.util.Game;
-import net.tejty.gamediscs.games.util.GameStage;
-import net.tejty.gamediscs.games.util.Sprite;
-import net.tejty.gamediscs.games.util.VecUtil;
+import net.tejty.gamediscs.games.util.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -529,7 +526,7 @@ public class FroggieGame extends Game {
         renderParticles(graphics, posX, posY);
 
         Font font = Minecraft.getInstance().font;
-        graphics.drawString(font, Component.literal(String.valueOf(score)),  posX + 2, posY + HEIGHT - font.lineHeight, 0xFFFFFF, true);
+        graphics.drawString(font, Component.literal(String.valueOf(score)),  posX + 2, posY + HEIGHT - font.lineHeight, Color.WHITE.getColor(), true);
 
         // Renders overlay
         renderOverlay(graphics, posX, posY);

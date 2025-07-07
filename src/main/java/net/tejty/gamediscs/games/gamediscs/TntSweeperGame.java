@@ -161,12 +161,12 @@ public class TntSweeperGame extends Game {
         renderOverlay(graphics, posX, posY);
         Font font = Minecraft.getInstance().font;
         String text = String.valueOf(flags);
-        graphics.drawString(font, text, posX + 2, posY + 2, 0x373737, false);
-        graphics.drawString(font, text, posX + 1, posY + 1, 0xFFFFFF, false);
+        graphics.drawString(font, text, posX + 2, posY + 2, 0xFF373737, false);
+        graphics.drawString(font, text, posX + 1, posY + 1, Color.WHITE.getColor(), false);
         if (stage == GameStage.PLAYING) {
             text = String.valueOf(ticks / 20);
-            graphics.drawString(font, text, posX + WIDTH - font.width(text) - 1, posY + 2, 0x373737, false);
-            graphics.drawString(font, text, posX + WIDTH - font.width(text) - 2, posY + 1, 0xFFFFFF, false);
+            graphics.drawString(font, text, posX + WIDTH - font.width(text) - 1, posY + 2, 0xFF373737, false);
+            graphics.drawString(font, text, posX + WIDTH - font.width(text) - 2, posY + 1, Color.WHITE.getColor(), false);
         }
     }
 

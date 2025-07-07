@@ -16,6 +16,7 @@ import net.tejty.gamediscs.sounds.SoundRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BlocktrisGame extends Game {
     public Grid grid;
@@ -119,9 +120,9 @@ public class BlocktrisGame extends Game {
 
         Font font = Minecraft.getInstance().font;
         Component text = Component.translatable("gui.gamingconsole.hold");
-        graphics.drawString(font, text, 22 + posX - font.width(text.getVisualOrderText()) / 2, 16 + posY, 0x555555, false);
+        graphics.drawString(font, text, 22 + posX - font.width(text.getVisualOrderText()) / 2, 16 + posY, Color.DARK_GRAY.getColor(), false);
         text = Component.translatable("gui.gamingconsole.next");
-        graphics.drawString(font, text, 118 + posX - font.width(text.getVisualOrderText()) / 2, 6 + posY, 0x555555, false);
+        graphics.drawString(font, text, 118 + posX - font.width(text.getVisualOrderText()) / 2, 6 + posY, Color.DARK_GRAY.getColor(), false);
 
         renderParticles(graphics, posX, posY);
 
@@ -166,11 +167,7 @@ public class BlocktrisGame extends Game {
                     soundPlayer.play(SoundRegistry.SWITCH.get(), 0.6f, 0.5f);
                     BlocktrisPiece oldHold = hold;
                     hold = piece;
-                    if (oldHold != null) {
-                        piece = oldHold;
-                    } else {
-                        piece = getNext();
-                    }
+                    piece = Objects.requireNonNullElseGet(oldHold, this::getNext);
                     piece.setPos(4, 1);
                     switched = true;
                 }
