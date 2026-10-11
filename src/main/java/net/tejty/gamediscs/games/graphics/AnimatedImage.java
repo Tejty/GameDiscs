@@ -26,6 +26,7 @@ public class AnimatedImage extends MultiImage {
     public AnimatedImage tick() {
         timer++;
         if (timer >= duration) {
+            timer = 0;
             if (current() >= count() - 1) {
                 setImage(0);
             } else {

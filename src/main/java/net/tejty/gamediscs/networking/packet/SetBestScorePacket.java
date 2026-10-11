@@ -26,6 +26,9 @@ public record SetBestScorePacket(String game, int score) implements CustomPacket
             ServerPlayer player = (ServerPlayer) context.player();
 
             ItemStack stack = player.getMainHandItem();
+            if (!(stack.getItem() instanceof GamingConsoleItem)) {
+                stack = player.getOffhandItem();
+            }
             if (stack.getItem() instanceof GamingConsoleItem console) {
                 console.setBestScore(stack, payload.game, payload.score, player);
             }

@@ -76,7 +76,7 @@ public class RabbitGame extends Game {
         if (stage != GameStage.DIED && stage != GameStage.WON) {
             ground.tick();
             if (ground.getX() <= -16) {
-                ground.moveBy(new Vec2(16, 0));
+                ground.setX(ground.getX() % 16);
             }
         }
     }

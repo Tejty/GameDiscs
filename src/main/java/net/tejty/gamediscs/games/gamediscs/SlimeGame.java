@@ -117,11 +117,10 @@ public class SlimeGame extends Game {
                 slime.remove(slime.getFirst());
             }
             else {
-                // If there is an apple, it respawns, and the score grows
                 spawnParticleExplosion(() -> new BreakParticleRenderer(APPLE, 8, 8), apple.getCenterPos(), 15, 3, 5, ParticleLevel.GAME);
-                respawnApple();
                 score++;
                 soundPlayer.play(SoundEvents.GENERIC_EAT);
+                respawnApple();
             }
         }
 
@@ -174,31 +173,29 @@ public class SlimeGame extends Game {
     }
 
     /**
-     * Moves apple to a random location that is not occupied by slime, or blocked position
+     * Places an apple uniformly among free tiles, or wins when the field is full.
      */
     private void respawnApple() {
-        // Keeps moving to random position until the position is valid
-        boolean valid = false;
-        while (!valid) {
-            // Goes to random position within the game field
-            apple.setPos(calcPos(VecUtil.randomInt(Vec2.ZERO, new Vec2(GAME_WIDTH, GAME_HEIGHT), random)));
-
-            // Sets valid to true
-            valid = true;
-            Vec2 applePos = calcTile(apple.getPos());
-
-            // If there is slime or blocked position, it sets valid to false
-            for (Vec2 vec2 : slime) {
-                if (VecUtil.is(vec2, applePos)) {
-                    valid = false;
-                    break;
-                }
-            }
-            for (Vec2 block : BLOCKED) {
-                if (VecUtil.is(block, applePos)) {
-                    valid = false;
-                    break;
-                }
+        boolean[] occupied = new boolean[GAME_WIDTH * GAME_HEIGHT];
+        for (Vec2 part : slime) {
+            occupied[(int) part.y * GAME_WIDTH + (int) part.x] = true;
+        }
+        for (Vec2 block : BLOCKED) {
+            occupied[(int) block.y * GAME_WIDTH + (int) block.x] = true;
+        }
+        int freeTiles = 0;
+        for (boolean tile : occupied) {
+            if (!tile) freeTiles++;
+        }
+        if (freeTiles == 0) {
+            win();
+            return;
+        }
+        int selected = random.nextInt(freeTiles);
+        for (int tile = 0; tile < occupied.length; tile++) {
+            if (!occupied[tile] && selected-- == 0) {
+                apple.setPos(calcPos(new Vec2(tile % GAME_WIDTH, tile / GAME_WIDTH)));
+                return;
             }
         }
     }
@@ -231,6 +228,9 @@ public class SlimeGame extends Game {
                 case RIGHT -> direction = VecUtil.VEC_RIGHT;
                 case DOWN -> direction = VecUtil.VEC_DOWN;
                 case LEFT -> direction = VecUtil.VEC_LEFT;
+            }
+            if (VecUtil.is(slime.getLast().add(direction), slime.get(slime.size() - 2))) {
+                direction = oldDirection;
             }
             if (!VecUtil.is(oldDirection, direction)) {
                     soundPlayer.play(SoundEvents.SLIME_SQUISH, 0.1f, 0.5f);

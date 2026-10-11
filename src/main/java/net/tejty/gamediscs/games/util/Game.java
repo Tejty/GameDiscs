@@ -108,6 +108,7 @@ public class Game {
     }
 
     public void respawn() {
+        controls.reset();
         stage = GameStage.START;
         ticks = 1;
         particles.clear();
@@ -162,22 +163,13 @@ public class Game {
      */
     
     public void tick() {
-        // Calls gameTick depending on game stage and game tick duration
         if (stage == GameStage.PLAYING && ticks % gameTickDuration() == 0) {
             gameTick();
         }
-        // Move particles
-        int i = 0;
-        while (i < particles.size()) {
-            Particle particle = particles.get(i);
+        for (Particle particle : particles) {
             particle.tick();
-            if (particle.isDead()) {
-                particles.remove(i);
-                i--;
-            }
-            i++;
         }
-        // Counts ticks
+        particles.removeIf(Particle::isDead);
         ticks++;
     }
 

@@ -48,8 +48,7 @@ public class GamingConsoleItem extends Item {
 
     public void setBestScore(ItemStack stack, String game, int score, Player player) {
         BestScoreComponent component = stack.getOrDefault(DataComponentRegistry.BEST_SCORE, new BestScoreComponent(Map.of(), player.getStringUUID()));
-        // The component can be null if not present
-        if (!component.stringUUID().equals(player.getStringUUID())) {
+        if (!component.stringUUID().equals(player.getStringUUID()) || score <= component.gameScores().getOrDefault(game, 0)) {
             return;
         }
         Map<String, Integer> scores = new HashMap<>(component.gameScores());

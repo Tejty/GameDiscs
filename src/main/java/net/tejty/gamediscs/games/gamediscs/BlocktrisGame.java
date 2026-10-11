@@ -94,7 +94,7 @@ public class BlocktrisGame extends Game {
 
     @Override
     public int gameTickDuration() {
-        return (int)(10f / ((float)score / 50f + 1f));
+        return Math.max(1, (int)(10f / ((float)score / 50f + 1f)));
     }
 
     @Override
@@ -173,6 +173,9 @@ public class BlocktrisGame extends Game {
                     }
                     piece.setPos(4, 1);
                     switched = true;
+                    if (piece.isTouching()) {
+                        die();
+                    }
                 }
             }
         }
@@ -204,8 +207,8 @@ public class BlocktrisGame extends Game {
     }
 
     private void placePiece() {
-        switched = false;
         if (placementCooldown <= 0) {
+            switched = false;
             piece.place();
 
             int combo = 0;
@@ -235,6 +238,9 @@ public class BlocktrisGame extends Game {
                             }
                             grid.set(x, line + 1, grid.get(x, line));
                         }
+                    }
+                    for (int x = 0; x < grid.width(); x++) {
+                        grid.set(x, 0, 0);
                     }
                     y++;
                 }

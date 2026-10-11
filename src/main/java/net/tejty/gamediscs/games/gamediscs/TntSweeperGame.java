@@ -257,7 +257,7 @@ public class TntSweeperGame extends Game {
     }
 
     private void checkForWin() {
-        if (flags == 0 && score == GAME_WIDTH * GAME_HEIGHT - TNT_COUNT) {
+        if (stage == GameStage.PLAYING && flags == 0 && score == GAME_WIDTH * GAME_HEIGHT - TNT_COUNT) {
             win();
         }
     }

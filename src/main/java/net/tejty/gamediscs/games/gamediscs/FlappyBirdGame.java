@@ -126,6 +126,7 @@ public class FlappyBirdGame extends Game {
             // If the bird is touching the pipe, the player dies
             if (bird.isTouching(pipe)) {
                 die();
+                return;
             }
 
             i++;
@@ -134,6 +135,7 @@ public class FlappyBirdGame extends Game {
         // If the bird is touching ground, or is outside the game, the player dies
         if (bird.isTouching(ground) || bird.getY() < 0) {
             die();
+            return;
         }
 
         if (ticks % 2 == 0) {

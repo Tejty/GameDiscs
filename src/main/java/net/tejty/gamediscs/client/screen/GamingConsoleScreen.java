@@ -1,5 +1,6 @@
 package net.tejty.gamediscs.client.screen;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,10 +18,10 @@ import net.tejty.gamediscs.item.custom.GameDiscItem;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.IdentityHashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 @OnlyIn(Dist.CLIENT)
 public class GamingConsoleScreen extends Screen {
@@ -40,6 +41,11 @@ public class GamingConsoleScreen extends Screen {
     private static final int D = 68;
     private static final int SPACE = 32;
     private static final int ENTER = 257;
+    private static final int QUIT = 81;
+    private static final int RESTART = 82;
+
+    private final Set<Integer> heldKeys = new HashSet<>();
+    private boolean windowActive = true;
 
     // Visual buttons that allow you to visually see if the button is pressed or not
     private static final VisualButton W_BUTTON = new VisualButton(BACKGROUD, 256, 256, 33, 121, 14, 24, 183, 0, 24);
@@ -75,8 +81,7 @@ public class GamingConsoleScreen extends Screen {
 
     @Override
     public void tick() {
-        // Calls tick() in Game every 50ms (20 times per second)
-        if (game != null) {
+        if (updateWindowFocus()) {
             game.tick();
         }
     }
@@ -207,138 +212,94 @@ public class GamingConsoleScreen extends Screen {
         return games;
     }
 
-    // Main method for pressed keys
+    private static Button buttonForKey(int key) {
+        return switch (key) {
+            case W -> Button.UP;
+            case S -> Button.DOWN;
+            case A -> Button.LEFT;
+            case D -> Button.RIGHT;
+            case SPACE -> Button.BUTTON1;
+            case ENTER -> Button.BUTTON2;
+            default -> null;
+        };
+    }
+
+    private boolean updateWindowFocus() {
+        boolean active = minecraft.isWindowActive();
+        if (!active) {
+            game.controls.reset();
+        } else if (!windowActive) {
+            // Focus loss can hide releases; held keys still need a release before reuse.
+            heldKeys.removeIf(key -> !InputConstants.isKeyDown(minecraft.getWindow().getWindow(), key));
+        }
+        windowActive = active;
+        return active;
+    }
+
     @Override
     public boolean keyPressed(int key, int pScanCode, int pModifiers) {
-        // This method should return true if the key press was consumed. So it saves it in this flag variable
-        boolean flag = false;
-
-        // If the game is not empty, tries to quit or reset the game if the corresponding key was pressed
-        if (!game.isEmpty()) {
-            // If the key was Q, returns to game selection (sets game to empty Game)
-            if (key == 81) {
+        Button button = buttonForKey(key);
+        if (button == null && key != QUIT && key != RESTART) {
+            return super.keyPressed(key, pScanCode, pModifiers);
+        }
+        if (!updateWindowFocus()) {
+            heldKeys.add(key);
+            return true;
+        }
+        // Keep physical presses across game changes to consume OS repeats until release.
+        if (!heldKeys.add(key)) {
+            return true;
+        }
+        if (key == QUIT) {
+            game.controls.reset();
+            if (game.isEmpty()) {
+                onClose();
+            } else {
                 game = new Game();
-                flag = true;
                 game.soundPlayer.playConfirm();
             }
-            // If the key was R, resets the game by calling prepare() method
-            else if (key == 82) {
+            return true;
+        }
+        if (key == RESTART) {
+            if (!game.isEmpty()) {
                 game.prepare();
-                flag = true;
+                game.soundPlayer.playConfirm();
+            }
+            return true;
+        }
+        game.controls.setButton(button, true);
+        if (game.isEmpty() && !availableGames.isEmpty()) {
+            if (key == W || key == S) {
+                selected = Math.floorMod(selected + (key == W ? -1 : 1), availableGames.size());
+                game.soundPlayer.playSelect();
+            } else if (key == SPACE || key == ENTER) {
+                game.controls.reset();
+                game = availableGames.get(selected);
+                game.prepare();
                 game.soundPlayer.playConfirm();
             }
         }
-        else {
-            if (key == 81) {
-                this.minecraft.setScreen(null);
-                return true;
-            }
-        }
-        if (game != null) {
-            // Sets the buttons in game's controls to pressed state if the button was pressed
-            switch (key) {
-                case W -> {
-                    game.controls.setButton(Button.UP, true);
-                    flag = true;
-                }
-                case S -> {
-                    game.controls.setButton(Button.DOWN, true);
-                    flag = true;
-                }
-                case A -> {
-                    game.controls.setButton(Button.LEFT, true);
-                    flag = true;
-                }
-                case D -> {
-                    game.controls.setButton(Button.RIGHT, true);
-                    flag = true;
-                }
-                case SPACE -> {
-                    game.controls.setButton(Button.BUTTON1, true);
-                    flag = true;
-                }
-                case ENTER -> {
-                    game.controls.setButton(Button.BUTTON2, true);
-                    flag = true;
-                }
-            }
-        }
-        if (game.isEmpty()) {
-            // If we are in game selection, it must handle the keys by itself
-            // W moves the selection up
-            if (key == W) {
-                int newSelected = selected - 1;
-                if (newSelected < 0) {
-                    newSelected = availableGames.size() - 1;
-                }
-                selected = newSelected;
-                flag = true;
-                game.soundPlayer.playSelect();
-            }
-            // S moves the selection down
-            if (key == S) {
-                int newSelected = selected + 1;
-                if (newSelected > availableGames.size() - 1) {
-                    newSelected = 0;
-                }
-                selected = newSelected;
-                flag = true;
-                game.soundPlayer.playSelect();
-            }
-            // Space selects game
-            if ((key == SPACE || key == ENTER) && !availableGames.isEmpty()) {
-                Game newGame = availableGames.get(selected);
-                newGame.prepare();
-                game = newGame;
-                flag = true;
-                game.soundPlayer.playConfirm();
-            }
-        }
-        return (super.keyPressed(key, pScanCode, pModifiers) || flag);
+        return true;
     }
 
-    // Main method for handling key releasing
     @Override
     public boolean keyReleased(int pKeyCode, int pScanCode, int pModifiers) {
-        // This method should return true if the key release was consumed, so it saves it in this flag variable
-        boolean flag = false;
-
-        if (game != null) {
-            // Trying to set button in game's controls to released state if the corresponding key was released
-            switch (pKeyCode) {
-                case W -> {
-                    game.controls.setButton(Button.UP, false);
-                    flag = true;
-                }
-                case S -> {
-                    game.controls.setButton(Button.DOWN, false);
-                    flag = true;
-                }
-                case A -> {
-                    game.controls.setButton(Button.LEFT, false);
-                    flag = true;
-                }
-                case D -> {
-                    game.controls.setButton(Button.RIGHT, false);
-                    flag = true;
-                }
-                case SPACE -> {
-                    game.controls.setButton(Button.BUTTON1, false);
-                    flag = true;
-                }
-                case ENTER -> {
-                    game.controls.setButton(Button.BUTTON2, false);
-                    flag = true;
-                }
-            }
+        Button button = buttonForKey(pKeyCode);
+        if (button == null && pKeyCode != QUIT && pKeyCode != RESTART) {
+            return super.keyReleased(pKeyCode, pScanCode, pModifiers);
         }
-        return (super.keyPressed(pKeyCode, pScanCode, pModifiers) || flag);
+        updateWindowFocus();
+        heldKeys.remove(pKeyCode);
+        if (button != null) {
+            game.controls.setButton(button, false);
+        }
+        return true;
     }
 
     @Override
-    public void onClose() {
-        super.onClose();
-
-        game = null;
+    public void removed() {
+        game.controls.reset();
+        heldKeys.clear();
+        super.removed();
     }
 }
